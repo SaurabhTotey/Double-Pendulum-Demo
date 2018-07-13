@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'Pendulum.dart';
+import 'RungeKutta.dart';
 import 'Vector.dart';
 
 /**
@@ -59,8 +60,13 @@ class Stage {
         double denominatorFactor = combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * angleDifference);
         this.initialPendulum.angularAcceleration = (-this.gravity * (combinedMass + this.initialPendulum.mass) * sin(this.initialPendulum.angle) - this.attachedPendulum.mass * this.gravity * sin(angleDifference - this.attachedPendulum.angle) - 2 * sin(angleDifference) * this.attachedPendulum.mass * (pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength + pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * cos(angleDifference))) / (this.initialPendulum.stringLength * denominatorFactor);
         this.attachedPendulum.angularAcceleration = 2 * sin(angleDifference) * (pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * combinedMass + this.gravity * combinedMass * cos(this.initialPendulum.angle) + pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength * this.attachedPendulum.mass * cos(angleDifference)) / (this.attachedPendulum.stringLength * denominatorFactor);
-        //TODO: calculate angular velocity using runge kutta
-        //TODO: calculate new angle
+        //Calculates the angles for both pendulums
+        this.initialPendulum.angle = rungeKutta(0.0, this.initialPendulum.angle, dt, (timeStep) => rungeKutta(0.0, this.initialPendulum.angularVelocity, timeStep, (ignored) => this.initialPendulum.angularAcceleration));
+        this.attachedPendulum.angle = rungeKutta(0.0, this.attachedPendulum.angle, dt, (timeStep) => rungeKutta(0.0, this.attachedPendulum.angularVelocity, timeStep, (ignored) => this.initialPendulum.angularAcceleration));
+        //Calculates the angular velocity for both pendulums
+        this.initialPendulum.angularVelocity = rungeKutta(0.0, this.initialPendulum.angularVelocity, dt, (timeStep) => this.initialPendulum.angularAcceleration);
+        this.attachedPendulum.angularVelocity = rungeKutta(0.0, this.attachedPendulum.angularVelocity, dt, (timeStep) => this.initialPendulum.angularAcceleration);
+        //TODO: above is probably incorrect to some degree
         //Updates the pendulums' positions using their angles
         pendulums.forEach( (pendulum) =>
             pendulum.location = pendulum.startingLocation + new Vector.isosceles(pendulum.stringLength) * new Vector(sin(pendulum.angle), -cos(pendulum.angle))
