@@ -6395,7 +6395,7 @@
       static: {
         Gui$: function() {
           var t1, t2, t3;
-          t1 = new D.Screen(null, null);
+          t1 = new D.Screen(null, null, null);
           t2 = document;
           t3 = t2.getElementById("screen");
           t1.screen = t3;
@@ -6439,7 +6439,7 @@
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
     Screen: {
-      "^": "Object;screen,renderer"
+      "^": "Object;screen,renderer,world"
     }
   }], ["", "../src/main.dart",, F, {
     "^": "",

@@ -15,6 +15,16 @@ class Pendulum {
     double radius;
     //The current location of the center of the pendulum
     Vector location;
+    //The current velocity of the center of the pendulum
+    Vector velocity = new Vector.empty();
+    //The current acceleration of the center of the pendulum
+    Vector acceleration = new Vector.empty();
+    //The angle of the pendulum where 0 is downwards, and counterclockwise is positive
+    double angle = 0.0;
+    //The change of the angle where 0 is downwards, and counterclockwise is positive
+    double angularVelocity = 0.0;
+    //The change of the change of the angle where 0 is downwards, and counterclockwise is positive
+    double angularAcceleration = 0.0;
 
     /**
      * Creates a pendulum

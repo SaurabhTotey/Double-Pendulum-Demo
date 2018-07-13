@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'Pendulum.dart';
 import 'Vector.dart';
 
@@ -47,9 +48,35 @@ class Stage {
 
     /**
      * Moves the world forward by the specified amount of time
+     * All math used is stolen from https://myphysicslab.com/pendulum/double-pendulum-en.html
      */
-    void step(double delta) {
-        //TODO: make
+    void step(double dt) {
+        //Gets the pendulums as a list for making doing something to both pendulums easy
+        List<Pendulum> pendulums = [this.initialPendulum, this.attachedPendulum];
+        //Calculates the angular acceleration for both pendulums
+        double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
+        double angleDifference = this.initialPendulum.angle - this.attachedPendulum.angle;
+        double denominatorFactor = combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * angleDifference);
+        this.initialPendulum.angularAcceleration = (-this.gravity * (combinedMass + this.initialPendulum.mass) * sin(this.initialPendulum.angle) - this.attachedPendulum.mass * this.gravity * sin(angleDifference - this.attachedPendulum.angle) - 2 * sin(angleDifference) * this.attachedPendulum.mass * (pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength + pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * cos(angleDifference))) / (this.initialPendulum.stringLength * denominatorFactor);
+        this.attachedPendulum.angularAcceleration = 2 * sin(angleDifference) * (pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * combinedMass + this.gravity * combinedMass * cos(this.initialPendulum.angle) + pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength * this.attachedPendulum.mass * cos(angleDifference)) / (this.attachedPendulum.stringLength * denominatorFactor);
+        //TODO: calculate angular velocity using runge kutta
+        //TODO: calculate new angle
+        //Updates the pendulums' positions using their angles
+        pendulums.forEach( (pendulum) =>
+            pendulum.location = pendulum.startingLocation + new Vector.isosceles(pendulum.stringLength) * new Vector(sin(pendulum.angle), -cos(pendulum.angle))
+        );
+        this.attachedPendulum.location += this.attachedPendulum.startingLocation - this.initialPendulum.location;
+        this.attachedPendulum.startingLocation = this.initialPendulum.location;
+        //Updates the pendulums' velocities using their angles and angular velocity
+        pendulums.forEach( (pendulum) =>
+            pendulum.velocity = new Vector.isosceles(pendulum.stringLength * pendulum.angularVelocity) * new Vector(cos(pendulum.angle), sin(pendulum.angle))
+        );
+        this.attachedPendulum.velocity += this.initialPendulum.velocity;
+        //Updates the pendulum's accelerations
+        pendulums.forEach( (pendulum) =>
+            pendulum.acceleration = new Vector.isosceles(pendulum.stringLength) * new Vector(-pow(pendulum.angularVelocity, 2) * sin(pendulum.angle) + pendulum.angularAcceleration * cos(pendulum.angle), pow(pendulum.angularVelocity, 2) * cos(pendulum.angle) + pendulum.angularAcceleration * sin(pendulum.angle))
+        );
+        this.attachedPendulum.acceleration += this.initialPendulum.acceleration;
     }
 
 }
