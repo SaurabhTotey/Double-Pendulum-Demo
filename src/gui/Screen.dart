@@ -25,9 +25,6 @@ class Screen {
         this.screen = document.getElementById('screen');
         this.renderer = this.screen.getContext('2d');
         this.pendulums = [p1, p2];
-        this.renderer.strokeStyle = 'blue';
-        this.renderer.lineWidth = 3;
-        this.renderer.fillStyle = 'green';
     }
 
     /**
@@ -47,6 +44,24 @@ class Screen {
             drawHeight - this.screen.width / this.logicalWidth * this.logicalHeight;
             startY = (this.screen.height - drawHeight) / 2;
         }
+        //Converts the given logical coordinates to view or screen coordinates
+        Vector getViewCoordinates(Vector logicalCoordinates) {
+            Vector viewCoords = logicalCoordinates * new Vector(this.screen.width.toDouble(), this.screen.height.toDouble()) / new Vector(this.logicalWidth, this.logicalHeight) + new Vector(startX, startY);
+            viewCoords.y = this.screen.height - viewCoords.y;
+            return viewCoords;
+        }
+        Vector p1 = getViewCoordinates(this.pendulums[0].startingLocation);
+        Vector p2 = getViewCoordinates(this.pendulums[0].location);
+        Vector p3 = getViewCoordinates(this.pendulums[1].location);
+        this.renderer.beginPath();
+        this.renderer.moveTo(p1.x.toInt(), p1.y.toInt());
+        this.renderer.lineTo(p2.x.toInt(), p2.y.toInt());
+        this.renderer.lineTo(p3.x.toInt(), p3.y.toInt());
+        this.renderer.stroke();
+        this.renderer.beginPath();
+        this.renderer.arc(p2.x.toInt(), p2.y.toInt(), pendulums[0].radius * drawWidth / this.logicalWidth, 0.0, 2 * PI);
+        this.renderer.arc(p3.x.toInt(), p3.y.toInt(), pendulums[1].radius * drawWidth / this.logicalWidth, 0.0, 2 * PI);
+        this.renderer.fill();
     }
 
 }

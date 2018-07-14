@@ -586,7 +586,7 @@
       toString$0: ["super$Interceptor$toString", function(receiver) {
         return H.Primitives_objectToHumanReadableString(receiver);
       }],
-      "%": "Blob|CanvasGradient|CanvasPattern|DOMError|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
+      "%": "Blob|DOMError|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
     },
     JSBool: {
       "^": "Interceptor;",
@@ -2118,6 +2118,11 @@
     },
     argumentErrorValue: function(object) {
       return new P.ArgumentError(true, object, null, null);
+    },
+    checkNum: function(value) {
+      if (typeof value !== "number")
+        throw H.wrapException(H.argumentErrorValue(value));
+      return value;
     },
     checkInt: function(value) {
       if (typeof value !== "number" || Math.floor(value) !== value)
@@ -5993,9 +5998,33 @@
       "%": "HTMLCanvasElement"
     },
     CanvasRenderingContext2D: {
-      "^": "Interceptor;strokeStyle}",
-      fillRect$4: function(receiver, x, y, width, height) {
-        return receiver.fillRect(x, y, width, height);
+      "^": "Interceptor;",
+      beginPath$0: function(receiver) {
+        return receiver.beginPath();
+      },
+      stroke$1: function(receiver, path) {
+        return receiver.stroke(path);
+      },
+      stroke$0: function($receiver) {
+        return $receiver.stroke();
+      },
+      lineTo$2: function(receiver, x, y) {
+        return receiver.lineTo(x, y);
+      },
+      moveTo$2: function(receiver, x, y) {
+        return receiver.moveTo(x, y);
+      },
+      arc$6: function(receiver, x, y, radius, startAngle, endAngle, anticlockwise) {
+        receiver.arc(x, y, radius, startAngle, endAngle, false);
+      },
+      arc$5: function($receiver, x, y, radius, startAngle, endAngle) {
+        return this.arc$6($receiver, x, y, radius, startAngle, endAngle, false);
+      },
+      fill$1: function(receiver, winding) {
+        receiver.fill(winding);
+      },
+      fill$0: function($receiver) {
+        return this.fill$1($receiver, "nonzero");
       },
       "%": "CanvasRenderingContext2D"
     },
@@ -6204,92 +6233,100 @@
       "%": "SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGAnimationElement|SVGSetElement"
     },
     FEBlendElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEBlendElement"
     },
     FEColorMatrixElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEColorMatrixElement"
     },
     FEComponentTransferElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEComponentTransferElement"
     },
     FECompositeElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFECompositeElement"
     },
     FEConvolveMatrixElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEConvolveMatrixElement"
     },
     FEDiffuseLightingElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEDiffuseLightingElement"
     },
     FEDisplacementMapElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEDisplacementMapElement"
     },
     FEFloodElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEFloodElement"
     },
     FEGaussianBlurElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEGaussianBlurElement"
     },
     FEImageElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEImageElement"
     },
     FEMergeElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEMergeElement"
     },
     FEMorphologyElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEMorphologyElement"
     },
     FEOffsetElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFEOffsetElement"
     },
+    FEPointLightElement: {
+      "^": "SvgElement;x=,y=",
+      "%": "SVGFEPointLightElement"
+    },
     FESpecularLightingElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFESpecularLightingElement"
     },
+    FESpotLightElement: {
+      "^": "SvgElement;x=,y=",
+      "%": "SVGFESpotLightElement"
+    },
     FETileElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFETileElement"
     },
     FETurbulenceElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFETurbulenceElement"
     },
     FilterElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGFilterElement"
     },
     ForeignObjectElement: {
-      "^": "GraphicsElement;height=,width=",
+      "^": "GraphicsElement;height=,width=,x=,y=",
       "%": "SVGForeignObjectElement"
     },
     GeometryElement: {
@@ -6302,7 +6339,7 @@
       "%": "SVGClipPathElement|SVGDefsElement|SVGGElement|SVGSwitchElement;SVGGraphicsElement"
     },
     ImageElement0: {
-      "^": "GraphicsElement;height=,width=",
+      "^": "GraphicsElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGImageElement"
     },
@@ -6312,17 +6349,17 @@
       "%": "SVGMarkerElement"
     },
     MaskElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGMaskElement"
     },
     PatternElement: {
-      "^": "SvgElement;height=,width=",
+      "^": "SvgElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGPatternElement"
     },
     RectElement: {
-      "^": "GeometryElement;height=,width=",
+      "^": "GeometryElement;height=,width=,x=,y=",
       "%": "SVGRectElement"
     },
     ScriptElement0: {
@@ -6333,10 +6370,10 @@
     SvgElement: {
       "^": "Element;",
       $isInterceptor: 1,
-      "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
+      "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
     },
     SvgSvgElement: {
-      "^": "GraphicsElement;height=,width=",
+      "^": "GraphicsElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGSVGElement"
     },
@@ -6347,15 +6384,19 @@
     },
     TextContentElement: {
       "^": "GraphicsElement;",
-      "%": "SVGTSpanElement|SVGTextElement|SVGTextPositioningElement;SVGTextContentElement"
+      "%": ";SVGTextContentElement"
     },
     TextPathElement: {
       "^": "TextContentElement;",
       $isInterceptor: 1,
       "%": "SVGTextPathElement"
     },
+    TextPositioningElement: {
+      "^": "TextContentElement;x=,y=",
+      "%": "SVGTSpanElement|SVGTextElement|SVGTextPositioningElement"
+    },
     UseElement: {
-      "^": "GraphicsElement;height=,width=",
+      "^": "GraphicsElement;height=,width=,x=,y=",
       $isInterceptor: 1,
       "%": "SVGUseElement"
     },
@@ -6405,7 +6446,7 @@
     Gui: {
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
-        var t1, t2, t3, t4, t5, t6, drawHeight, drawWidth, startX, startY;
+        var t1, t2, t3, t4, t5;
         t1 = this.world;
         t2 = t1.initialPendulum;
         t3 = t1.attachedPendulum;
@@ -6413,12 +6454,8 @@
         t4 = document;
         t5 = t4.getElementById("screen");
         t1.screen = t5;
-        t5 = J.getContext$1$x(t5, "2d");
-        t1.renderer = t5;
+        t1.renderer = J.getContext$1$x(t5, "2d");
         t1.pendulums = [t2, t3];
-        J.set$strokeStyle$x(t5, "blue");
-        t5.lineWidth = 3;
-        t5.fillStyle = "green";
         this.screen = t1;
         t1 = new O.ControlPanel(null);
         t1.controlPanel = t4.getElementById("control-panel");
@@ -6426,44 +6463,7 @@
         t1 = new X.Gui_resizeProc(this);
         t1.call$0();
         W._EventStreamSubscription$(window, "resize", t1, false, W.Event);
-        t1 = this.screen;
-        t2 = J.get$height$x(t1.screen);
-        t3 = t1.logicalHeight;
-        if (typeof t2 !== "number")
-          return t2.$div();
-        if (typeof t3 !== "number")
-          return H.iae(t3);
-        t4 = J.get$width$x(t1.screen);
-        t5 = t1.logicalWidth;
-        if (typeof t4 !== "number")
-          return t4.$div();
-        if (typeof t5 !== "number")
-          return H.iae(t5);
-        t6 = t1.screen;
-        if (t2 / t3 < t4 / t5) {
-          drawHeight = J.toDouble$0$n(J.get$height$x(t6));
-          t2 = J.get$height$x(t1.screen);
-          if (typeof t2 !== "number")
-            return t2.$div();
-          drawWidth = t2 / t3 * t5;
-          t5 = J.get$width$x(t1.screen);
-          if (typeof t5 !== "number")
-            return t5.$sub();
-          startX = (t5 - drawWidth) / 2;
-          startY = 0;
-        } else {
-          drawWidth = J.toDouble$0$n(J.get$width$x(t6));
-          t2 = J.get$width$x(t1.screen);
-          if (typeof t2 !== "number")
-            return t2.$div();
-          t2 = J.get$height$x(t1.screen);
-          if (typeof t2 !== "number")
-            return t2.$sub();
-          startY = (t2 - 0) / 2;
-          startX = 0;
-          drawHeight = 0;
-        }
-        J.fillRect$4$x(t1.renderer, startX, startY, drawWidth, drawHeight);
+        this.screen.draw$0();
       },
       static: {
         Gui$: function(world) {
@@ -6509,7 +6509,93 @@
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
     Screen: {
-      "^": "Object;screen,renderer,pendulums,logicalWidth,logicalHeight"
+      "^": "Object;screen,renderer,pendulums,logicalWidth,logicalHeight",
+      draw$0: function() {
+        var t1, t2, t3, t4, t5, t6, drawWidth, p1, p2, p3;
+        t1 = {};
+        t1.startX = 0;
+        t1.startY = 0;
+        t2 = J.get$height$x(this.screen);
+        t3 = this.logicalHeight;
+        if (typeof t2 !== "number")
+          return t2.$div();
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        t4 = J.get$width$x(this.screen);
+        t5 = this.logicalWidth;
+        if (typeof t4 !== "number")
+          return t4.$div();
+        if (typeof t5 !== "number")
+          return H.iae(t5);
+        t6 = this.screen;
+        if (t2 / t3 < t4 / t5) {
+          J.toDouble$0$n(J.get$height$x(t6));
+          t2 = J.get$height$x(this.screen);
+          if (typeof t2 !== "number")
+            return t2.$div();
+          drawWidth = t2 / t3 * t5;
+          t3 = J.get$width$x(this.screen);
+          if (typeof t3 !== "number")
+            return t3.$sub();
+          t1.startX = (t3 - drawWidth) / 2;
+        } else {
+          drawWidth = J.toDouble$0$n(J.get$width$x(t6));
+          t2 = J.get$width$x(this.screen);
+          if (typeof t2 !== "number")
+            return t2.$div();
+          t2 = J.get$height$x(this.screen);
+          if (typeof t2 !== "number")
+            return t2.$sub();
+          t1.startY = (t2 - 0) / 2;
+        }
+        t1 = new D.Screen_draw_getViewCoordinates(t1, this);
+        p1 = t1.call$1(this.pendulums[0].startingLocation);
+        p2 = t1.call$1(this.pendulums[0].location);
+        p3 = t1.call$1(this.pendulums[1].location);
+        J.beginPath$0$x(this.renderer);
+        t1 = J.getInterceptor$x(p1);
+        J.moveTo$2$x(this.renderer, J.toInt$0$n(t1.get$x(p1)), J.toInt$0$n(t1.get$y(p1)));
+        t1 = J.getInterceptor$x(p2);
+        J.lineTo$2$x(this.renderer, J.toInt$0$n(t1.get$x(p2)), J.toInt$0$n(t1.get$y(p2)));
+        t2 = J.getInterceptor$x(p3);
+        J.lineTo$2$x(this.renderer, J.toInt$0$n(t2.get$x(p3)), J.toInt$0$n(t2.get$y(p3)));
+        J.stroke$0$x(this.renderer);
+        J.beginPath$0$x(this.renderer);
+        J.arc$5$x(this.renderer, J.toInt$0$n(t1.get$x(p2)), J.toInt$0$n(t1.get$y(p2)), this.pendulums[0].radius * drawWidth / t5, 0, 6.283185307179586);
+        J.arc$5$x(this.renderer, J.toInt$0$n(t2.get$x(p3)), J.toInt$0$n(t2.get$y(p3)), this.pendulums[1].radius * drawWidth / t5, 0, 6.283185307179586);
+        J.fill$0$x(this.renderer);
+      }
+    },
+    Screen_draw_getViewCoordinates: {
+      "^": "Closure:13;_box_0,$this",
+      call$1: function(logicalCoordinates) {
+        var t1, t2, t3, t4, t5, t6, t7, t8, viewCoords;
+        t1 = this.$this;
+        t2 = J.toDouble$0$n(J.get$width$x(t1.screen));
+        t3 = J.toDouble$0$n(J.get$height$x(t1.screen));
+        t4 = logicalCoordinates.x;
+        if (typeof t4 !== "number")
+          return t4.$mul();
+        t5 = logicalCoordinates.y;
+        if (typeof t5 !== "number")
+          return t5.$mul();
+        t6 = t1.logicalWidth;
+        t7 = t1.logicalHeight;
+        if (typeof t6 !== "number")
+          return H.iae(t6);
+        if (typeof t7 !== "number")
+          return H.iae(t7);
+        t8 = this._box_0;
+        viewCoords = new V.Vector(t4 * t2 / t6, t5 * t3 / t7).$add(0, new V.Vector(t8.startX, t8.startY));
+        t1 = J.get$height$x(t1.screen);
+        t8 = viewCoords.y;
+        if (typeof t1 !== "number")
+          return t1.$sub();
+        if (typeof t8 !== "number")
+          return H.iae(t8);
+        viewCoords.y = t1 - t8;
+        return viewCoords;
+      }
     }
   }], ["", "../src/physics/Stage.dart",, L, {
     "^": "",
@@ -6519,13 +6605,31 @@
   }], ["", "../src/physics/Vector.dart",, V, {
     "^": "",
     Vector: {
-      "^": "Object;x,y",
+      "^": "Object;x>,y>",
       $add: function(_, other) {
-        var t1 = J.getInterceptor$x(other);
-        return new V.Vector(C.JSNumber_methods.$add(this.x, t1.get$x(other)), C.JSNumber_methods.$add(this.y, t1.get$y(other)));
+        var t1, t2, t3, t4;
+        t1 = this.x;
+        t2 = J.get$x$x(other);
+        if (typeof t1 !== "number")
+          return t1.$add();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        t3 = this.y;
+        t4 = other.y;
+        if (typeof t3 !== "number")
+          return t3.$add();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        return new V.Vector(t1 + t2, t3 + t4);
       },
       get$length: function(_) {
-        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+        var t1, t2;
+        t1 = this.x;
+        H.checkNum(t1);
+        t1 = Math.pow(t1, 2);
+        t2 = this.y;
+        H.checkNum(t2);
+        return Math.sqrt(t1 + Math.pow(t2, 2));
       }
     }
   }], ["", "../src/main.dart",, F, {
@@ -6544,6 +6648,8 @@
       t1 = t2.location;
       t2 = t1.x;
       t3 = t1.y;
+      if (typeof t3 !== "number")
+        return t3.$sub();
       t4 = new V.Vector(null, null);
       t4.x = 0;
       t4.y = 0;
@@ -6644,9 +6750,6 @@
   J.set$height$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$height(receiver, value);
   };
-  J.set$strokeStyle$x = function(receiver, value) {
-    return J.getInterceptor$x(receiver).set$strokeStyle(receiver, value);
-  };
   J.set$width$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$width(receiver, value);
   };
@@ -6664,6 +6767,9 @@
   };
   J.get$width$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$width(receiver);
+  };
+  J.get$x$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$x(receiver);
   };
   J.$add$ns = function(receiver, a0) {
     if (typeof receiver == "number" && typeof a0 == "number")
@@ -6688,20 +6794,38 @@
   J._removeEventListener$3$x = function(receiver, a0, a1, a2) {
     return J.getInterceptor$x(receiver)._removeEventListener$3(receiver, a0, a1, a2);
   };
+  J.arc$5$x = function(receiver, a0, a1, a2, a3, a4) {
+    return J.getInterceptor$x(receiver).arc$5(receiver, a0, a1, a2, a3, a4);
+  };
+  J.beginPath$0$x = function(receiver) {
+    return J.getInterceptor$x(receiver).beginPath$0(receiver);
+  };
   J.elementAt$1$ax = function(receiver, a0) {
     return J.getInterceptor$ax(receiver).elementAt$1(receiver, a0);
   };
-  J.fillRect$4$x = function(receiver, a0, a1, a2, a3) {
-    return J.getInterceptor$x(receiver).fillRect$4(receiver, a0, a1, a2, a3);
+  J.fill$0$x = function(receiver) {
+    return J.getInterceptor$x(receiver).fill$0(receiver);
   };
   J.getContext$1$x = function(receiver, a0) {
     return J.getInterceptor$x(receiver).getContext$1(receiver, a0);
   };
+  J.lineTo$2$x = function(receiver, a0, a1) {
+    return J.getInterceptor$x(receiver).lineTo$2(receiver, a0, a1);
+  };
   J.map$1$ax = function(receiver, a0) {
     return J.getInterceptor$ax(receiver).map$1(receiver, a0);
   };
+  J.moveTo$2$x = function(receiver, a0, a1) {
+    return J.getInterceptor$x(receiver).moveTo$2(receiver, a0, a1);
+  };
+  J.stroke$0$x = function(receiver) {
+    return J.getInterceptor$x(receiver).stroke$0(receiver);
+  };
   J.toDouble$0$n = function(receiver) {
     return J.getInterceptor$n(receiver).toDouble$0(receiver);
+  };
+  J.toInt$0$n = function(receiver) {
+    return J.getInterceptor$n(receiver).toInt$0(receiver);
   };
   J.get$hashCode$ = function(receiver) {
     return J.getInterceptor(receiver).get$hashCode(receiver);
@@ -6972,7 +7096,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, ret: V.Vector, args: [V.Vector]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
