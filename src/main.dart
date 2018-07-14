@@ -1,8 +1,10 @@
 import 'gui/Gui.dart';
+import 'physics/Stage.dart';
 
 /**
  * Entry point to the program
  */
 void main() {
-    final gui = new Gui();
+    final world = new Stage();
+    final gui = new Gui(world);
 }

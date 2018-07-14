@@ -586,7 +586,7 @@
       toString$0: ["super$Interceptor$toString", function(receiver) {
         return H.Primitives_objectToHumanReadableString(receiver);
       }],
-      "%": "Blob|CanvasRenderingContext2D|DOMError|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
+      "%": "Blob|CanvasGradient|CanvasPattern|DOMError|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
     },
     JSBool: {
       "^": "Interceptor;",
@@ -758,6 +758,9 @@
           return t1 + 0;
         }
         throw H.wrapException(new P.UnsupportedError("" + receiver + ".toInt()"));
+      },
+      toDouble$0: function(receiver) {
+        return receiver;
       },
       toString$0: function(receiver) {
         if (receiver === 0 && 1 / receiver < 0)
@@ -5980,7 +5983,7 @@
       "%": "HTMLBodyElement"
     },
     CanvasElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       getContext$2: function(receiver, contextId, attributes) {
         return receiver.getContext(contextId);
       },
@@ -5988,6 +5991,13 @@
         return this.getContext$2($receiver, contextId, null);
       },
       "%": "HTMLCanvasElement"
+    },
+    CanvasRenderingContext2D: {
+      "^": "Interceptor;strokeStyle}",
+      fillRect$4: function(receiver, x, y, width, height) {
+        return receiver.fillRect(x, y, width, height);
+      },
+      "%": "CanvasRenderingContext2D"
     },
     CssStyleDeclaration: {
       "^": "Interceptor_CssStyleDeclarationBase;length=",
@@ -6015,7 +6025,7 @@
       "%": ";Element"
     },
     EmbedElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       "%": "HTMLEmbedElement"
     },
     ErrorEvent: {
@@ -6043,17 +6053,24 @@
       "%": "HTMLFormElement"
     },
     IFrameElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       "%": "HTMLIFrameElement"
     },
     ImageElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       "%": "HTMLImageElement"
     },
     InputElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       $isInterceptor: 1,
       "%": "HTMLInputElement"
+    },
+    Location: {
+      "^": "Interceptor;",
+      toString$0: function(receiver) {
+        return String(receiver);
+      },
+      "%": "Location"
     },
     MediaElement: {
       "^": "HtmlElement;error=",
@@ -6073,7 +6090,7 @@
       "%": "Document|HTMLDocument;Node"
     },
     ObjectElement: {
-      "^": "HtmlElement;height},width%",
+      "^": "HtmlElement;height%,width%",
       "%": "HTMLObjectElement"
     },
     SelectElement: {
@@ -6085,7 +6102,7 @@
       "%": "SpeechRecognitionError"
     },
     VideoElement: {
-      "^": "MediaElement;height},width%",
+      "^": "MediaElement;height%,width%",
       "%": "HTMLVideoElement"
     },
     Window: {
@@ -6187,92 +6204,92 @@
       "%": "SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGAnimationElement|SVGSetElement"
     },
     FEBlendElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEBlendElement"
     },
     FEColorMatrixElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEColorMatrixElement"
     },
     FEComponentTransferElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEComponentTransferElement"
     },
     FECompositeElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFECompositeElement"
     },
     FEConvolveMatrixElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEConvolveMatrixElement"
     },
     FEDiffuseLightingElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEDiffuseLightingElement"
     },
     FEDisplacementMapElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEDisplacementMapElement"
     },
     FEFloodElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEFloodElement"
     },
     FEGaussianBlurElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEGaussianBlurElement"
     },
     FEImageElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEImageElement"
     },
     FEMergeElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEMergeElement"
     },
     FEMorphologyElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEMorphologyElement"
     },
     FEOffsetElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEOffsetElement"
     },
     FESpecularLightingElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFESpecularLightingElement"
     },
     FETileElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFETileElement"
     },
     FETurbulenceElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFETurbulenceElement"
     },
     FilterElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFilterElement"
     },
     ForeignObjectElement: {
-      "^": "GraphicsElement;width=",
+      "^": "GraphicsElement;height=,width=",
       "%": "SVGForeignObjectElement"
     },
     GeometryElement: {
@@ -6285,7 +6302,7 @@
       "%": "SVGClipPathElement|SVGDefsElement|SVGGElement|SVGSwitchElement;SVGGraphicsElement"
     },
     ImageElement0: {
-      "^": "GraphicsElement;width=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGImageElement"
     },
@@ -6295,17 +6312,17 @@
       "%": "SVGMarkerElement"
     },
     MaskElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGMaskElement"
     },
     PatternElement: {
-      "^": "SvgElement;width=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGPatternElement"
     },
     RectElement: {
-      "^": "GeometryElement;width=",
+      "^": "GeometryElement;height=,width=",
       "%": "SVGRectElement"
     },
     ScriptElement0: {
@@ -6319,7 +6336,7 @@
       "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
     },
     SvgSvgElement: {
-      "^": "GraphicsElement;width=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGSVGElement"
     },
@@ -6338,7 +6355,7 @@
       "%": "SVGTextPathElement"
     },
     UseElement: {
-      "^": "GraphicsElement;width=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGUseElement"
     },
@@ -6386,25 +6403,73 @@
   }], ["", "../src/gui/Gui.dart",, X, {
     "^": "",
     Gui: {
-      "^": "Object;screen,controlPanel",
-      Gui$0: function() {
-        var t1 = new X.Gui_resizeProc(this);
+      "^": "Object;screen,controlPanel,world",
+      Gui$1: function(world) {
+        var t1, t2, t3, t4, t5, t6, drawHeight, drawWidth, startX, startY;
+        t1 = this.world;
+        t2 = t1.initialPendulum;
+        t3 = t1.attachedPendulum;
+        t1 = new D.Screen(null, null, null, t1.width, t1.height);
+        t4 = document;
+        t5 = t4.getElementById("screen");
+        t1.screen = t5;
+        t5 = J.getContext$1$x(t5, "2d");
+        t1.renderer = t5;
+        t1.pendulums = [t2, t3];
+        J.set$strokeStyle$x(t5, "blue");
+        t5.lineWidth = 3;
+        t5.fillStyle = "green";
+        this.screen = t1;
+        t1 = new O.ControlPanel(null);
+        t1.controlPanel = t4.getElementById("control-panel");
+        this.controlPanel = t1;
+        t1 = new X.Gui_resizeProc(this);
         t1.call$0();
         W._EventStreamSubscription$(window, "resize", t1, false, W.Event);
+        t1 = this.screen;
+        t2 = J.get$height$x(t1.screen);
+        t3 = t1.logicalHeight;
+        if (typeof t2 !== "number")
+          return t2.$div();
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        t4 = J.get$width$x(t1.screen);
+        t5 = t1.logicalWidth;
+        if (typeof t4 !== "number")
+          return t4.$div();
+        if (typeof t5 !== "number")
+          return H.iae(t5);
+        t6 = t1.screen;
+        if (t2 / t3 < t4 / t5) {
+          drawHeight = J.toDouble$0$n(J.get$height$x(t6));
+          t2 = J.get$height$x(t1.screen);
+          if (typeof t2 !== "number")
+            return t2.$div();
+          drawWidth = t2 / t3 * t5;
+          t5 = J.get$width$x(t1.screen);
+          if (typeof t5 !== "number")
+            return t5.$sub();
+          startX = (t5 - drawWidth) / 2;
+          startY = 0;
+        } else {
+          drawWidth = J.toDouble$0$n(J.get$width$x(t6));
+          t2 = J.get$width$x(t1.screen);
+          if (typeof t2 !== "number")
+            return t2.$div();
+          t2 = J.get$height$x(t1.screen);
+          if (typeof t2 !== "number")
+            return t2.$sub();
+          startY = (t2 - 0) / 2;
+          startX = 0;
+          drawHeight = 0;
+        }
+        J.fillRect$4$x(t1.renderer, startX, startY, drawWidth, drawHeight);
       },
       static: {
-        Gui$: function() {
-          var t1, t2, t3;
-          t1 = new D.Screen(null, null, null);
-          t2 = document;
-          t3 = t2.getElementById("screen");
-          t1.screen = t3;
-          t1.renderer = J.getContext$1$x(t3, "2d");
-          t3 = new O.ControlPanel(null);
-          t3.controlPanel = t2.getElementById("control-panel");
-          t3 = new X.Gui(t1, t3);
-          t3.Gui$0();
-          return t3;
+        Gui$: function(world) {
+          var t1 = new X.Gui(null, null, world);
+          t1.Gui$1(world);
+          return t1;
         }
       }
     },
@@ -6436,15 +6501,57 @@
         return this.call$1(null);
       }
     }
+  }], ["", "../src/physics/Pendulum.dart",, S, {
+    "^": "",
+    Pendulum: {
+      "^": "Object;startingLocation,stringLength,mass,radius,location,velocity,acceleration,angle,angularVelocity,angularAcceleration"
+    }
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
     Screen: {
-      "^": "Object;screen,renderer,world"
+      "^": "Object;screen,renderer,pendulums,logicalWidth,logicalHeight"
+    }
+  }], ["", "../src/physics/Stage.dart",, L, {
+    "^": "",
+    Stage: {
+      "^": "Object;initialPendulum,attachedPendulum,gravity,dampenFactor,width,height"
+    }
+  }], ["", "../src/physics/Vector.dart",, V, {
+    "^": "",
+    Vector: {
+      "^": "Object;x,y",
+      $add: function(_, other) {
+        var t1 = J.getInterceptor$x(other);
+        return new V.Vector(C.JSNumber_methods.$add(this.x, t1.get$x(other)), C.JSNumber_methods.$add(this.y, t1.get$y(other)));
+      },
+      get$length: function(_) {
+        return Math.sqrt(Math.pow(this.x, 2) + Math.pow(this.y, 2));
+      }
     }
   }], ["", "../src/main.dart",, F, {
     "^": "",
     main: [function() {
-      X.Gui$();
+      var world, t1, t2, t3, t4, t5;
+      world = new L.Stage(null, null, 9.8, 1, 20, 15);
+      t1 = new V.Vector(null, null);
+      t1.x = 0;
+      t1.y = 0;
+      t2 = new V.Vector(null, null);
+      t2.x = 0;
+      t2.y = 0;
+      t2 = new S.Pendulum(new V.Vector(10, 13.5), 5, 1.5, 0.5, new V.Vector(10, 8.5), t1, t2, 0, 0, 0);
+      world.initialPendulum = t2;
+      t1 = t2.location;
+      t2 = t1.x;
+      t3 = t1.y;
+      t4 = new V.Vector(null, null);
+      t4.x = 0;
+      t4.y = 0;
+      t5 = new V.Vector(null, null);
+      t5.x = 0;
+      t5.y = 0;
+      world.attachedPendulum = new S.Pendulum(t1, 5, 1.5, 0.5, new V.Vector(t2, t3 - 5), t4, t5, 0, 0, 0);
+      X.Gui$(world);
     }, "call$0", "main__main$closure", 0, 0, 1]
   }, 1]];
   setupProgram(dart, 0);
@@ -6537,11 +6644,17 @@
   J.set$height$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$height(receiver, value);
   };
+  J.set$strokeStyle$x = function(receiver, value) {
+    return J.getInterceptor$x(receiver).set$strokeStyle(receiver, value);
+  };
   J.set$width$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$width(receiver, value);
   };
   J.get$error$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$error(receiver);
+  };
+  J.get$height$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$height(receiver);
   };
   J.get$iterator$ax = function(receiver) {
     return J.getInterceptor$ax(receiver).get$iterator(receiver);
@@ -6578,11 +6691,17 @@
   J.elementAt$1$ax = function(receiver, a0) {
     return J.getInterceptor$ax(receiver).elementAt$1(receiver, a0);
   };
+  J.fillRect$4$x = function(receiver, a0, a1, a2, a3) {
+    return J.getInterceptor$x(receiver).fillRect$4(receiver, a0, a1, a2, a3);
+  };
   J.getContext$1$x = function(receiver, a0) {
     return J.getInterceptor$x(receiver).getContext$1(receiver, a0);
   };
   J.map$1$ax = function(receiver, a0) {
     return J.getInterceptor$ax(receiver).map$1(receiver, a0);
+  };
+  J.toDouble$0$n = function(receiver) {
+    return J.getInterceptor$n(receiver).toDouble$0(receiver);
   };
   J.get$hashCode$ = function(receiver) {
     return J.getInterceptor(receiver).get$hashCode(receiver);
