@@ -31,6 +31,7 @@ class Screen {
      * The method that handles drawing the pendulums
      */
     draw() {
+        this.renderer.clearRect(0, 0, this.screen.width, this.screen.height);
         double startX = 0.0;
         double startY = 0.0;
         double drawWidth = 0.0;
@@ -41,12 +42,12 @@ class Screen {
             startX = (this.screen.width - drawWidth) / 2;
         } else {
             drawWidth = this.screen.width.toDouble();
-            drawHeight - this.screen.width / this.logicalWidth * this.logicalHeight;
+            drawHeight = this.screen.width / this.logicalWidth * this.logicalHeight;
             startY = (this.screen.height - drawHeight) / 2;
         }
         //Converts the given logical coordinates to view or screen coordinates
         Vector getViewCoordinates(Vector logicalCoordinates) {
-            Vector viewCoords = logicalCoordinates * new Vector(this.screen.width.toDouble(), this.screen.height.toDouble()) / new Vector(this.logicalWidth, this.logicalHeight) + new Vector(startX, startY);
+            Vector viewCoords = logicalCoordinates * new Vector(drawWidth, drawHeight) / new Vector(this.logicalWidth, this.logicalHeight) + new Vector(startX, startY);
             viewCoords.y = this.screen.height - viewCoords.y;
             return viewCoords;
         }

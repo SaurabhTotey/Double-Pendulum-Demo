@@ -42,7 +42,7 @@ class Stage {
         if (attachedPendulum == null) {
             attachedPendulum = new Pendulum(
                 startingLocation: initialPendulum.location,
-                location: new Vector(initialPendulum.location.x, initialPendulum.location.y - 5.0)
+                location: new Vector(initialPendulum.location.x + 5, initialPendulum.location.y)
             );
         }
     }

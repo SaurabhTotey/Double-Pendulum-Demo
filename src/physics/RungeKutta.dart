@@ -7,10 +7,5 @@
  * If changeFunction always returns the same thing (is a constant function), this method effectively is euler's method
  */
 double rungeKutta(double initialInput, double initialOutput, double inputStep, double changeFunction(double)) {
-    double halfStep = inputStep / 2;
-    double a = initialOutput;
-    double b = a + halfStep * changeFunction(initialInput);
-    double c = b + halfStep * changeFunction(initialInput + halfStep);
-    double d = c + changeFunction(initialInput + inputStep);
-    return initialOutput + inputStep / 6 * (a + 2 * (b + c) + d);
+    return initialOutput + inputStep / 6 * (initialOutput + 4 * changeFunction(initialInput + inputStep / 2) + changeFunction(initialInput + inputStep));
 }
