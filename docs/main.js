@@ -1417,10 +1417,10 @@
           }
           this.doneHandlers = null;
         }
-      }, "call$0", "get$kill", 0, 0, 2]
+      }, "call$0", "get$kill", 0, 0, 1]
     },
     _IsolateContext_handlePing_respond: {
-      "^": "Closure:2;responsePort,response",
+      "^": "Closure:1;responsePort,response",
       call$0: function() {
         this.responsePort.send$1(this.response);
       }
@@ -1494,7 +1494,7 @@
       }
     },
     _EventLoop__runHelper_next: {
-      "^": "Closure:2;$this",
+      "^": "Closure:1;$this",
       call$0: function() {
         if (!this.$this.runIteration$0())
           return;
@@ -1522,7 +1522,7 @@
       }
     },
     IsolateNatives__startIsolate_runStartFunction: {
-      "^": "Closure:2;topLevel,args,message,isSpawnUri,context",
+      "^": "Closure:1;topLevel,args,message,isSpawnUri,context",
       call$0: function() {
         var t1, t2;
         t1 = this.context;
@@ -1697,14 +1697,14 @@
       }
     },
     TimerImpl_internalCallback: {
-      "^": "Closure:2;$this,callback",
+      "^": "Closure:1;$this,callback",
       call$0: function() {
         this.$this._handle = null;
         this.callback.call$0();
       }
     },
     TimerImpl_internalCallback0: {
-      "^": "Closure:2;$this,callback",
+      "^": "Closure:1;$this,callback",
       call$0: function() {
         this.$this._handle = null;
         --init.globalState.topEventLoop._activeJsAsyncCount;
@@ -1791,7 +1791,7 @@
         if (!(x instanceof P.Object))
           this.unsupported$1(x);
         return ["dart", init.classIdExtractor(x), this.serializeArrayInPlace$1(init.classFieldsExtractor(x))];
-      }, "call$1", "get$serialize", 2, 0, 1],
+      }, "call$1", "get$serialize", 2, 0, 2],
       unsupported$2: function(x, message) {
         throw H.wrapException(new P.UnsupportedError((message == null ? "Can't transmit:" : message) + " " + H.S(x)));
       },
@@ -1948,7 +1948,7 @@
           default:
             throw H.wrapException("couldn't deserialize: " + H.S(x));
         }
-      }, "call$1", "get$deserialize", 2, 0, 1],
+      }, "call$1", "get$deserialize", 2, 0, 2],
       deserializeArrayInPlace$1: function(x) {
         var t1, i, t2;
         t1 = J.getInterceptor$asx(x);
@@ -3097,7 +3097,7 @@
       }
     },
     unwrapException_saveStackTrace: {
-      "^": "Closure:1;ex",
+      "^": "Closure:2;ex",
       call$1: function(error) {
         if (!!J.getInterceptor(error).$isError)
           if (error.$thrownJsError == null)
@@ -3462,7 +3462,7 @@
       $isInternalMap: 1
     },
     JsLinkedHashMap_values_closure: {
-      "^": "Closure:1;$this",
+      "^": "Closure:2;$this",
       call$1: function(each) {
         return this.$this.$index(0, each);
       }
@@ -3506,7 +3506,7 @@
       }
     },
     initHooks_closure: {
-      "^": "Closure:1;getTag",
+      "^": "Closure:2;getTag",
       call$1: function(o) {
         return this.getTag(o);
       }
@@ -3855,7 +3855,7 @@
         if ($._nextCallback != null)
           $.$get$_AsyncRun__scheduleImmediateClosure().call$1(P.async___startMicrotaskLoop$closure());
       }
-    }, "call$0", "async___startMicrotaskLoop$closure", 0, 0, 2],
+    }, "call$0", "async___startMicrotaskLoop$closure", 0, 0, 1],
     _scheduleAsyncCallback: function(callback) {
       var newEntry = new P._AsyncCallbackEntry(callback, null);
       if ($._nextCallback == null) {
@@ -3987,7 +3987,7 @@
       P._scheduleAsyncCallback(f);
     },
     _AsyncRun__initializeScheduleImmediate_internalCallback: {
-      "^": "Closure:1;_box_0",
+      "^": "Closure:2;_box_0",
       call$1: function(_) {
         var t1, f;
         --init.globalState.topEventLoop._activeJsAsyncCount;
@@ -4323,7 +4323,7 @@
       }
     },
     _Future__chainForeignFuture_closure: {
-      "^": "Closure:1;target",
+      "^": "Closure:2;target",
       call$1: function(value) {
         var t1 = this.target;
         t1._state = 0;
@@ -4346,7 +4346,7 @@
       }
     },
     _Future__propagateToListeners_handleWhenCompleteCallback: {
-      "^": "Closure:2;_box_1,_box_0,hasError,listener",
+      "^": "Closure:1;_box_1,_box_0,hasError,listener",
       call$0: function() {
         var completeResult, e, s, exception, t1, t2, originalSource;
         completeResult = null;
@@ -4387,13 +4387,13 @@
       }
     },
     _Future__propagateToListeners_handleWhenCompleteCallback_closure: {
-      "^": "Closure:1;originalSource",
+      "^": "Closure:2;originalSource",
       call$1: function(_) {
         return this.originalSource;
       }
     },
     _Future__propagateToListeners_handleValueCallback: {
-      "^": "Closure:2;_box_0,listener,sourceResult",
+      "^": "Closure:1;_box_0,listener,sourceResult",
       call$0: function() {
         var e, s, exception, t1;
         try {
@@ -4408,7 +4408,7 @@
       }
     },
     _Future__propagateToListeners_handleError: {
-      "^": "Closure:2;_box_1,_box_0,listener",
+      "^": "Closure:1;_box_1,_box_0,listener",
       call$0: function() {
         var asyncError, e, s, t1, t2, exception, t3, t4;
         try {
@@ -4460,7 +4460,7 @@
       }
     },
     Stream_length_closure: {
-      "^": "Closure:1;_box_0",
+      "^": "Closure:2;_box_0",
       call$1: function(_) {
         ++this._box_0.count;
       }
@@ -4577,9 +4577,9 @@
           this._addPending$1(C.C__DelayedDone);
       },
       _onPause$0: [function() {
-      }, "call$0", "get$_onPause", 0, 0, 2],
+      }, "call$0", "get$_onPause", 0, 0, 1],
       _onResume$0: [function() {
-      }, "call$0", "get$_onResume", 0, 0, 2],
+      }, "call$0", "get$_onResume", 0, 0, 1],
       _onCancel$0: function() {
         return;
       },
@@ -4691,7 +4691,7 @@
       }
     },
     _BufferingStreamSubscription__sendError_sendError: {
-      "^": "Closure:2;$this,error,stackTrace",
+      "^": "Closure:1;$this,error,stackTrace",
       call$0: function() {
         var t1, t2, t3, t4, t5, t6;
         t1 = this.$this;
@@ -4712,7 +4712,7 @@
       }
     },
     _BufferingStreamSubscription__sendDone_sendDone: {
-      "^": "Closure:2;$this",
+      "^": "Closure:1;$this",
       call$0: function() {
         var t1, t2;
         t1 = this.$this;
@@ -4840,13 +4840,13 @@
         if (t1 == null)
           return;
         t1.pause$0(0);
-      }, "call$0", "get$_onPause", 0, 0, 2],
+      }, "call$0", "get$_onPause", 0, 0, 1],
       _onResume$0: [function() {
         var t1 = this._subscription;
         if (t1 == null)
           return;
         t1.resume$0();
-      }, "call$0", "get$_onResume", 0, 0, 2],
+      }, "call$0", "get$_onResume", 0, 0, 1],
       _onCancel$0: function() {
         var t1 = this._subscription;
         if (t1 != null) {
@@ -4867,7 +4867,7 @@
       }, "call$2", "get$_handleError", 4, 0, 10],
       _handleDone$0: [function() {
         this._async$_close$0();
-      }, "call$0", "get$_handleDone", 0, 0, 2],
+      }, "call$0", "get$_handleDone", 0, 0, 1],
       _ForwardingStreamSubscription$5: function(_stream, onData, onError, onDone, cancelOnError, $S, $T) {
         this._subscription = this._stream._async$_source.listen$3$onDone$onError(this.get$_handleData(), this.get$_handleDone(), this.get$_handleError());
       },
@@ -5023,7 +5023,7 @@
       }
     },
     _RootZone_bindUnaryCallback_closure: {
-      "^": "Closure:1;$this,f",
+      "^": "Closure:2;$this,f",
       call$1: function(arg) {
         return this.$this.runUnaryGuarded$2(this.f, arg);
       }
@@ -6267,7 +6267,7 @@
       }
     },
     _EventStreamSubscription_closure: {
-      "^": "Closure:1;onData",
+      "^": "Closure:2;onData",
       call$1: function(e) {
         return this.onData.call$1(e);
       }
@@ -6558,19 +6558,39 @@
   }], ["", "../src/physics/Pendulum.dart",, S, {
     "^": "",
     Pendulum: {
-      "^": "Object;startingLocation<,stringLength<,mass,radius,location,velocity,acceleration,angle,angularVelocity,angularAcceleration"
-    }
-  }], ["", "../src/physics/RungeKutta.dart",, R, {
-    "^": "",
-    rungeKutta: function(initialInput, initialOutput, inputStep, changeFunction) {
-      var t1, t2;
-      t1 = changeFunction.call$1(initialInput + inputStep / 2);
-      if (typeof t1 !== "number")
-        return H.iae(t1);
-      t2 = changeFunction.call$1(initialInput + inputStep);
-      if (typeof t2 !== "number")
-        return H.iae(t2);
-      return initialOutput + inputStep / 6 * (initialOutput + 4 * t1 + t2);
+      "^": "Object;startingLocation<,stringLength<,mass,radius,location,velocity,acceleration,angle,angularVelocity,angularAcceleration",
+      Pendulum$5$location$mass$radius$startingLocation$stringLength: function($location, mass, radius, startingLocation, stringLength) {
+        var t1, t2, t3, t4;
+        t1 = this.startingLocation;
+        t2 = t1.x;
+        t3 = this.location;
+        t4 = t3.x;
+        if (typeof t2 !== "number")
+          return t2.$sub();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        t1 = t1.y;
+        t3 = t3.y;
+        if (typeof t1 !== "number")
+          return t1.$sub();
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        this.angle = -Math.atan2(t2 - t4, t1 - t3);
+      },
+      static: {
+        Pendulum$: function($location, mass, radius, startingLocation, stringLength) {
+          var t1, t2;
+          t1 = new V.Vector(null, null);
+          t1.x = 0;
+          t1.y = 0;
+          t2 = new V.Vector(null, null);
+          t2.x = 0;
+          t2.y = 0;
+          t2 = new S.Pendulum(startingLocation, stringLength, mass, radius, $location, t1, t2, null, 0, 0);
+          t2.Pendulum$5$location$mass$radius$startingLocation$stringLength($location, mass, radius, startingLocation, stringLength);
+          return t2;
+        }
+      }
     }
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
@@ -6673,7 +6693,7 @@
     Stage: {
       "^": "Object;initialPendulum,attachedPendulum,gravity,dampenFactor,width,height",
       step$1: function(_, dt) {
-        var t1, t2, pendulums, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8;
+        var t1, t2, pendulums, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8, t9, t10, t11;
         t1 = this.initialPendulum;
         t2 = this.attachedPendulum;
         pendulums = [t1, t2];
@@ -6700,82 +6720,46 @@
         t6 = Math.cos(t6.angle);
         t2 = Math.pow(this.attachedPendulum.angularVelocity, 2);
         t4 = this.attachedPendulum;
-        t8.angularAcceleration = 2 * t7 * (t5 * t1 * combinedMass + t3 * combinedMass * t6 + t2 * t4.stringLength * t4.mass * Math.cos(angleDifference)) / (this.attachedPendulum.stringLength * denominatorFactor);
-        t4 = this.initialPendulum;
-        t4.angle = R.rungeKutta(0, t4.angle, dt, new L.Stage_step_closure(this));
+        t9 = t4.stringLength;
+        t4 = t4.mass;
+        t10 = Math.cos(angleDifference);
+        t11 = this.attachedPendulum;
+        t8.angularAcceleration = 2 * t7 * (t5 * t1 * combinedMass + t3 * combinedMass * t6 + t2 * t9 * t4 * t10) / (t11.stringLength * denominatorFactor);
+        t10 = this.initialPendulum;
+        t10.angularVelocity = t10.angularVelocity + t10.angularAcceleration * dt;
+        t4 = t11.angularVelocity + t11.angularAcceleration * dt;
+        t11.angularVelocity = t4;
+        t10.angle = t10.angle + t10.angularVelocity * dt;
+        t11.angle = t11.angle + t4 * dt;
+        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure());
         t4 = this.attachedPendulum;
-        t4.angle = R.rungeKutta(0, t4.angle, dt, new L.Stage_step_closure0(this));
-        t4 = this.initialPendulum;
-        t4.angularVelocity = R.rungeKutta(0, t4.angularVelocity, dt, new L.Stage_step_closure1(this));
-        t4 = this.attachedPendulum;
-        t4.angularVelocity = R.rungeKutta(0, t4.angularVelocity, dt, new L.Stage_step_closure2(this));
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure3());
-        t4 = this.attachedPendulum;
-        t2 = t4.location;
-        t6 = t4.startingLocation;
-        t3 = this.initialPendulum.location;
-        t1 = t6.x;
-        t5 = t3.x;
-        if (typeof t1 !== "number")
-          return t1.$sub();
-        if (typeof t5 !== "number")
-          return H.iae(t5);
-        t6 = t6.y;
-        t3 = t3.y;
+        t11 = t4.location;
+        t10 = t4.startingLocation;
+        t9 = this.initialPendulum.location;
+        t2 = t10.x;
+        t6 = t9.x;
+        if (typeof t2 !== "number")
+          return t2.$sub();
         if (typeof t6 !== "number")
-          return t6.$sub();
-        if (typeof t3 !== "number")
-          return H.iae(t3);
-        t4.location = t2.$add(0, new V.Vector(t1 - t5, t6 - t3));
+          return H.iae(t6);
+        t10 = t10.y;
+        t9 = t9.y;
+        if (typeof t10 !== "number")
+          return t10.$sub();
+        if (typeof t9 !== "number")
+          return H.iae(t9);
+        t4.location = t11.$add(0, new V.Vector(t2 - t6, t10 - t9));
         this.attachedPendulum.startingLocation = this.initialPendulum.location;
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure4());
-        t3 = this.attachedPendulum;
-        t3.velocity = t3.velocity.$add(0, this.initialPendulum.velocity);
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure5());
-        t3 = this.attachedPendulum;
-        t3.acceleration = t3.acceleration.$add(0, this.initialPendulum.acceleration);
+        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure0());
+        t9 = this.attachedPendulum;
+        t9.velocity = t9.velocity.$add(0, this.initialPendulum.velocity);
+        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure1());
+        t9 = this.attachedPendulum;
+        t9.acceleration = t9.acceleration.$add(0, this.initialPendulum.acceleration);
       }
     },
     Stage_step_closure: {
-      "^": "Closure:1;$this",
-      call$1: function(timeStep) {
-        var t1 = this.$this;
-        return R.rungeKutta(0, t1.initialPendulum.angularVelocity, timeStep, new L.Stage_step__closure0(t1));
-      }
-    },
-    Stage_step__closure0: {
-      "^": "Closure:1;$this",
-      call$1: function(ignored) {
-        return this.$this.initialPendulum.angularAcceleration;
-      }
-    },
-    Stage_step_closure0: {
-      "^": "Closure:1;$this",
-      call$1: function(timeStep) {
-        var t1 = this.$this;
-        return R.rungeKutta(0, t1.attachedPendulum.angularVelocity, timeStep, new L.Stage_step__closure(t1));
-      }
-    },
-    Stage_step__closure: {
-      "^": "Closure:1;$this",
-      call$1: function(ignored) {
-        return this.$this.initialPendulum.angularAcceleration;
-      }
-    },
-    Stage_step_closure1: {
-      "^": "Closure:1;$this",
-      call$1: function(timeStep) {
-        return this.$this.initialPendulum.angularAcceleration;
-      }
-    },
-    Stage_step_closure2: {
-      "^": "Closure:1;$this",
-      call$1: function(timeStep) {
-        return this.$this.initialPendulum.angularAcceleration;
-      }
-    },
-    Stage_step_closure3: {
-      "^": "Closure:1;",
+      "^": "Closure:2;",
       call$1: function(pendulum) {
         var t1, t2, t3;
         t1 = pendulum.get$startingLocation();
@@ -6788,8 +6772,8 @@
         return t3;
       }
     },
-    Stage_step_closure4: {
-      "^": "Closure:1;",
+    Stage_step_closure0: {
+      "^": "Closure:2;",
       call$1: function(pendulum) {
         var t1, t2;
         t1 = pendulum.get$stringLength() * pendulum.angularVelocity;
@@ -6801,8 +6785,8 @@
         return t2;
       }
     },
-    Stage_step_closure5: {
-      "^": "Closure:1;",
+    Stage_step_closure1: {
+      "^": "Closure:2;",
       call$1: function(pendulum) {
         var t1, t2;
         t1 = pendulum.get$stringLength();
@@ -6863,33 +6847,20 @@
   }], ["", "../src/main.dart",, F, {
     "^": "",
     main: [function() {
-      var world, t1, t2, t3, t4, t5, gui;
+      var world, t1, t2, gui;
       world = new L.Stage(null, null, 9.8, 1, 20, 15);
-      t1 = new V.Vector(null, null);
-      t1.x = 0;
-      t1.y = 0;
-      t2 = new V.Vector(null, null);
-      t2.x = 0;
-      t2.y = 0;
-      t2 = new S.Pendulum(new V.Vector(10, 13.5), 5, 1.5, 0.5, new V.Vector(10, 8.5), t1, t2, 0, 0, 0);
-      world.initialPendulum = t2;
-      t1 = t2.location;
+      t1 = S.Pendulum$(new V.Vector(10, 8.5), 1.5, 0.5, new V.Vector(10, 13.5), 5);
+      world.initialPendulum = t1;
+      t1 = t1.location;
       t2 = t1.x;
       if (typeof t2 !== "number")
         return t2.$add();
-      t3 = t1.y;
-      t4 = new V.Vector(null, null);
-      t4.x = 0;
-      t4.y = 0;
-      t5 = new V.Vector(null, null);
-      t5.x = 0;
-      t5.y = 0;
-      world.attachedPendulum = new S.Pendulum(t1, 5, 1.5, 0.5, new V.Vector(t2 + 5, t3), t4, t5, 0, 0, 0);
+      world.attachedPendulum = S.Pendulum$(new V.Vector(t2 + 5, t1.y), 1.5, 0.5, t1, 5);
       gui = X.Gui$(world);
       P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 25, 0, 0), new F.main_closure(world, gui, 25));
-    }, "call$0", "main__main$closure", 0, 0, 2],
+    }, "call$0", "main__main$closure", 0, 0, 1],
     main_closure: {
-      "^": "Closure:1;world,gui,ms",
+      "^": "Closure:2;world,gui,ms",
       call$1: function(timer) {
         this.world.step$1(0, this.ms / 1000);
         this.gui.screen.draw$0();
@@ -7335,7 +7306,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, args: [,]}, {func: 1, v: true}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, ret: V.Vector, args: [V.Vector]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, ret: V.Vector, args: [V.Vector]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

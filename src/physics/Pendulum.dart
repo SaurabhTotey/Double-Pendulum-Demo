@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'Vector.dart';
 
 /**
@@ -20,7 +21,7 @@ class Pendulum {
     //The current acceleration of the center of the pendulum
     Vector acceleration = new Vector.empty();
     //The angle of the pendulum where 0 is downwards, and counterclockwise is positive
-    double angle = 0.0;
+    double angle;
     //The change of the angle where 0 is downwards, and counterclockwise is positive
     double angularVelocity = 0.0;
     //The change of the change of the angle where 0 is downwards, and counterclockwise is positive
@@ -35,6 +36,9 @@ class Pendulum {
         this.mass = 1.5,
         this.radius = 0.5,
         this.location
-    });
+    }) {
+        //this.angle = atan2(location.x - startingLocation.x, location.y - startingLocation.y);
+        this.angle = -atan2(startingLocation.x - location.x, startingLocation.y - location.y);
+    }
 
 }
