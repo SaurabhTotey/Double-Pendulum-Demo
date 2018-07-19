@@ -12,7 +12,7 @@ class Screen {
     CanvasElement screen;
     //The utility object that can be used to actually draw on the screen
     CanvasRenderingContext2D renderer;
-    //THe logical coordinates of the stage
+    //The stage that the screen is representing or drawing
     Stage world;
     //The bounding area for where the renderer should be drawing
     double startX = 0.0;
@@ -27,6 +27,21 @@ class Screen {
         this.screen = document.getElementById('screen');
         this.renderer = this.screen.getContext('2d');
         resizeProc();
+        bool isMouseDown = false;
+        this.screen.onMouseDown.listen(([MouseEvent ignored]) {
+            isMouseDown = true;
+            this.world.isPaused = true;
+        });
+        this.screen.onMouseMove.listen(([MouseEvent ignored]) {
+            if (!isMouseDown) {
+                return;
+            }
+            //TODO: do stuff if mouse has clicked pendulum
+        });
+        this.screen.onMouseUp.listen(([MouseEvent ignored]) {
+            isMouseDown = false;
+            this.world.isPaused = false;
+        });
     }
 
     /**

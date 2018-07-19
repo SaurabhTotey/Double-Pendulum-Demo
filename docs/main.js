@@ -3512,13 +3512,13 @@
       }
     },
     initHooks_closure0: {
-      "^": "Closure:5;getUnknownTag",
+      "^": "Closure:6;getUnknownTag",
       call$2: function(o, tag) {
         return this.getUnknownTag(o, tag);
       }
     },
     initHooks_closure1: {
-      "^": "Closure:6;prototypeForTag",
+      "^": "Closure:7;prototypeForTag",
       call$1: function(tag) {
         return this.prototypeForTag(tag);
       }
@@ -3817,14 +3817,14 @@
     _AsyncRun__scheduleImmediateJsOverride: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.scheduleImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateJsOverride_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 4],
     _AsyncRun__scheduleImmediateWithSetImmediate: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.setImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 4],
     _AsyncRun__scheduleImmediateWithTimer: [function(callback) {
       P.Timer__createTimer(C.Duration_0, callback);
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 4],
     _registerErrorHandler: function(errorHandler, zone) {
       if (H.functionTypeTest(errorHandler, {func: 1, args: [P.Null, P.Null]})) {
         zone.toString;
@@ -3998,7 +3998,7 @@
       }
     },
     _AsyncRun__initializeScheduleImmediate_closure: {
-      "^": "Closure:7;_box_0,div,span",
+      "^": "Closure:8;_box_0,div,span",
       call$1: function(callback) {
         var t1, t2;
         ++init.globalState.topEventLoop._activeJsAsyncCount;
@@ -4177,7 +4177,7 @@
         P._Future__propagateToListeners(this, listeners);
       }, function(error) {
         return this._completeError$2(error, null);
-      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 8, 0],
+      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 9, 0],
       _Future$value$1: function(value, $T) {
         this._state = 4;
         this._resultOrListeners = value;
@@ -4331,7 +4331,7 @@
       }
     },
     _Future__chainForeignFuture_closure0: {
-      "^": "Closure:9;target",
+      "^": "Closure:10;target",
       call$2: function(error, stackTrace) {
         this.target._completeError$2(error, stackTrace);
       },
@@ -4864,7 +4864,7 @@
       }],
       _handleError$2: [function(error, stackTrace) {
         this._stream._handleError$3(error, stackTrace, this);
-      }, "call$2", "get$_handleError", 4, 0, 10],
+      }, "call$2", "get$_handleError", 4, 0, 11],
       _handleDone$0: [function() {
         this._async$_close$0();
       }, "call$0", "get$_handleDone", 0, 0, 1],
@@ -5455,7 +5455,7 @@
       $asEfficientLengthIterable: null
     },
     Maps_mapToString_closure: {
-      "^": "Closure:11;_box_0,result",
+      "^": "Closure:12;_box_0,result",
       call$2: function(k, v) {
         var t1, t2;
         t1 = this._box_0;
@@ -5682,7 +5682,7 @@
       }
     },
     Duration_toString_sixDigits: {
-      "^": "Closure:4;",
+      "^": "Closure:5;",
       call$1: function(n) {
         if (n >= 100000)
           return "" + n;
@@ -5698,7 +5698,7 @@
       }
     },
     Duration_toString_twoDigits: {
-      "^": "Closure:4;",
+      "^": "Closure:5;",
       call$1: function(n) {
         if (n >= 10)
           return "" + n;
@@ -6100,6 +6100,15 @@
       toString$0: function(receiver) {
         return receiver.localName;
       },
+      get$onMouseDown: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mousedown", false, [W.MouseEvent]);
+      },
+      get$onMouseMove: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mousemove", false, [W.MouseEvent]);
+      },
+      get$onMouseUp: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mouseup", false, [W.MouseEvent]);
+      },
       $isInterceptor: 1,
       "%": ";Element"
     },
@@ -6115,7 +6124,7 @@
       "^": "Interceptor;",
       $isEvent: 1,
       $isObject: 1,
-      "%": "AnimationEvent|AnimationPlayerEvent|ApplicationCacheErrorEvent|AudioProcessingEvent|AutocompleteErrorEvent|BeforeInstallPromptEvent|BeforeUnloadEvent|BlobEvent|ClipboardEvent|CloseEvent|CompositionEvent|CustomEvent|DeviceLightEvent|DeviceMotionEvent|DeviceOrientationEvent|DragEvent|ExtendableEvent|ExtendableMessageEvent|FetchEvent|FocusEvent|FontFaceSetLoadEvent|GamepadEvent|GeofencingEvent|HashChangeEvent|IDBVersionChangeEvent|InstallEvent|KeyboardEvent|MIDIConnectionEvent|MIDIMessageEvent|MediaEncryptedEvent|MediaKeyMessageEvent|MediaQueryListEvent|MediaStreamEvent|MediaStreamTrackEvent|MessageEvent|MouseEvent|NotificationEvent|OfflineAudioCompletionEvent|PageTransitionEvent|PointerEvent|PopStateEvent|PresentationConnectionAvailableEvent|PresentationConnectionCloseEvent|ProgressEvent|PromiseRejectionEvent|PushEvent|RTCDTMFToneChangeEvent|RTCDataChannelEvent|RTCIceCandidateEvent|RTCPeerConnectionIceEvent|RelatedEvent|ResourceProgressEvent|SVGZoomEvent|SecurityPolicyViolationEvent|ServicePortConnectEvent|ServiceWorkerMessageEvent|SpeechRecognitionEvent|SpeechSynthesisEvent|StorageEvent|SyncEvent|TextEvent|TouchEvent|TrackEvent|TransitionEvent|UIEvent|USBConnectionEvent|WebGLContextEvent|WebKitTransitionEvent|WheelEvent;Event|InputEvent"
+      "%": "AnimationEvent|AnimationPlayerEvent|ApplicationCacheErrorEvent|AudioProcessingEvent|AutocompleteErrorEvent|BeforeInstallPromptEvent|BeforeUnloadEvent|BlobEvent|ClipboardEvent|CloseEvent|CustomEvent|DeviceLightEvent|DeviceMotionEvent|DeviceOrientationEvent|ExtendableEvent|ExtendableMessageEvent|FetchEvent|FontFaceSetLoadEvent|GamepadEvent|GeofencingEvent|HashChangeEvent|IDBVersionChangeEvent|InstallEvent|MIDIConnectionEvent|MIDIMessageEvent|MediaEncryptedEvent|MediaKeyMessageEvent|MediaQueryListEvent|MediaStreamEvent|MediaStreamTrackEvent|MessageEvent|NotificationEvent|OfflineAudioCompletionEvent|PageTransitionEvent|PopStateEvent|PresentationConnectionAvailableEvent|PresentationConnectionCloseEvent|ProgressEvent|PromiseRejectionEvent|PushEvent|RTCDTMFToneChangeEvent|RTCDataChannelEvent|RTCIceCandidateEvent|RTCPeerConnectionIceEvent|RelatedEvent|ResourceProgressEvent|SecurityPolicyViolationEvent|ServicePortConnectEvent|ServiceWorkerMessageEvent|SpeechRecognitionEvent|SpeechSynthesisEvent|StorageEvent|SyncEvent|TrackEvent|TransitionEvent|USBConnectionEvent|WebGLContextEvent|WebKitTransitionEvent;Event|InputEvent"
     },
     EventTarget: {
       "^": "Interceptor;",
@@ -6155,6 +6164,13 @@
       "^": "HtmlElement;error=",
       "%": "HTMLAudioElement;HTMLMediaElement"
     },
+    MouseEvent: {
+      "^": "UIEvent;",
+      $isMouseEvent: 1,
+      $isEvent: 1,
+      $isObject: 1,
+      "%": "DragEvent|MouseEvent|PointerEvent|WheelEvent"
+    },
     Navigator: {
       "^": "Interceptor;",
       $isInterceptor: 1,
@@ -6180,6 +6196,10 @@
       "^": "Event;error=",
       "%": "SpeechRecognitionError"
     },
+    UIEvent: {
+      "^": "Event;",
+      "%": "CompositionEvent|FocusEvent|KeyboardEvent|SVGZoomEvent|TextEvent|TouchEvent;UIEvent"
+    },
     VideoElement: {
       "^": "MediaElement;height%,width%",
       "%": "HTMLVideoElement"
@@ -6202,6 +6222,9 @@
       listen$3$onDone$onError: function(onData, onDone, onError) {
         return this.listen$4$cancelOnError$onDone$onError(onData, null, onDone, onError);
       }
+    },
+    _ElementEventStreamImpl: {
+      "^": "_EventStream;_html$_target,_eventType,_useCapture,$ti"
     },
     _EventStreamSubscription: {
       "^": "StreamSubscription;_pauseCount,_html$_target,_eventType,_onData,_useCapture,$ti",
@@ -6411,6 +6434,15 @@
     },
     SvgElement: {
       "^": "Element;",
+      get$onMouseDown: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mousedown", false, [W.MouseEvent]);
+      },
+      get$onMouseMove: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mousemove", false, [W.MouseEvent]);
+      },
+      get$onMouseUp: function(receiver) {
+        return new W._ElementEventStreamImpl(receiver, "mouseup", false, [W.MouseEvent]);
+      },
       $isInterceptor: 1,
       "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
     },
@@ -6484,16 +6516,10 @@
     Gui: {
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
-        var t1, t2, t3;
-        t1 = new D.Screen(null, null, this.world, 0, 0, 0, 0);
-        t2 = document;
-        t3 = t2.getElementById("screen");
-        t1.screen = t3;
-        t1.renderer = J.getContext$1$x(t3, "2d");
-        t1.resizeProc$0();
-        this.screen = t1;
+        var t1;
+        this.screen = D.Screen$(this.world);
         t1 = new O.ControlPanel(null);
-        t1.controlPanel = t2.getElementById("control-panel");
+        t1.controlPanel = document.getElementById("control-panel");
         this.controlPanel = t1;
         t1 = new X.Gui_resizeProc(this);
         t1.call$0();
@@ -6509,7 +6535,7 @@
       }
     },
     Gui_resizeProc: {
-      "^": "Closure:12;$this",
+      "^": "Closure:13;$this",
       call$1: function(ignored) {
         var t1, t2, t3, t4;
         t1 = this.$this;
@@ -6691,6 +6717,56 @@
           return H.iae(t1);
         J.arc$5$x(t7, t6, t5, t4 * t3 / t1, 0, 6.283185307179586);
         J.fill$0$x(this.renderer);
+      },
+      Screen$1: function(world, _box_0) {
+        var t1 = document.getElementById("screen");
+        this.screen = t1;
+        this.renderer = J.getContext$1$x(t1, "2d");
+        this.resizeProc$0();
+        _box_0.isMouseDown = false;
+        t1 = J.get$onMouseDown$x(this.screen);
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
+        t1 = J.get$onMouseMove$x(this.screen);
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure0(_box_0), false, H.getTypeArgumentByIndex(t1, 0));
+        t1 = J.get$onMouseUp$x(this.screen);
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure1(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
+      },
+      static: {
+        Screen$: function(world) {
+          var t1 = new D.Screen(null, null, world, 0, 0, 0, 0);
+          t1.Screen$1(world, {});
+          return t1;
+        }
+      }
+    },
+    Screen_closure: {
+      "^": "Closure:3;_box_0,$this",
+      call$1: function(ignored) {
+        this._box_0.isMouseDown = true;
+        this.$this.world.isPaused = true;
+      },
+      call$0: function() {
+        return this.call$1(null);
+      }
+    },
+    Screen_closure0: {
+      "^": "Closure:3;_box_0",
+      call$1: function(ignored) {
+        if (!this._box_0.isMouseDown)
+          return;
+      },
+      call$0: function() {
+        return this.call$1(null);
+      }
+    },
+    Screen_closure1: {
+      "^": "Closure:3;_box_0,$this",
+      call$1: function(ignored) {
+        this._box_0.isMouseDown = false;
+        this.$this.world.isPaused = false;
+      },
+      call$0: function() {
+        return this.call$1(null);
       }
     }
   }], ["", "../src/physics/Stage.dart",, L, {
@@ -6699,6 +6775,8 @@
       "^": "Object;initialPendulum,attachedPendulum,pendulums,gravity,dampenFactor,width,height,isPaused",
       step$1: function(_, dt) {
         var t1, t2, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8, t9, t10, t11;
+        if (this.isPaused)
+          return;
         t1 = this.initialPendulum;
         t2 = t1.mass;
         t3 = this.attachedPendulum;
@@ -6983,6 +7061,15 @@
   };
   J.get$length$asx = function(receiver) {
     return J.getInterceptor$asx(receiver).get$length(receiver);
+  };
+  J.get$onMouseDown$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$onMouseDown(receiver);
+  };
+  J.get$onMouseMove$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$onMouseMove(receiver);
+  };
+  J.get$onMouseUp$x = function(receiver) {
+    return J.getInterceptor$x(receiver).get$onMouseUp(receiver);
   };
   J.get$width$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$width(receiver);
@@ -7318,7 +7405,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, opt: [W.MouseEvent]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
