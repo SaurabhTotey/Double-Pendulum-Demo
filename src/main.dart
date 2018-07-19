@@ -8,10 +8,11 @@ import 'physics/Stage.dart';
 void main() {
     final world = new Stage();
     final gui = new Gui(world);
-    int ms = 25;
+    int ms = 5;
     new Timer.periodic(new Duration(milliseconds: ms), (timer) {
         world.step(ms / 1000.0);
-        // print(world.attachedPendulum.angularAcceleration);
+    });
+    new Timer.periodic(new Duration(milliseconds: 50), (timer) {
         gui.screen.draw();
     });
 }

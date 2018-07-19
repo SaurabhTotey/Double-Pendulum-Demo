@@ -6500,19 +6500,15 @@
     Gui: {
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
-        var t1, t2, t3, t4, t5;
-        t1 = this.world;
-        t2 = t1.initialPendulum;
-        t3 = t1.attachedPendulum;
-        t1 = new D.Screen(null, null, null, t1.width, t1.height);
-        t4 = document;
-        t5 = t4.getElementById("screen");
-        t1.screen = t5;
-        t1.renderer = J.getContext$1$x(t5, "2d");
-        t1.pendulums = [t2, t3];
+        var t1, t2, t3;
+        t1 = new D.Screen(null, null, this.world);
+        t2 = document;
+        t3 = t2.getElementById("screen");
+        t1.screen = t3;
+        t1.renderer = J.getContext$1$x(t3, "2d");
         this.screen = t1;
         t1 = new O.ControlPanel(null);
-        t1.controlPanel = t4.getElementById("control-panel");
+        t1.controlPanel = t2.getElementById("control-panel");
         this.controlPanel = t1;
         t1 = new X.Gui_resizeProc(this);
         t1.call$0();
@@ -6595,9 +6591,9 @@
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
     Screen: {
-      "^": "Object;screen,renderer,pendulums,logicalWidth,logicalHeight",
+      "^": "Object;screen,renderer,world",
       draw$0: function() {
-        var t1, t2, t3, t4, t5, t6, drawWidth, drawHeight, p1, p2, p3;
+        var t1, t2, t3, t4, t5, t6, t7, drawWidth, drawHeight, p1, p2, p3, t8, t9;
         t1 = {};
         J.clearRect$4$x(this.renderer, 0, 0, J.get$width$x(this.screen), J.get$height$x(this.screen));
         t1.startX = 0;
@@ -6605,56 +6601,85 @@
         t1.drawWidth = 0;
         t1.drawHeight = 0;
         t2 = J.get$height$x(this.screen);
-        t3 = this.logicalHeight;
+        t3 = this.world;
+        t4 = t3.height;
         if (typeof t2 !== "number")
           return t2.$div();
-        if (typeof t3 !== "number")
-          return H.iae(t3);
-        t4 = J.get$width$x(this.screen);
-        t5 = this.logicalWidth;
         if (typeof t4 !== "number")
-          return t4.$div();
+          return H.iae(t4);
+        t5 = J.get$width$x(this.screen);
+        t6 = t3.width;
         if (typeof t5 !== "number")
-          return H.iae(t5);
-        t6 = this.screen;
-        if (t2 / t3 < t4 / t5) {
-          t1.drawHeight = J.toDouble$0$n(J.get$height$x(t6));
+          return t5.$div();
+        if (typeof t6 !== "number")
+          return H.iae(t6);
+        t7 = this.screen;
+        if (t2 / t4 < t5 / t6) {
+          t1.drawHeight = J.toDouble$0$n(J.get$height$x(t7));
           t2 = J.get$height$x(this.screen);
+          t4 = t3.height;
           if (typeof t2 !== "number")
             return t2.$div();
-          drawWidth = t2 / t3 * t5;
+          if (typeof t4 !== "number")
+            return H.iae(t4);
+          t5 = t3.width;
+          if (typeof t5 !== "number")
+            return H.iae(t5);
+          drawWidth = t2 / t4 * t5;
           t1.drawWidth = drawWidth;
-          t3 = J.get$width$x(this.screen);
-          if (typeof t3 !== "number")
-            return t3.$sub();
-          t1.startX = (t3 - drawWidth) / 2;
+          t5 = J.get$width$x(this.screen);
+          if (typeof t5 !== "number")
+            return t5.$sub();
+          t1.startX = (t5 - drawWidth) / 2;
         } else {
-          t1.drawWidth = J.toDouble$0$n(J.get$width$x(t6));
+          t1.drawWidth = J.toDouble$0$n(J.get$width$x(t7));
           t2 = J.get$width$x(this.screen);
+          t4 = t3.width;
           if (typeof t2 !== "number")
             return t2.$div();
-          drawHeight = t2 / t5 * t3;
+          if (typeof t4 !== "number")
+            return H.iae(t4);
+          t5 = t3.height;
+          if (typeof t5 !== "number")
+            return H.iae(t5);
+          drawHeight = t2 / t4 * t5;
           t1.drawHeight = drawHeight;
-          t3 = J.get$height$x(this.screen);
-          if (typeof t3 !== "number")
-            return t3.$sub();
-          t1.startY = (t3 - drawHeight) / 2;
+          t5 = J.get$height$x(this.screen);
+          if (typeof t5 !== "number")
+            return t5.$sub();
+          t1.startY = (t5 - drawHeight) / 2;
         }
         t2 = new D.Screen_draw_getViewCoordinates(t1, this);
-        p1 = t2.call$1(this.pendulums[0].startingLocation);
-        p2 = t2.call$1(this.pendulums[0].location);
-        p3 = t2.call$1(this.pendulums[1].location);
+        p1 = t2.call$1(t3.pendulums[0].startingLocation);
+        p2 = t2.call$1(t3.pendulums[0].location);
+        p3 = t2.call$1(t3.pendulums[1].location);
         J.beginPath$0$x(this.renderer);
         t2 = J.getInterceptor$x(p1);
         J.moveTo$2$x(this.renderer, J.toInt$0$n(t2.get$x(p1)), J.toInt$0$n(t2.get$y(p1)));
         t2 = J.getInterceptor$x(p2);
         J.lineTo$2$x(this.renderer, J.toInt$0$n(t2.get$x(p2)), J.toInt$0$n(t2.get$y(p2)));
-        t3 = J.getInterceptor$x(p3);
-        J.lineTo$2$x(this.renderer, J.toInt$0$n(t3.get$x(p3)), J.toInt$0$n(t3.get$y(p3)));
+        t4 = J.getInterceptor$x(p3);
+        J.lineTo$2$x(this.renderer, J.toInt$0$n(t4.get$x(p3)), J.toInt$0$n(t4.get$y(p3)));
         J.stroke$0$x(this.renderer);
         J.beginPath$0$x(this.renderer);
-        J.arc$5$x(this.renderer, J.toInt$0$n(t2.get$x(p2)), J.toInt$0$n(t2.get$y(p2)), this.pendulums[0].radius * t1.drawWidth / t5, 0, 6.283185307179586);
-        J.arc$5$x(this.renderer, J.toInt$0$n(t3.get$x(p3)), J.toInt$0$n(t3.get$y(p3)), this.pendulums[1].radius * t1.drawWidth / t5, 0, 6.283185307179586);
+        t5 = this.renderer;
+        t6 = J.toInt$0$n(t2.get$x(p2));
+        t2 = J.toInt$0$n(t2.get$y(p2));
+        t7 = t3.pendulums[0].radius;
+        t8 = t1.drawWidth;
+        t9 = t3.width;
+        if (typeof t9 !== "number")
+          return H.iae(t9);
+        J.arc$5$x(t5, t6, t2, t7 * t8 / t9, 0, 6.283185307179586);
+        t9 = this.renderer;
+        t8 = J.toInt$0$n(t4.get$x(p3));
+        t4 = J.toInt$0$n(t4.get$y(p3));
+        t7 = t3.pendulums[1].radius;
+        t1 = t1.drawWidth;
+        t3 = t3.width;
+        if (typeof t3 !== "number")
+          return H.iae(t3);
+        J.arc$5$x(t9, t8, t4, t7 * t1 / t3, 0, 6.283185307179586);
         J.fill$0$x(this.renderer);
       }
     },
@@ -6665,19 +6690,20 @@
         t1 = this._box_0;
         t2 = logicalCoordinates.$mul(0, new V.Vector(t1.drawWidth, t1.drawHeight));
         t3 = this.$this;
-        t4 = t3.logicalWidth;
-        t5 = t3.logicalHeight;
+        t4 = t3.world;
+        t5 = t4.width;
+        t4 = t4.height;
         t6 = t2.x;
         if (typeof t6 !== "number")
           return t6.$div();
-        if (typeof t4 !== "number")
-          return H.iae(t4);
+        if (typeof t5 !== "number")
+          return H.iae(t5);
         t2 = t2.y;
         if (typeof t2 !== "number")
           return t2.$div();
-        if (typeof t5 !== "number")
-          return H.iae(t5);
-        viewCoords = new V.Vector(t6 / t4, t2 / t5).$add(0, new V.Vector(t1.startX, t1.startY));
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        viewCoords = new V.Vector(t6 / t5, t2 / t4).$add(0, new V.Vector(t1.startX, t1.startY));
         t3 = J.get$height$x(t3.screen);
         t1 = viewCoords.y;
         if (typeof t3 !== "number")
@@ -6691,55 +6717,54 @@
   }], ["", "../src/physics/Stage.dart",, L, {
     "^": "",
     Stage: {
-      "^": "Object;initialPendulum,attachedPendulum,gravity,dampenFactor,width,height",
+      "^": "Object;initialPendulum,attachedPendulum,pendulums,gravity,dampenFactor,width,height,isPaused",
       step$1: function(_, dt) {
-        var t1, t2, pendulums, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8, t9, t10, t11;
+        var t1, t2, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8, t9, t10, t11;
         t1 = this.initialPendulum;
-        t2 = this.attachedPendulum;
-        pendulums = [t1, t2];
-        t3 = t1.mass;
-        t4 = t2.mass;
-        combinedMass = t3 + t4;
-        angleDifference = t1.angle - t2.angle;
-        denominatorFactor = combinedMass + t3 - t4 * Math.cos(2 * angleDifference);
+        t2 = t1.mass;
+        t3 = this.attachedPendulum;
+        t4 = t3.mass;
+        combinedMass = t2 + t4;
+        angleDifference = t1.angle - t3.angle;
+        denominatorFactor = combinedMass + t2 - t4 * Math.cos(2 * angleDifference);
         t4 = this.initialPendulum;
-        t3 = this.gravity;
-        t2 = t4.mass;
+        t2 = this.gravity;
+        t3 = t4.mass;
         t1 = Math.sin(t4.angle);
         t5 = this.attachedPendulum;
         t6 = t5.mass;
         t5 = Math.sin(angleDifference - t5.angle);
         t7 = Math.sin(angleDifference);
         t8 = this.attachedPendulum;
-        t4.angularAcceleration = (-t3 * (combinedMass + t2) * t1 - t6 * t3 * t5 - 2 * t7 * t8.mass * (Math.pow(t8.angularVelocity, 2) * this.attachedPendulum.stringLength + Math.pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * Math.cos(angleDifference))) / (this.initialPendulum.stringLength * denominatorFactor);
+        t4.angularAcceleration = (-t2 * (combinedMass + t3) * t1 - t6 * t2 * t5 - 2 * t7 * t8.mass * (Math.pow(t8.angularVelocity, 2) * this.attachedPendulum.stringLength + Math.pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * Math.cos(angleDifference))) / (this.initialPendulum.stringLength * denominatorFactor);
         t8 = this.attachedPendulum;
         t7 = Math.sin(angleDifference);
         t5 = Math.pow(this.initialPendulum.angularVelocity, 2);
         t6 = this.initialPendulum;
         t1 = t6.stringLength;
         t6 = Math.cos(t6.angle);
-        t2 = Math.pow(this.attachedPendulum.angularVelocity, 2);
+        t3 = Math.pow(this.attachedPendulum.angularVelocity, 2);
         t4 = this.attachedPendulum;
         t9 = t4.stringLength;
         t4 = t4.mass;
         t10 = Math.cos(angleDifference);
         t11 = this.attachedPendulum;
-        t8.angularAcceleration = 2 * t7 * (t5 * t1 * combinedMass + t3 * combinedMass * t6 + t2 * t9 * t4 * t10) / (t11.stringLength * denominatorFactor);
+        t8.angularAcceleration = 2 * t7 * (t5 * t1 * combinedMass + t2 * combinedMass * t6 + t3 * t9 * t4 * t10) / (t11.stringLength * denominatorFactor);
         t10 = this.initialPendulum;
         t10.angularVelocity = t10.angularVelocity + t10.angularAcceleration * dt;
         t4 = t11.angularVelocity + t11.angularAcceleration * dt;
         t11.angularVelocity = t4;
         t10.angle = t10.angle + t10.angularVelocity * dt;
         t11.angle = t11.angle + t4 * dt;
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure());
+        C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure());
         t4 = this.attachedPendulum;
         t11 = t4.location;
         t10 = t4.startingLocation;
         t9 = this.initialPendulum.location;
-        t2 = t10.x;
+        t3 = t10.x;
         t6 = t9.x;
-        if (typeof t2 !== "number")
-          return t2.$sub();
+        if (typeof t3 !== "number")
+          return t3.$sub();
         if (typeof t6 !== "number")
           return H.iae(t6);
         t10 = t10.y;
@@ -6748,12 +6773,12 @@
           return t10.$sub();
         if (typeof t9 !== "number")
           return H.iae(t9);
-        t4.location = t11.$add(0, new V.Vector(t2 - t6, t10 - t9));
+        t4.location = t11.$add(0, new V.Vector(t3 - t6, t10 - t9));
         this.attachedPendulum.startingLocation = this.initialPendulum.location;
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure0());
+        C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure0());
         t9 = this.attachedPendulum;
         t9.velocity = t9.velocity.$add(0, this.initialPendulum.velocity);
-        C.JSArray_methods.forEach$1(pendulums, new L.Stage_step_closure1());
+        C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure1());
         t9 = this.attachedPendulum;
         t9.acceleration = t9.acceleration.$add(0, this.initialPendulum.acceleration);
       }
@@ -6847,22 +6872,30 @@
   }], ["", "../src/main.dart",, F, {
     "^": "",
     main: [function() {
-      var world, t1, t2, gui;
-      world = new L.Stage(null, null, 9.8, 1, 20, 15);
+      var world, t1, t2, t3, gui;
+      world = new L.Stage(null, null, null, 9.8, 1, 20, 15, false);
       t1 = S.Pendulum$(new V.Vector(10, 8.5), 1.5, 0.5, new V.Vector(10, 13.5), 5);
       world.initialPendulum = t1;
-      t1 = t1.location;
-      t2 = t1.x;
-      if (typeof t2 !== "number")
-        return t2.$add();
-      world.attachedPendulum = S.Pendulum$(new V.Vector(t2 + 5, t1.y), 1.5, 0.5, t1, 5);
+      t2 = t1.location;
+      t3 = t2.x;
+      if (typeof t3 !== "number")
+        return t3.$add();
+      t2 = S.Pendulum$(new V.Vector(t3 + 5, t2.y), 1.5, 0.5, t2, 5);
+      world.attachedPendulum = t2;
+      world.pendulums = [t1, t2];
       gui = X.Gui$(world);
-      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 25, 0, 0), new F.main_closure(world, gui, 25));
+      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure(world, 5));
+      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 50, 0, 0), new F.main_closure0(gui));
     }, "call$0", "main__main$closure", 0, 0, 1],
     main_closure: {
-      "^": "Closure:2;world,gui,ms",
+      "^": "Closure:2;world,ms",
       call$1: function(timer) {
         this.world.step$1(0, this.ms / 1000);
+      }
+    },
+    main_closure0: {
+      "^": "Closure:2;gui",
+      call$1: function(timer) {
         this.gui.screen.draw$0();
       }
     }

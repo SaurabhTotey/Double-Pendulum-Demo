@@ -19,7 +19,7 @@ class Gui {
      * Constructs the Gui to make the components auto resize when the window resizes
      */
     Gui(this.world) {
-        this.screen = new Screen(this.world.initialPendulum, this.world.attachedPendulum, this.world.width, this.world.height);
+        this.screen = new Screen(this.world);
         this.controlPanel = new ControlPanel();
         void resizeProc([Event ignored = null]) {
             this.screen.screen.width = (window.innerWidth * 0.75).toInt();

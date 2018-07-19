@@ -12,6 +12,8 @@ class Stage {
     Pendulum initialPendulum;
     //The attached pendulum that is what gets traced on the screen
     Pendulum attachedPendulum;
+    //The pendulums as a list for making doing something to both pendulums easy
+    List<Pendulum> pendulums;
     //The gravity in the world in m/s/s
     double gravity;
     //The dampening effect on the pendulum swinging; works multiplicatively
@@ -20,6 +22,8 @@ class Stage {
     double width;
     //The stage height in meters
     double height;
+    //Whether the stage should be running or not
+    bool isPaused = false;
 
     /**
      * Creating a stage initializes the pendulums to be at a stable rest position by default
@@ -44,6 +48,7 @@ class Stage {
                 location: new Vector(initialPendulum.location.x + 5, initialPendulum.location.y)
             );
         }
+        this.pendulums = [this.initialPendulum, this.attachedPendulum];
     }
 
     /**
@@ -51,8 +56,9 @@ class Stage {
      * All math used is stolen from https://myphysicslab.com/pendulum/double-pendulum-en.html
      */
     void step(double dt) {
-        //Gets the pendulums as a list for making doing something to both pendulums easy
-        List<Pendulum> pendulums = [this.initialPendulum, this.attachedPendulum];
+        if (this.isPaused) {
+            return;
+        }
         //Calculates the angular acceleration for both pendulums
         double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
         double angleDifference = this.initialPendulum.angle - this.attachedPendulum.angle;
@@ -66,18 +72,18 @@ class Stage {
         this.initialPendulum.angle += this.initialPendulum.angularVelocity * dt;
         this.attachedPendulum.angle += this.attachedPendulum.angularVelocity * dt;
         //Updates the pendulums' positions using their angles
-        pendulums.forEach( (pendulum) =>
+        this.pendulums.forEach( (pendulum) =>
             pendulum.location = pendulum.startingLocation + new Vector.isosceles(pendulum.stringLength) * new Vector(sin(pendulum.angle), -cos(pendulum.angle))
         );
         this.attachedPendulum.location += this.attachedPendulum.startingLocation - this.initialPendulum.location;
         this.attachedPendulum.startingLocation = this.initialPendulum.location;
         //Updates the pendulums' velocities using their angles and angular velocity
-        pendulums.forEach( (pendulum) =>
+        this.pendulums.forEach( (pendulum) =>
             pendulum.velocity = new Vector.isosceles(pendulum.stringLength * pendulum.angularVelocity) * new Vector(cos(pendulum.angle), sin(pendulum.angle))
         );
         this.attachedPendulum.velocity += this.initialPendulum.velocity;
         //Updates the pendulum's accelerations
-        pendulums.forEach( (pendulum) =>
+        this.pendulums.forEach( (pendulum) =>
             pendulum.acceleration = new Vector.isosceles(pendulum.stringLength) * new Vector(-pow(pendulum.angularVelocity, 2) * sin(pendulum.angle) + pendulum.angularAcceleration * cos(pendulum.angle), pow(pendulum.angularVelocity, 2) * cos(pendulum.angle) + pendulum.angularAcceleration * sin(pendulum.angle))
         );
         this.attachedPendulum.acceleration += this.initialPendulum.acceleration;
