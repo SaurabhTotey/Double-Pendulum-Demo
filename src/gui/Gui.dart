@@ -26,6 +26,7 @@ class Gui {
             this.screen.screen.height = window.innerHeight;
             this.controlPanel.controlPanel.style.width = '${window.innerWidth - this.screen.screen.width}px';
             this.controlPanel.controlPanel.style.height = '${window.innerHeight}px';
+            this.screen.resizeProc();
         }
         resizeProc();
         window.onResize.listen(resizeProc);

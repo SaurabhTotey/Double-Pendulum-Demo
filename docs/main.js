@@ -586,7 +586,7 @@
       toString$0: ["super$Interceptor$toString", function(receiver) {
         return H.Primitives_objectToHumanReadableString(receiver);
       }],
-      "%": "Blob|DOMError|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
+      "%": "Blob|DOMError|DeviceAcceleration|File|FileError|MediaError|NavigatorUserMediaError|PositionError|SQLError|SVGAnimatedLength|SVGAnimatedLengthList|SVGAnimatedNumber|SVGAnimatedNumberList|SVGAnimatedString|Screen|WebGLRenderingContext"
     },
     JSBool: {
       "^": "Interceptor;",
@@ -6088,10 +6088,6 @@
     CssStyleDeclarationBase: {
       "^": "Object;"
     },
-    DeviceAcceleration: {
-      "^": "Interceptor;x=,y=",
-      "%": "DeviceAcceleration"
-    },
     DomException: {
       "^": "Interceptor;",
       toString$0: function(receiver) {
@@ -6287,100 +6283,92 @@
       "%": "SVGAnimateElement|SVGAnimateMotionElement|SVGAnimateTransformElement|SVGAnimationElement|SVGSetElement"
     },
     FEBlendElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEBlendElement"
     },
     FEColorMatrixElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEColorMatrixElement"
     },
     FEComponentTransferElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEComponentTransferElement"
     },
     FECompositeElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFECompositeElement"
     },
     FEConvolveMatrixElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEConvolveMatrixElement"
     },
     FEDiffuseLightingElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEDiffuseLightingElement"
     },
     FEDisplacementMapElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEDisplacementMapElement"
     },
     FEFloodElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEFloodElement"
     },
     FEGaussianBlurElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEGaussianBlurElement"
     },
     FEImageElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEImageElement"
     },
     FEMergeElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEMergeElement"
     },
     FEMorphologyElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEMorphologyElement"
     },
     FEOffsetElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFEOffsetElement"
     },
-    FEPointLightElement: {
-      "^": "SvgElement;x=,y=",
-      "%": "SVGFEPointLightElement"
-    },
     FESpecularLightingElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFESpecularLightingElement"
     },
-    FESpotLightElement: {
-      "^": "SvgElement;x=,y=",
-      "%": "SVGFESpotLightElement"
-    },
     FETileElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFETileElement"
     },
     FETurbulenceElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFETurbulenceElement"
     },
     FilterElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGFilterElement"
     },
     ForeignObjectElement: {
-      "^": "GraphicsElement;height=,width=,x=,y=",
+      "^": "GraphicsElement;height=,width=",
       "%": "SVGForeignObjectElement"
     },
     GeometryElement: {
@@ -6393,7 +6381,7 @@
       "%": "SVGClipPathElement|SVGDefsElement|SVGGElement|SVGSwitchElement;SVGGraphicsElement"
     },
     ImageElement0: {
-      "^": "GraphicsElement;height=,width=,x=,y=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGImageElement"
     },
@@ -6403,17 +6391,17 @@
       "%": "SVGMarkerElement"
     },
     MaskElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGMaskElement"
     },
     PatternElement: {
-      "^": "SvgElement;height=,width=,x=,y=",
+      "^": "SvgElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGPatternElement"
     },
     RectElement: {
-      "^": "GeometryElement;height=,width=,x=,y=",
+      "^": "GeometryElement;height=,width=",
       "%": "SVGRectElement"
     },
     ScriptElement0: {
@@ -6424,10 +6412,10 @@
     SvgElement: {
       "^": "Element;",
       $isInterceptor: 1,
-      "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
+      "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
     },
     SvgSvgElement: {
-      "^": "GraphicsElement;height=,width=,x=,y=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGSVGElement"
     },
@@ -6438,19 +6426,15 @@
     },
     TextContentElement: {
       "^": "GraphicsElement;",
-      "%": ";SVGTextContentElement"
+      "%": "SVGTSpanElement|SVGTextElement|SVGTextPositioningElement;SVGTextContentElement"
     },
     TextPathElement: {
       "^": "TextContentElement;",
       $isInterceptor: 1,
       "%": "SVGTextPathElement"
     },
-    TextPositioningElement: {
-      "^": "TextContentElement;x=,y=",
-      "%": "SVGTSpanElement|SVGTextElement|SVGTextPositioningElement"
-    },
     UseElement: {
-      "^": "GraphicsElement;height=,width=,x=,y=",
+      "^": "GraphicsElement;height=,width=",
       $isInterceptor: 1,
       "%": "SVGUseElement"
     },
@@ -6501,11 +6485,12 @@
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
         var t1, t2, t3;
-        t1 = new D.Screen(null, null, this.world);
+        t1 = new D.Screen(null, null, this.world, 0, 0, 0, 0);
         t2 = document;
         t3 = t2.getElementById("screen");
         t1.screen = t3;
         t1.renderer = J.getContext$1$x(t3, "2d");
+        t1.resizeProc$0();
         this.screen = t1;
         t1 = new O.ControlPanel(null);
         t1.controlPanel = t2.getElementById("control-panel");
@@ -6543,9 +6528,10 @@
           return H.iae(t4);
         t4 = "" + (t2 - t4) + "px";
         t3.width = t4;
-        t1 = t1.controlPanel.controlPanel.style;
-        t2 = H.S(window.innerHeight) + "px";
-        t1.height = t2;
+        t2 = t1.controlPanel.controlPanel.style;
+        t3 = H.S(window.innerHeight) + "px";
+        t2.height = t3;
+        t1.screen.resizeProc$0();
       },
       call$0: function() {
         return this.call$1(null);
@@ -6591,127 +6577,120 @@
   }], ["", "../src/gui/Screen.dart",, D, {
     "^": "",
     Screen: {
-      "^": "Object;screen,renderer,world",
-      draw$0: function() {
-        var t1, t2, t3, t4, t5, t6, t7, drawWidth, drawHeight, p1, p2, p3, t8, t9;
-        t1 = {};
-        J.clearRect$4$x(this.renderer, 0, 0, J.get$width$x(this.screen), J.get$height$x(this.screen));
-        t1.startX = 0;
-        t1.startY = 0;
-        t1.drawWidth = 0;
-        t1.drawHeight = 0;
-        t2 = J.get$height$x(this.screen);
-        t3 = this.world;
-        t4 = t3.height;
-        if (typeof t2 !== "number")
-          return t2.$div();
-        if (typeof t4 !== "number")
-          return H.iae(t4);
-        t5 = J.get$width$x(this.screen);
-        t6 = t3.width;
-        if (typeof t5 !== "number")
-          return t5.$div();
-        if (typeof t6 !== "number")
-          return H.iae(t6);
-        t7 = this.screen;
-        if (t2 / t4 < t5 / t6) {
-          t1.drawHeight = J.toDouble$0$n(J.get$height$x(t7));
-          t2 = J.get$height$x(this.screen);
-          t4 = t3.height;
-          if (typeof t2 !== "number")
-            return t2.$div();
-          if (typeof t4 !== "number")
-            return H.iae(t4);
-          t5 = t3.width;
-          if (typeof t5 !== "number")
-            return H.iae(t5);
-          drawWidth = t2 / t4 * t5;
-          t1.drawWidth = drawWidth;
-          t5 = J.get$width$x(this.screen);
-          if (typeof t5 !== "number")
-            return t5.$sub();
-          t1.startX = (t5 - drawWidth) / 2;
-        } else {
-          t1.drawWidth = J.toDouble$0$n(J.get$width$x(t7));
-          t2 = J.get$width$x(this.screen);
-          t4 = t3.width;
-          if (typeof t2 !== "number")
-            return t2.$div();
-          if (typeof t4 !== "number")
-            return H.iae(t4);
-          t5 = t3.height;
-          if (typeof t5 !== "number")
-            return H.iae(t5);
-          drawHeight = t2 / t4 * t5;
-          t1.drawHeight = drawHeight;
-          t5 = J.get$height$x(this.screen);
-          if (typeof t5 !== "number")
-            return t5.$sub();
-          t1.startY = (t5 - drawHeight) / 2;
-        }
-        t2 = new D.Screen_draw_getViewCoordinates(t1, this);
-        p1 = t2.call$1(t3.pendulums[0].startingLocation);
-        p2 = t2.call$1(t3.pendulums[0].location);
-        p3 = t2.call$1(t3.pendulums[1].location);
-        J.beginPath$0$x(this.renderer);
-        t2 = J.getInterceptor$x(p1);
-        J.moveTo$2$x(this.renderer, J.toInt$0$n(t2.get$x(p1)), J.toInt$0$n(t2.get$y(p1)));
-        t2 = J.getInterceptor$x(p2);
-        J.lineTo$2$x(this.renderer, J.toInt$0$n(t2.get$x(p2)), J.toInt$0$n(t2.get$y(p2)));
-        t4 = J.getInterceptor$x(p3);
-        J.lineTo$2$x(this.renderer, J.toInt$0$n(t4.get$x(p3)), J.toInt$0$n(t4.get$y(p3)));
-        J.stroke$0$x(this.renderer);
-        J.beginPath$0$x(this.renderer);
-        t5 = this.renderer;
-        t6 = J.toInt$0$n(t2.get$x(p2));
-        t2 = J.toInt$0$n(t2.get$y(p2));
-        t7 = t3.pendulums[0].radius;
-        t8 = t1.drawWidth;
-        t9 = t3.width;
-        if (typeof t9 !== "number")
-          return H.iae(t9);
-        J.arc$5$x(t5, t6, t2, t7 * t8 / t9, 0, 6.283185307179586);
-        t9 = this.renderer;
-        t8 = J.toInt$0$n(t4.get$x(p3));
-        t4 = J.toInt$0$n(t4.get$y(p3));
-        t7 = t3.pendulums[1].radius;
-        t1 = t1.drawWidth;
-        t3 = t3.width;
+      "^": "Object;screen,renderer,world,startX,startY,drawWidth,drawHeight",
+      resizeProc$1: function(ignored) {
+        var t1, t2, t3, t4, t5, t6;
+        t1 = J.get$height$x(this.screen);
+        t2 = this.world;
+        t3 = t2.height;
+        if (typeof t1 !== "number")
+          return t1.$div();
         if (typeof t3 !== "number")
           return H.iae(t3);
-        J.arc$5$x(t9, t8, t4, t7 * t1 / t3, 0, 6.283185307179586);
-        J.fill$0$x(this.renderer);
-      }
-    },
-    Screen_draw_getViewCoordinates: {
-      "^": "Closure:13;_box_0,$this",
-      call$1: function(logicalCoordinates) {
-        var t1, t2, t3, t4, t5, t6, viewCoords;
-        t1 = this._box_0;
-        t2 = logicalCoordinates.$mul(0, new V.Vector(t1.drawWidth, t1.drawHeight));
-        t3 = this.$this;
-        t4 = t3.world;
-        t5 = t4.width;
-        t4 = t4.height;
-        t6 = t2.x;
-        if (typeof t6 !== "number")
-          return t6.$div();
+        t4 = J.get$width$x(this.screen);
+        t5 = t2.width;
+        if (typeof t4 !== "number")
+          return t4.$div();
         if (typeof t5 !== "number")
           return H.iae(t5);
-        t2 = t2.y;
-        if (typeof t2 !== "number")
-          return t2.$div();
+        t6 = this.screen;
+        if (t1 / t3 < t4 / t5) {
+          this.drawHeight = J.toDouble$0$n(J.get$height$x(t6));
+          t1 = J.get$height$x(this.screen);
+          t3 = t2.height;
+          if (typeof t1 !== "number")
+            return t1.$div();
+          if (typeof t3 !== "number")
+            return H.iae(t3);
+          t2 = t2.width;
+          if (typeof t2 !== "number")
+            return H.iae(t2);
+          this.drawWidth = t1 / t3 * t2;
+          t2 = J.get$width$x(this.screen);
+          t3 = this.drawWidth;
+          if (typeof t2 !== "number")
+            return t2.$sub();
+          this.startX = (t2 - t3) / 2;
+        } else {
+          this.drawWidth = J.toDouble$0$n(J.get$width$x(t6));
+          t1 = J.get$width$x(this.screen);
+          t3 = t2.width;
+          if (typeof t1 !== "number")
+            return t1.$div();
+          if (typeof t3 !== "number")
+            return H.iae(t3);
+          t2 = t2.height;
+          if (typeof t2 !== "number")
+            return H.iae(t2);
+          this.drawHeight = t1 / t3 * t2;
+          t2 = J.get$height$x(this.screen);
+          t3 = this.drawHeight;
+          if (typeof t2 !== "number")
+            return t2.$sub();
+          this.startY = (t2 - t3) / 2;
+        }
+      },
+      resizeProc$0: function() {
+        return this.resizeProc$1(null);
+      },
+      getViewCoordinates$1: function(logicalCoordinates) {
+        var t1, t2, t3, t4, viewCoords;
+        t1 = logicalCoordinates.$mul(0, new V.Vector(this.drawWidth, this.drawHeight));
+        t2 = this.world;
+        t3 = t2.width;
+        t2 = t2.height;
+        t4 = t1.x;
         if (typeof t4 !== "number")
-          return H.iae(t4);
-        viewCoords = new V.Vector(t6 / t5, t2 / t4).$add(0, new V.Vector(t1.startX, t1.startY));
-        t3 = J.get$height$x(t3.screen);
-        t1 = viewCoords.y;
+          return t4.$div();
         if (typeof t3 !== "number")
-          return t3.$sub();
+          return H.iae(t3);
+        t1 = t1.y;
+        if (typeof t1 !== "number")
+          return t1.$div();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        viewCoords = new V.Vector(t4 / t3, t1 / t2).$add(0, new V.Vector(this.startX, this.startY));
+        t2 = J.get$height$x(this.screen);
+        t1 = viewCoords.y;
+        if (typeof t2 !== "number")
+          return t2.$sub();
         if (typeof t1 !== "number")
           return H.iae(t1);
-        viewCoords.y = t3 - t1;
+        viewCoords.y = t2 - t1;
         return viewCoords;
+      },
+      draw$0: function() {
+        var t1, p1, p2, p3, t2, t3, t4, t5, t6, t7;
+        J.clearRect$4$x(this.renderer, 0, 0, J.get$width$x(this.screen), J.get$height$x(this.screen));
+        t1 = this.world;
+        p1 = this.getViewCoordinates$1(t1.pendulums[0].startingLocation);
+        p2 = this.getViewCoordinates$1(t1.pendulums[0].location);
+        p3 = this.getViewCoordinates$1(t1.pendulums[1].location);
+        J.beginPath$0$x(this.renderer);
+        J.moveTo$2$x(this.renderer, J.toInt$0$n(p1.x), J.toInt$0$n(p1.y));
+        J.lineTo$2$x(this.renderer, J.toInt$0$n(p2.x), J.toInt$0$n(p2.y));
+        J.lineTo$2$x(this.renderer, J.toInt$0$n(p3.x), J.toInt$0$n(p3.y));
+        J.stroke$0$x(this.renderer);
+        J.beginPath$0$x(this.renderer);
+        t2 = this.renderer;
+        t3 = J.toInt$0$n(p2.x);
+        t4 = J.toInt$0$n(p2.y);
+        t5 = t1.pendulums[0].radius;
+        t6 = this.drawWidth;
+        t7 = t1.width;
+        if (typeof t7 !== "number")
+          return H.iae(t7);
+        J.arc$5$x(t2, t3, t4, t5 * t6 / t7, 0, 6.283185307179586);
+        t7 = this.renderer;
+        t6 = J.toInt$0$n(p3.x);
+        t5 = J.toInt$0$n(p3.y);
+        t4 = t1.pendulums[1].radius;
+        t3 = this.drawWidth;
+        t1 = t1.width;
+        if (typeof t1 !== "number")
+          return H.iae(t1);
+        J.arc$5$x(t7, t6, t5, t4 * t3 / t1, 0, 6.283185307179586);
+        J.fill$0$x(this.renderer);
       }
     }
   }], ["", "../src/physics/Stage.dart",, L, {
@@ -6826,7 +6805,7 @@
   }], ["", "../src/physics/Vector.dart",, V, {
     "^": "",
     Vector: {
-      "^": "Object;x>,y>",
+      "^": "Object;x>,y",
       $add: function(_, other) {
         var t1, t2, t3, t4;
         t1 = this.x;
@@ -6885,7 +6864,7 @@
       world.pendulums = [t1, t2];
       gui = X.Gui$(world);
       P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure(world, 5));
-      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 50, 0, 0), new F.main_closure0(gui));
+      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure0(gui));
     }, "call$0", "main__main$closure", 0, 0, 1],
     main_closure: {
       "^": "Closure:2;world,ms",
@@ -7339,7 +7318,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, ret: V.Vector, args: [V.Vector]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

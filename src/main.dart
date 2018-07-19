@@ -12,7 +12,7 @@ void main() {
     new Timer.periodic(new Duration(milliseconds: ms), (timer) {
         world.step(ms / 1000.0);
     });
-    new Timer.periodic(new Duration(milliseconds: 50), (timer) {
+    new Timer.periodic(new Duration(milliseconds: ms), (timer) {
         gui.screen.draw();
     });
 }
