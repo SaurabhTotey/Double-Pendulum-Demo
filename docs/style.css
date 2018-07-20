@@ -1,7 +1,12 @@
+:root {
+    --font-size: 20px;
+}
+
 body {
     padding: 0;
     margin: 0;
     overflow: hidden;
+    font-size: var(--font-size);
 }
 
 canvas, div {
@@ -20,8 +25,23 @@ div {
 
 p {
     margin: 3%;
+    vertical-align: middle;
+    text-align: center;
 }
 
 input {
+    text-align: center;
+    font-size: var(--font-size);
+}
+
+.input {
     float: right;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.units {
+    text-decoration: underline;
 }

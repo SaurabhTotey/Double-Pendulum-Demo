@@ -20,18 +20,30 @@ class ControlPanel {
     /**
      * Adds a field to the control panel that will take user input and then pass input to the given input handler
      */
-    void addInputField(String name, Function(String) inputHandler, [String initialValue = ""]) {
-        ParagraphElement container = new ParagraphElement();
-        SpanElement title = new SpanElement();
-        title.innerHtml = name;
-        container.append(title);
-        InputElement input = new InputElement(type: "text");
-        input.value = initialValue;
-        input.onInput.listen((Event e) {
-            inputHandler(input.value);
+    void addInputField(String title, String name, Function(String) inputHandler, {String initialValue = "", String units = ""}) {
+        ParagraphElement containerElement = new ParagraphElement();
+        SpanElement titleElement = new SpanElement();
+        titleElement.setAttribute("class", "title");
+        titleElement.innerHtml = title;
+        containerElement.append(titleElement);
+        SpanElement labelElement = new SpanElement();
+        labelElement.setAttribute("class", "label");
+        labelElement.innerHtml = " $name";
+        containerElement.append(labelElement);
+        SpanElement inputContainer = new SpanElement();
+        inputContainer.setAttribute("class", "input");
+        InputElement inputElement = new InputElement(type: "text");
+        inputElement.value = initialValue;
+        inputElement.onInput.listen((Event e) {
+            inputHandler(inputElement.value);
         });
-        container.append(input);
-        this.controlPanel.append(container);
+        inputContainer.append(inputElement);
+        SpanElement unitsElement = new SpanElement();
+        unitsElement.setAttribute("class", "units");
+        unitsElement.innerHtml = units;
+        inputContainer.append(unitsElement);
+        containerElement.append(inputContainer);
+        this.controlPanel.append(containerElement);
     }
 
     /**

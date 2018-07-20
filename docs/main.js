@@ -7953,29 +7953,41 @@
     "^": "",
     ControlPanel: {
       "^": "Object;controlPanel,outputUpdaters",
-      addInputField$3: function($name, inputHandler, initialValue) {
-        var t1, container, title, input;
+      addInputField$5$initialValue$units: function(title, $name, inputHandler, initialValue, units) {
+        var t1, containerElement, titleElement, labelElement, inputContainer, inputElement, t2, unitsElement;
         t1 = document;
-        container = t1.createElement("p");
-        title = t1.createElement("span");
-        C.SpanElement_methods.setInnerHtml$1(title, $name);
-        container.appendChild(title);
-        input = W.InputElement_InputElement("text");
-        t1 = J.getInterceptor$x(input);
-        t1.set$value(input, initialValue);
-        t1 = t1.get$onInput(input);
-        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new O.ControlPanel_addInputField_closure(inputHandler, input), false, H.getTypeArgumentByIndex(t1, 0));
-        container.appendChild(input);
-        this.controlPanel.appendChild(container);
+        containerElement = t1.createElement("p");
+        titleElement = t1.createElement("span");
+        titleElement.setAttribute("class", "title");
+        C.SpanElement_methods.setInnerHtml$1(titleElement, title);
+        containerElement.appendChild(titleElement);
+        labelElement = t1.createElement("span");
+        labelElement.setAttribute("class", "label");
+        C.SpanElement_methods.setInnerHtml$1(labelElement, " " + $name);
+        containerElement.appendChild(labelElement);
+        inputContainer = t1.createElement("span");
+        inputContainer.setAttribute("class", "input");
+        inputElement = W.InputElement_InputElement("text");
+        t2 = J.getInterceptor$x(inputElement);
+        t2.set$value(inputElement, initialValue);
+        t2 = t2.get$onInput(inputElement);
+        W._EventStreamSubscription$(t2._html$_target, t2._eventType, new O.ControlPanel_addInputField_closure(inputHandler, inputElement), false, H.getTypeArgumentByIndex(t2, 0));
+        inputContainer.appendChild(inputElement);
+        unitsElement = t1.createElement("span");
+        unitsElement.setAttribute("class", "units");
+        C.SpanElement_methods.setInnerHtml$1(unitsElement, units);
+        inputContainer.appendChild(unitsElement);
+        containerElement.appendChild(inputContainer);
+        this.controlPanel.appendChild(containerElement);
       },
       update$0: function() {
         C.JSArray_methods.forEach$1(this.outputUpdaters, new O.ControlPanel_update_closure());
       }
     },
     ControlPanel_addInputField_closure: {
-      "^": "Closure:16;inputHandler,input",
+      "^": "Closure:16;inputHandler,inputElement",
       call$1: function(e) {
-        this.inputHandler.call$1(J.get$value$x(this.input));
+        this.inputHandler.call$1(J.get$value$x(this.inputElement));
       }
     },
     ControlPanel_update_closure: {
@@ -7999,7 +8011,7 @@
         t2.call$0();
         W._EventStreamSubscription$(window, "resize", t2, false, W.Event);
         this.screen.draw$0();
-        this.controlPanel.addInputField$3("World Gravity", new X.Gui_closure(this), H.S(t1.gravity));
+        this.controlPanel.addInputField$5$initialValue$units("World", "Gravity", new X.Gui_closure(this), H.S(t1.gravity), "m/s/s");
       },
       static: {
         Gui$: function(world) {

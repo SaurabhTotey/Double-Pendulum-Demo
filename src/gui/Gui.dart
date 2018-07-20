@@ -31,7 +31,13 @@ class Gui {
         resizeProc();
         window.onResize.listen(resizeProc);
         this.screen.draw();
-        this.controlPanel.addInputField("World Gravity", (newGravity) { try { this.world.gravity = double.parse(newGravity); } catch (e) {} }, "${this.world.gravity}");
+        this.controlPanel.addInputField(
+            "World",
+            "Gravity",
+            (newGravity) { try { this.world.gravity = double.parse(newGravity); } catch (e) {} },
+            initialValue: "${this.world.gravity}",
+            units: "m/s/s"
+        );
     }
 
     /**
