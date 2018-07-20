@@ -60,7 +60,7 @@ class Vector {
      * Returns a string representation of this vector
      */
     String toString() {
-        return "<${this.x}, ${this.y}>";
+        return "<${this.x.toStringAsFixed(1)}, ${this.y.toStringAsFixed(1)}>";
     }
 
 }

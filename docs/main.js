@@ -1405,13 +1405,13 @@
       return new H._Deserializer(true, []).deserialize$1(new H._Serializer(false, P._LinkedIdentityHashMap__LinkedIdentityHashMap$es6(null, P.int)).serialize$1(message));
     },
     startRootIsolate_closure: {
-      "^": "Closure:1;_box_0,entry",
+      "^": "Closure:0;_box_0,entry",
       call$0: function() {
         this.entry.call$1(this._box_0.args);
       }
     },
     startRootIsolate_closure0: {
-      "^": "Closure:1;_box_0,entry",
+      "^": "Closure:0;_box_0,entry",
       call$0: function() {
         this.entry.call$2(this._box_0.args, null);
       }
@@ -1724,7 +1724,7 @@
       "^": "Object;"
     },
     IsolateNatives__processWorkerMessage_closure: {
-      "^": "Closure:1;entryPoint,args,message,isSpawnUri,startPaused,replyTo",
+      "^": "Closure:0;entryPoint,args,message,isSpawnUri,startPaused,replyTo",
       call$0: function() {
         H.IsolateNatives__startIsolate(this.entryPoint, this.args, this.message, this.isSpawnUri, this.startPaused, this.replyTo);
       }
@@ -1810,7 +1810,7 @@
       }
     },
     _NativeJsSendPort_send_closure: {
-      "^": "Closure:1;$this,msg",
+      "^": "Closure:0;$this,msg",
       call$0: function() {
         var t1 = this.$this._receivePort;
         if (!t1.get$_isClosed())
@@ -1920,7 +1920,7 @@
       }
     },
     TimerImpl$periodic_closure: {
-      "^": "Closure:1;$this,callback",
+      "^": "Closure:0;$this,callback",
       call$0: function() {
         this.callback.call$1(this.$this);
       }
@@ -1999,7 +1999,7 @@
         if (!(x instanceof P.Object))
           this.unsupported$1(x);
         return ["dart", init.classIdExtractor(x), this.serializeArrayInPlace$1(init.classFieldsExtractor(x))];
-      }, "call$1", "get$serialize", 2, 0, 0],
+      }, "call$1", "get$serialize", 2, 0, 1],
       unsupported$2: function(x, message) {
         throw H.wrapException(new P.UnsupportedError((message == null ? "Can't transmit:" : message) + " " + H.S(x)));
       },
@@ -2156,7 +2156,7 @@
           default:
             throw H.wrapException("couldn't deserialize: " + H.S(x));
         }
-      }, "call$1", "get$deserialize", 2, 0, 0],
+      }, "call$1", "get$deserialize", 2, 0, 1],
       deserializeArrayInPlace$1: function(x) {
         var t1, i, t2;
         t1 = J.getInterceptor$asx(x);
@@ -3327,7 +3327,7 @@
       }
     },
     unwrapException_saveStackTrace: {
-      "^": "Closure:0;ex",
+      "^": "Closure:1;ex",
       call$1: function(error) {
         if (!!J.getInterceptor(error).$isError)
           if (error.$thrownJsError == null)
@@ -3350,31 +3350,31 @@
       }
     },
     invokeClosure_closure: {
-      "^": "Closure:1;closure",
+      "^": "Closure:0;closure",
       call$0: function() {
         return this.closure.call$0();
       }
     },
     invokeClosure_closure0: {
-      "^": "Closure:1;closure,arg1",
+      "^": "Closure:0;closure,arg1",
       call$0: function() {
         return this.closure.call$1(this.arg1);
       }
     },
     invokeClosure_closure1: {
-      "^": "Closure:1;closure,arg1,arg2",
+      "^": "Closure:0;closure,arg1,arg2",
       call$0: function() {
         return this.closure.call$2(this.arg1, this.arg2);
       }
     },
     invokeClosure_closure2: {
-      "^": "Closure:1;closure,arg1,arg2,arg3",
+      "^": "Closure:0;closure,arg1,arg2,arg3",
       call$0: function() {
         return this.closure.call$3(this.arg1, this.arg2, this.arg3);
       }
     },
     invokeClosure_closure3: {
-      "^": "Closure:1;closure,arg1,arg2,arg3,arg4",
+      "^": "Closure:0;closure,arg1,arg2,arg3,arg4",
       call$0: function() {
         return this.closure.call$4(this.arg1, this.arg2, this.arg3, this.arg4);
       }
@@ -3692,7 +3692,7 @@
       $isInternalMap: 1
     },
     JsLinkedHashMap_values_closure: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(each) {
         return this.$this.$index(0, each);
       }
@@ -3736,7 +3736,7 @@
       }
     },
     initHooks_closure: {
-      "^": "Closure:0;getTag",
+      "^": "Closure:1;getTag",
       call$1: function(o) {
         return this.getTag(o);
       }
@@ -4217,7 +4217,7 @@
       P._scheduleAsyncCallback(f);
     },
     _AsyncRun__initializeScheduleImmediate_internalCallback: {
-      "^": "Closure:0;_box_0",
+      "^": "Closure:1;_box_0",
       call$1: function(_) {
         var t1, f;
         --init.globalState.topEventLoop._activeJsAsyncCount;
@@ -4239,14 +4239,14 @@
       }
     },
     _AsyncRun__scheduleImmediateJsOverride_internalCallback: {
-      "^": "Closure:1;callback",
+      "^": "Closure:0;callback",
       call$0: function() {
         --init.globalState.topEventLoop._activeJsAsyncCount;
         this.callback.call$0();
       }
     },
     _AsyncRun__scheduleImmediateWithSetImmediate_internalCallback: {
-      "^": "Closure:1;callback",
+      "^": "Closure:0;callback",
       call$0: function() {
         --init.globalState.topEventLoop._activeJsAsyncCount;
         this.callback.call$0();
@@ -4541,19 +4541,19 @@
       }
     },
     _Future__addListener_closure: {
-      "^": "Closure:1;$this,listener",
+      "^": "Closure:0;$this,listener",
       call$0: function() {
         P._Future__propagateToListeners(this.$this, this.listener);
       }
     },
     _Future__prependListeners_closure: {
-      "^": "Closure:1;_box_0,$this",
+      "^": "Closure:0;_box_0,$this",
       call$0: function() {
         P._Future__propagateToListeners(this.$this, this._box_0.listeners);
       }
     },
     _Future__chainForeignFuture_closure: {
-      "^": "Closure:0;target",
+      "^": "Closure:1;target",
       call$1: function(value) {
         var t1 = this.target;
         t1._state = 0;
@@ -4570,7 +4570,7 @@
       }
     },
     _Future__chainForeignFuture_closure1: {
-      "^": "Closure:1;target,e,s",
+      "^": "Closure:0;target,e,s",
       call$0: function() {
         this.target._completeError$2(this.e, this.s);
       }
@@ -4617,7 +4617,7 @@
       }
     },
     _Future__propagateToListeners_handleWhenCompleteCallback_closure: {
-      "^": "Closure:0;originalSource",
+      "^": "Closure:1;originalSource",
       call$1: function(_) {
         return this.originalSource;
       }
@@ -4690,13 +4690,13 @@
       }
     },
     Stream_length_closure: {
-      "^": "Closure:0;_box_0",
+      "^": "Closure:1;_box_0",
       call$1: function(_) {
         ++this._box_0.count;
       }
     },
     Stream_length_closure0: {
-      "^": "Closure:1;_box_0,future",
+      "^": "Closure:0;_box_0,future",
       call$0: function() {
         this.future._complete$1(this._box_0.count);
       }
@@ -4713,7 +4713,7 @@
       }
     },
     Stream_toList_closure0: {
-      "^": "Closure:1;result,future",
+      "^": "Closure:0;result,future",
       call$0: function() {
         this.future._complete$1(this.result);
       }
@@ -5000,7 +5000,7 @@
       }
     },
     _PendingEvents_schedule_closure: {
-      "^": "Closure:1;$this,dispatch",
+      "^": "Closure:0;$this,dispatch",
       call$0: function() {
         var t1, oldState, $event, t2;
         t1 = this.$this;
@@ -5143,7 +5143,7 @@
       "^": "Object;"
     },
     _rootHandleUncaughtError_closure: {
-      "^": "Closure:1;_box_0,stackTrace",
+      "^": "Closure:0;_box_0,stackTrace",
       call$0: function() {
         var t1, t2, error;
         t1 = this._box_0;
@@ -5241,19 +5241,19 @@
       }
     },
     _RootZone_bindCallback_closure: {
-      "^": "Closure:1;$this,f",
+      "^": "Closure:0;$this,f",
       call$0: function() {
         return this.$this.runGuarded$1(this.f);
       }
     },
     _RootZone_bindCallback_closure0: {
-      "^": "Closure:1;$this,f",
+      "^": "Closure:0;$this,f",
       call$0: function() {
         return this.$this.run$1(this.f);
       }
     },
     _RootZone_bindUnaryCallback_closure: {
-      "^": "Closure:0;$this,f",
+      "^": "Closure:1;$this,f",
       call$1: function(arg) {
         return this.$this.runUnaryGuarded$2(this.f, arg);
       }
@@ -6614,7 +6614,7 @@
       "%": ";Element"
     },
     closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(e) {
         return !!J.getInterceptor(e).$isElement;
       }
@@ -7245,7 +7245,7 @@
       }
     },
     _EventStreamSubscription_closure: {
-      "^": "Closure:0;onData",
+      "^": "Closure:1;onData",
       call$1: function(e) {
         return this.onData.call$1(e);
       }
@@ -7342,13 +7342,13 @@
       }
     },
     NodeValidatorBuilder_allowsElement_closure: {
-      "^": "Closure:0;element",
+      "^": "Closure:1;element",
       call$1: function(v) {
         return v.allowsElement$1(this.element);
       }
     },
     NodeValidatorBuilder_allowsAttribute_closure: {
-      "^": "Closure:0;element,attributeName,value",
+      "^": "Closure:1;element,attributeName,value",
       call$1: function(v) {
         return v.allowsAttribute$3(this.element, this.attributeName, this.value);
       }
@@ -7391,13 +7391,13 @@
       }
     },
     _SimpleNodeValidator_closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(x) {
         return !C.JSArray_methods.contains$1(C.List_yrN, x);
       }
     },
     _SimpleNodeValidator_closure0: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(x) {
         return C.JSArray_methods.contains$1(C.List_yrN, x);
       }
@@ -7423,7 +7423,7 @@
       }
     },
     _TemplatingNodeValidator_closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(attr) {
         return "TEMPLATE::" + H.S(attr);
       }
@@ -8099,19 +8099,19 @@
       }
     },
     ControlPanel_addNumericInput_closure: {
-      "^": "Closure:0;inputHandler,numericInputElement",
+      "^": "Closure:1;inputHandler,numericInputElement",
       call$1: function(ignored) {
         return this.inputHandler.call$1(H.Primitives_parseDouble(J.get$value$x(this.numericInputElement), null));
       }
     },
     ControlPanel_addOutputField_closure: {
-      "^": "Closure:1;outputHandler,outputElement",
+      "^": "Closure:0;outputHandler,outputElement",
       call$0: function() {
         J.set$value$x(this.outputElement, this.outputHandler.call$0());
       }
     },
     ControlPanel_update_closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(updater) {
         return updater.call$0();
       }
@@ -8164,6 +8164,13 @@
         this.controlPanel.addOutputField$5("Pendulum 2", "Angle", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angle, 2), "rad", new X.Gui_closure8(this));
         this.controlPanel.addOutputField$5("Pendulum 2", "Angular Velocity", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angularVelocity, 2), "rad/s", new X.Gui_closure9(this));
         this.controlPanel.addOutputField$5("Pendulum 2", "Angular Acceleration", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angularAcceleration, 2), "rad/s/s", new X.Gui_closure10(this));
+        this.controlPanel.uiContainer.appendChild(t3.createElement("br"));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Location", t1.initialPendulum.location.toString$0(0), "m", new X.Gui_closure11(this));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Velocity", t1.initialPendulum.velocity.toString$0(0), "m/s", new X.Gui_closure12(this));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Acceleration", t1.initialPendulum.acceleration.toString$0(0), "m/s/s", new X.Gui_closure13(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Location", t1.attachedPendulum.location.toString$0(0), "m", new X.Gui_closure14(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Velocity", t1.attachedPendulum.velocity.toString$0(0), "m/s", new X.Gui_closure15(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Acceleration", t1.attachedPendulum.acceleration.toString$0(0), "m/s/s", new X.Gui_closure16(this));
       },
       static: {
         Gui$: function(world) {
@@ -8203,81 +8210,117 @@
       }
     },
     Gui_closure: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newGravity) {
         this.$this.world.gravity = newGravity;
         return newGravity;
       }
     },
     Gui_closure0: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newTimeWarp) {
         this.$this.world.timeWarp = newTimeWarp;
         return newTimeWarp;
       }
     },
     Gui_closure1: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newRodLength) {
         this.$this.world.initialPendulum.stringLength = newRodLength;
         return newRodLength;
       }
     },
     Gui_closure2: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newRodLength) {
         this.$this.world.attachedPendulum.stringLength = newRodLength;
         return newRodLength;
       }
     },
     Gui_closure3: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newMass) {
         this.$this.world.initialPendulum.mass = newMass;
         return newMass;
       }
     },
     Gui_closure4: {
-      "^": "Closure:0;$this",
+      "^": "Closure:1;$this",
       call$1: function(newMass) {
         this.$this.world.attachedPendulum.mass = newMass;
         return newMass;
       }
     },
     Gui_closure5: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angle, 2);
       }
     },
     Gui_closure6: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angularVelocity, 2);
       }
     },
     Gui_closure7: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angularAcceleration, 2);
       }
     },
     Gui_closure8: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angle, 2);
       }
     },
     Gui_closure9: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angularVelocity, 2);
       }
     },
     Gui_closure10: {
-      "^": "Closure:1;$this",
+      "^": "Closure:0;$this",
       call$0: function() {
         return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angularAcceleration, 2);
+      }
+    },
+    Gui_closure11: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.initialPendulum.location.toString$0(0);
+      }
+    },
+    Gui_closure12: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.initialPendulum.velocity.toString$0(0);
+      }
+    },
+    Gui_closure13: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.initialPendulum.acceleration.toString$0(0);
+      }
+    },
+    Gui_closure14: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.attachedPendulum.location.toString$0(0);
+      }
+    },
+    Gui_closure15: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.attachedPendulum.velocity.toString$0(0);
+      }
+    },
+    Gui_closure16: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        return this.$this.world.attachedPendulum.acceleration.toString$0(0);
       }
     }
   }], ["", "../src/physics/Pendulum.dart",, S, {
@@ -8655,7 +8698,7 @@
       }
     },
     Stage_step_closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(pendulum) {
         var t1, t2;
         t1 = J.$mul$ns(pendulum.get$stringLength(), pendulum.angularVelocity);
@@ -8668,7 +8711,7 @@
       }
     },
     Stage_step_closure0: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(pendulum) {
         var t1, t2;
         t1 = pendulum.get$stringLength();
@@ -8681,7 +8724,7 @@
       }
     },
     Stage_updatePendulumPositions_closure: {
-      "^": "Closure:0;",
+      "^": "Closure:1;",
       call$1: function(pendulum) {
         var t1, t2, t3;
         t1 = pendulum.get$startingLocation();
@@ -8724,7 +8767,7 @@
         return Math.sqrt(t1 + Math.pow(t2, 2));
       },
       toString$0: function(_) {
-        return "<" + H.S(this.x) + ", " + H.S(this.y) + ">";
+        return "<" + J.toStringAsFixed$1$n(this.x, 1) + ", " + J.toStringAsFixed$1$n(this.y, 1) + ">";
       }
     }
   }], ["", "../src/main.dart",, F, {
@@ -8743,13 +8786,13 @@
       P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure0(gui));
     }, "call$0", "main__main$closure", 0, 0, 2],
     main_closure: {
-      "^": "Closure:0;world,step",
+      "^": "Closure:1;world,step",
       call$1: function(timer) {
         this.world.step$1(0, this.step / 1000);
       }
     },
     main_closure0: {
-      "^": "Closure:0;gui",
+      "^": "Closure:1;gui",
       call$1: function(timer) {
         var t1 = this.gui;
         t1.screen.draw$0();
@@ -8997,6 +9040,9 @@
   };
   J.toLowerCase$0$s = function(receiver) {
     return J.getInterceptor$s(receiver).toLowerCase$0(receiver);
+  };
+  J.toStringAsFixed$1$n = function(receiver, a0) {
+    return J.getInterceptor$n(receiver).toStringAsFixed$1(receiver, a0);
   };
   J.trim$0$s = function(receiver) {
     return J.getInterceptor$s(receiver).trim$0(receiver);
@@ -9291,7 +9337,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1, args: [,]}, {func: 1}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
+  init.types = [{func: 1}, {func: 1, args: [,]}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
