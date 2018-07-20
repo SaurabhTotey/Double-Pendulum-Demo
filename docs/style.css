@@ -26,9 +26,11 @@ div {
 input {
     text-align: center;
     font-size: var(--font-size);
+    width: 30%;
 }
 
 table {
+    width: 100%;
     padding: 3%;
 }
 

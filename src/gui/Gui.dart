@@ -22,7 +22,7 @@ class Gui {
         this.screen = new Screen(this.world);
         this.controlPanel = new ControlPanel();
         void resizeProc([Event ignored = null]) {
-            this.screen.screen.width = (window.innerWidth * 0.75).toInt();
+            this.screen.screen.width = (window.innerWidth * 0.7).toInt();
             this.screen.screen.height = window.innerHeight;
             this.controlPanel.controlPanel.style.width = '${window.innerWidth - this.screen.screen.width}px';
             this.controlPanel.controlPanel.style.height = '${window.innerHeight}px';
@@ -90,6 +90,49 @@ class Gui {
             100.0,
             0.1,
             (newMass) => this.world.attachedPendulum.mass = newMass
+        );
+        this.controlPanel.addBreak();
+        this.controlPanel.addOutputField(
+            "Pendulum 1",
+            "Angle",
+            this.world.initialPendulum.angle.toStringAsFixed(2),
+            "rad",
+            () => this.world.initialPendulum.angle.toStringAsFixed(2)
+        );
+        this.controlPanel.addOutputField(
+            "Pendulum 1",
+            "Angular Velocity",
+            this.world.initialPendulum.angularVelocity.toStringAsFixed(2),
+            "rad/s",
+            () => this.world.initialPendulum.angularVelocity.toStringAsFixed(2)
+        );
+        this.controlPanel.addOutputField(
+            "Pendulum 1",
+            "Angular Acceleration",
+            this.world.initialPendulum.angularAcceleration.toStringAsFixed(2),
+            "rad/s/s",
+            () => this.world.initialPendulum.angularAcceleration.toStringAsFixed(2)
+        );
+        this.controlPanel.addOutputField(
+            "Pendulum 2",
+            "Angle",
+            this.world.attachedPendulum.angle.toStringAsFixed(2),
+            "rad",
+            () => this.world.attachedPendulum.angle.toStringAsFixed(2)
+        );
+        this.controlPanel.addOutputField(
+            "Pendulum 2",
+            "Angular Velocity",
+            this.world.attachedPendulum.angularVelocity.toStringAsFixed(2),
+            "rad/s",
+            () => this.world.attachedPendulum.angularVelocity.toStringAsFixed(2)
+        );
+        this.controlPanel.addOutputField(
+            "Pendulum 2",
+            "Angular Acceleration",
+            this.world.attachedPendulum.angularAcceleration.toStringAsFixed(2),
+            "rad/s/s",
+            () => this.world.attachedPendulum.angularAcceleration.toStringAsFixed(2)
         );
     }
 

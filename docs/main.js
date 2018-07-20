@@ -799,6 +799,19 @@
       toDouble$0: function(receiver) {
         return receiver;
       },
+      toStringAsFixed$1: function(receiver, fractionDigits) {
+        var result, t1;
+        if (fractionDigits > 20)
+          throw H.wrapException(P.RangeError$range(fractionDigits, 0, 20, "fractionDigits", null));
+        result = receiver.toFixed(fractionDigits);
+        if (receiver === 0)
+          t1 = 1 / receiver < 0;
+        else
+          t1 = false;
+        if (t1)
+          return "-" + result;
+        return result;
+      },
       toString$0: function(receiver) {
         if (receiver === 0 && 1 / receiver < 0)
           return "-0.0";
@@ -6314,11 +6327,12 @@
       var e, e0, exception;
       e0 = document.createElement("input");
       e = e0;
-      try {
-        J.set$type$x(e, type);
-      } catch (exception) {
-        H.unwrapException(exception);
-      }
+      if (type != null)
+        try {
+          J.set$type$x(e, type);
+        } catch (exception) {
+          H.unwrapException(exception);
+        }
       return e;
     },
     _JenkinsSmiHash_combine: function(hash, value) {
@@ -6339,7 +6353,7 @@
     },
     HtmlElement: {
       "^": "Element;",
-      "%": "HTMLBRElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableColElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
+      "%": "HTMLBRElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableColElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
     },
     AnchorElement: {
       "^": "HtmlElement;type},href}",
@@ -6368,7 +6382,7 @@
       "%": "HTMLBodyElement"
     },
     ButtonElement: {
-      "^": "HtmlElement;name=,type},value%",
+      "^": "HtmlElement;disabled},name=,type},value%",
       "%": "HTMLButtonElement"
     },
     CanvasElement: {
@@ -6630,7 +6644,7 @@
       "%": "MediaStream|MessagePort;EventTarget"
     },
     FieldSetElement: {
-      "^": "HtmlElement;name=",
+      "^": "HtmlElement;disabled},name=",
       "%": "HTMLFieldSetElement"
     },
     FormElement: {
@@ -6646,13 +6660,13 @@
       "%": "HTMLImageElement"
     },
     InputElement: {
-      "^": "HtmlElement;height%,name=,type},value%,width%",
+      "^": "HtmlElement;disabled},height%,name=,type},value%,width%",
       $isElement: 1,
       $isInterceptor: 1,
       "%": "HTMLInputElement"
     },
     KeygenElement: {
-      "^": "HtmlElement;name=",
+      "^": "HtmlElement;disabled},name=",
       "%": "HTMLKeygenElement"
     },
     LIElement: {
@@ -6660,7 +6674,7 @@
       "%": "HTMLLIElement"
     },
     LinkElement: {
-      "^": "HtmlElement;href},type}",
+      "^": "HtmlElement;disabled},href},type}",
       "%": "HTMLLinkElement"
     },
     Location: {
@@ -6683,7 +6697,7 @@
       "%": "HTMLMenuElement"
     },
     MenuItemElement: {
-      "^": "HtmlElement;type}",
+      "^": "HtmlElement;disabled},type}",
       "%": "HTMLMenuItemElement"
     },
     MetaElement: {
@@ -6859,8 +6873,12 @@
       "^": "HtmlElement;height%,name=,type},width%",
       "%": "HTMLObjectElement"
     },
+    OptGroupElement: {
+      "^": "HtmlElement;disabled}",
+      "%": "HTMLOptGroupElement"
+    },
     OptionElement: {
-      "^": "HtmlElement;value%",
+      "^": "HtmlElement;disabled},value%",
       "%": "HTMLOptionElement"
     },
     OutputElement: {
@@ -6880,7 +6898,7 @@
       "%": "HTMLScriptElement"
     },
     SelectElement: {
-      "^": "HtmlElement;length=,name=,value%",
+      "^": "HtmlElement;disabled},length=,name=,value%",
       "%": "HTMLSelectElement"
     },
     SlotElement: {
@@ -6896,7 +6914,7 @@
       "%": "SpeechRecognitionError"
     },
     StyleElement: {
-      "^": "HtmlElement;type}",
+      "^": "HtmlElement;disabled},type}",
       "%": "HTMLStyleElement"
     },
     TableCellElement: {
@@ -6973,7 +6991,7 @@
       "%": "HTMLTemplateElement"
     },
     TextAreaElement: {
-      "^": "HtmlElement;name=,value%",
+      "^": "HtmlElement;disabled},name=,value%",
       "%": "HTMLTextAreaElement"
     },
     UIEvent: {
@@ -7922,7 +7940,7 @@
       "%": "SVGScriptElement"
     },
     StyleElement0: {
-      "^": "SvgElement;type}",
+      "^": "SvgElement;disabled},type}",
       "%": "SVGStyleElement"
     },
     SvgElement: {
@@ -8053,6 +8071,29 @@
         rowElement.appendChild(unitsCell);
         this.uiContainer.appendChild(rowElement);
       },
+      addOutputField$5: function(section, attribute, value, units, outputHandler) {
+        var t1, rowElement, sectionCell, attributeCell, unitsCell, outputCell, outputElement;
+        t1 = document;
+        rowElement = t1.createElement("tr");
+        sectionCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(sectionCell, section);
+        attributeCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(attributeCell, attribute);
+        unitsCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(unitsCell, units);
+        outputCell = t1.createElement("td");
+        outputElement = W.InputElement_InputElement(null);
+        t1 = J.getInterceptor$x(outputElement);
+        t1.set$disabled(outputElement, true);
+        t1.set$value(outputElement, value);
+        this.outputUpdaters.push(new O.ControlPanel_addOutputField_closure(outputHandler, outputElement));
+        outputCell.appendChild(outputElement);
+        rowElement.appendChild(sectionCell);
+        rowElement.appendChild(attributeCell);
+        rowElement.appendChild(outputCell);
+        rowElement.appendChild(unitsCell);
+        this.uiContainer.appendChild(rowElement);
+      },
       update$0: function() {
         C.JSArray_methods.forEach$1(this.outputUpdaters, new O.ControlPanel_update_closure());
       }
@@ -8061,6 +8102,12 @@
       "^": "Closure:0;inputHandler,numericInputElement",
       call$1: function(ignored) {
         return this.inputHandler.call$1(H.Primitives_parseDouble(J.get$value$x(this.numericInputElement), null));
+      }
+    },
+    ControlPanel_addOutputField_closure: {
+      "^": "Closure:1;outputHandler,outputElement",
+      call$0: function() {
+        J.set$value$x(this.outputElement, this.outputHandler.call$0());
       }
     },
     ControlPanel_update_closure: {
@@ -8074,7 +8121,7 @@
     Gui: {
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
-        var t1, t2, t3, t4, t5, t6, titleRow, sectionTitle, attributeTitle, valueTitle, unitsTitle;
+        var t1, t2, t3, t4, t5, titleRow, sectionTitle, attributeTitle, valueTitle, unitsTitle;
         t1 = this.world;
         this.screen = D.Screen$(t1);
         t2 = new O.ControlPanel(null, null, []);
@@ -8083,8 +8130,6 @@
         t2.controlPanel = t4;
         t5 = t3.createElement("table");
         t2.uiContainer = t5;
-        t6 = t5.style;
-        t6.width = "100%";
         t4.appendChild(t5);
         titleRow = t3.createElement("tr");
         sectionTitle = t3.createElement("th");
@@ -8112,6 +8157,13 @@
         this.controlPanel.addNumericInput$8("Pendulum 2", "Rod Length", t1.attachedPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure2(this));
         this.controlPanel.addNumericInput$8("Pendulum 1", "Mass", t1.initialPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure3(this));
         this.controlPanel.addNumericInput$8("Pendulum 2", "Mass", t1.attachedPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure4(this));
+        this.controlPanel.uiContainer.appendChild(t3.createElement("br"));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Angle", C.JSNumber_methods.toStringAsFixed$1(t1.initialPendulum.angle, 2), "rad", new X.Gui_closure5(this));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Angular Velocity", C.JSNumber_methods.toStringAsFixed$1(t1.initialPendulum.angularVelocity, 2), "rad/s", new X.Gui_closure6(this));
+        this.controlPanel.addOutputField$5("Pendulum 1", "Angular Acceleration", C.JSNumber_methods.toStringAsFixed$1(t1.initialPendulum.angularAcceleration, 2), "rad/s/s", new X.Gui_closure7(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Angle", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angle, 2), "rad", new X.Gui_closure8(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Angular Velocity", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angularVelocity, 2), "rad/s", new X.Gui_closure9(this));
+        this.controlPanel.addOutputField$5("Pendulum 2", "Angular Acceleration", C.JSNumber_methods.toStringAsFixed$1(t1.attachedPendulum.angularAcceleration, 2), "rad/s/s", new X.Gui_closure10(this));
       },
       static: {
         Gui$: function(world) {
@@ -8130,7 +8182,7 @@
         t3 = window.innerWidth;
         if (typeof t3 !== "number")
           return t3.$mul();
-        J.set$width$x(t2, C.JSNumber_methods.toInt$0(t3 * 0.75));
+        J.set$width$x(t2, C.JSNumber_methods.toInt$0(t3 * 0.7));
         J.set$height$x(t1.screen.screen, window.innerHeight);
         t3 = t1.controlPanel.controlPanel.style;
         t2 = window.innerWidth;
@@ -8190,6 +8242,42 @@
       call$1: function(newMass) {
         this.$this.world.attachedPendulum.mass = newMass;
         return newMass;
+      }
+    },
+    Gui_closure5: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angle, 2);
+      }
+    },
+    Gui_closure6: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angularVelocity, 2);
+      }
+    },
+    Gui_closure7: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.initialPendulum.angularAcceleration, 2);
+      }
+    },
+    Gui_closure8: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angle, 2);
+      }
+    },
+    Gui_closure9: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angularVelocity, 2);
+      }
+    },
+    Gui_closure10: {
+      "^": "Closure:1;$this",
+      call$0: function() {
+        return C.JSNumber_methods.toStringAsFixed$1(this.$this.world.attachedPendulum.angularAcceleration, 2);
       }
     }
   }], ["", "../src/physics/Pendulum.dart",, S, {
@@ -8776,6 +8864,9 @@
   };
   J.set$type$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$type(receiver, value);
+  };
+  J.set$value$x = function(receiver, value) {
+    return J.getInterceptor$x(receiver).set$value(receiver, value);
   };
   J.set$width$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$width(receiver, value);

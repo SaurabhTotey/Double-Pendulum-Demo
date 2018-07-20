@@ -18,7 +18,6 @@ class ControlPanel {
     ControlPanel() {
         this.controlPanel = document.getElementById('control-panel');
         this.uiContainer = new TableElement();
-        this.uiContainer.style.width = "100%";
         this.controlPanel.append(this.uiContainer);
         TableRowElement titleRow = new TableRowElement();
         HtmlElement sectionTitle = document.createElement("th");
@@ -34,6 +33,13 @@ class ControlPanel {
         titleRow.append(valueTitle);
         titleRow.append(unitsTitle);
         this.uiContainer.append(titleRow);
+        this.addBreak();
+    }
+
+    /**
+     * Adds a horizontal break to the control panel
+     */
+    void addBreak() {
         this.uiContainer.append(new BRElement());
     }
 
@@ -77,7 +83,28 @@ class ControlPanel {
      * Output should only be used to show what is going on, not to take user input
      */
     void addOutputField(String section, String attribute, String value, String units, String Function() outputHandler) {
+        TableRowElement rowElement = new TableRowElement();
+        TableCellElement sectionCell = new TableCellElement();
+        sectionCell.innerHtml = section;
+        TableCellElement attributeCell = new TableCellElement();
+        attributeCell.innerHtml = attribute;
+        TableCellElement unitsCell = new TableCellElement();
+        unitsCell.innerHtml = units;
 
+        TableCellElement outputCell = new TableCellElement();
+        InputElement outputElement = new InputElement();
+        outputElement.disabled = true;
+        outputElement.value = value;
+        this.outputUpdaters.add(() {
+            outputElement.value = outputHandler();
+        });
+        outputCell.append(outputElement);
+
+        rowElement.append(sectionCell);
+        rowElement.append(attributeCell);
+        rowElement.append(outputCell);
+        rowElement.append(unitsCell);
+        this.uiContainer.append(rowElement);
     }
 
     /**
