@@ -8072,7 +8072,7 @@
         this.uiContainer.appendChild(rowElement);
       },
       addOutputField$5: function(section, attribute, value, units, outputHandler) {
-        var t1, rowElement, sectionCell, attributeCell, unitsCell, outputCell, outputElement;
+        var t1, rowElement, sectionCell, attributeCell, unitsCell, outputCell, outputElement, t2;
         t1 = document;
         rowElement = t1.createElement("tr");
         sectionCell = t1.createElement("td");
@@ -8085,6 +8085,8 @@
         outputElement = W.InputElement_InputElement(null);
         t1 = J.getInterceptor$x(outputElement);
         t1.set$disabled(outputElement, true);
+        t2 = outputElement.style;
+        t2.backgroundColor = "rgba(150,150,150,50)";
         t1.set$value(outputElement, value);
         this.outputUpdaters.push(new O.ControlPanel_addOutputField_closure(outputHandler, outputElement));
         outputCell.appendChild(outputElement);
@@ -8782,8 +8784,8 @@
       world.attachedPendulum = t2;
       world.pendulums = [t1, t2];
       gui = X.Gui$(world);
-      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure(world, 5));
-      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 5, 0, 0), new F.main_closure0(gui));
+      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 25, 0, 0), new F.main_closure(world, 25));
+      P.Timer_Timer$periodic(P.Duration$(0, 0, 0, 25, 0, 0), new F.main_closure0(gui));
     }, "call$0", "main__main$closure", 0, 0, 2],
     main_closure: {
       "^": "Closure:1;world,step",

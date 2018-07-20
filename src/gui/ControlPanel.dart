@@ -94,6 +94,7 @@ class ControlPanel {
         TableCellElement outputCell = new TableCellElement();
         InputElement outputElement = new InputElement();
         outputElement.disabled = true;
+        outputElement.style.backgroundColor = "rgba(150,150,150,50)";
         outputElement.value = value;
         this.outputUpdaters.add(() {
             outputElement.value = outputHandler();

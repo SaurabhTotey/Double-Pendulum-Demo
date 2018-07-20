@@ -8,7 +8,7 @@ import 'physics/Stage.dart';
 void main() {
     final world = new Stage();
     final gui = new Gui(world);
-    int step = 5;
+    int step = 25;
     new Timer.periodic(new Duration(milliseconds: step), (timer) {
         world.step(step / 1000.0);
     });

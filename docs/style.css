@@ -21,12 +21,12 @@ canvas {
 
 div {
     background-color: lightgray;
+    overflow: auto;
 }
 
 input {
     text-align: center;
     font-size: var(--font-size);
-    width: 50%;
 }
 
 table {
