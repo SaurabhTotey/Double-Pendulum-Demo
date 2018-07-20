@@ -2798,6 +2798,20 @@
         t1 = reflectionInfo;
       return H.Closure_fromTearOff(receiver, functions, t1, !!isStatic, jsArguments, $name);
     },
+    propertyTypeCastError: function(value, property) {
+      var t1 = J.getInterceptor$asx(property);
+      throw H.wrapException(H.CastErrorImplementation$(H.Primitives_objectTypeName(value), t1.substring$2(property, 3, t1.get$length(property))));
+    },
+    interceptedTypeCast: function(value, property) {
+      var t1;
+      if (value != null)
+        t1 = (typeof value === "object" || typeof value === "function") && J.getInterceptor(value)[property];
+      else
+        t1 = true;
+      if (t1)
+        return value;
+      H.propertyTypeCastError(value, property);
+    },
     extractFunctionTypeObjectFrom: function(o) {
       var interceptor = J.getInterceptor(o);
       return "$signature" in interceptor ? interceptor.$signature() : null;
@@ -3458,6 +3472,17 @@
             if (template[$name] === fieldName)
               return $name;
           }
+        }
+      }
+    },
+    CastErrorImplementation: {
+      "^": "Error;message",
+      toString$0: function(_) {
+        return this.message;
+      },
+      static: {
+        CastErrorImplementation$: function(actualType, expectedType) {
+          return new H.CastErrorImplementation("CastError: Casting value of type '" + actualType + "' to incompatible type '" + expectedType + "'");
         }
       }
     },
@@ -6393,6 +6418,12 @@
       getContext$1: function($receiver, contextId) {
         return this.getContext$2($receiver, contextId, null);
       },
+      toDataUrl$2: function(receiver, type, quality) {
+        return receiver.toDataURL(type, quality);
+      },
+      toDataUrl$0: function($receiver) {
+        return this.toDataUrl$2($receiver, "image/png", null);
+      },
       "%": "HTMLCanvasElement"
     },
     CanvasRenderingContext2D: {
@@ -6675,6 +6706,7 @@
     },
     LinkElement: {
       "^": "HtmlElement;disabled},href},type}",
+      $isLinkElement: 1,
       "%": "HTMLLinkElement"
     },
     Location: {
@@ -8470,6 +8502,7 @@
           return H.iae(t1);
         J.arc$5$x(t7, t6, t5, t4 * t3 / t1, 0, 6.283185307179586);
         J.fill$0$x(this.renderer);
+        H.interceptedTypeCast(document.getElementById("icon"), "$isLinkElement").href = J.toDataUrl$0$x(this.screen);
       },
       Screen$1: function(world, _box_0) {
         var t1 = document.getElementById("screen");
@@ -9033,6 +9066,9 @@
   };
   J.stroke$0$x = function(receiver) {
     return J.getInterceptor$x(receiver).stroke$0(receiver);
+  };
+  J.toDataUrl$0$x = function(receiver) {
+    return J.getInterceptor$x(receiver).toDataUrl$0(receiver);
   };
   J.toDouble$0$n = function(receiver) {
     return J.getInterceptor$n(receiver).toDouble$0(receiver);

@@ -113,10 +113,12 @@ class Screen {
     }
 
     /**
-     * The method that handles drawing the pendulums
+     * The method that handles drawing the pendulums and updating the page icon to screen contents
      */
     draw() {
+        //Clears screen
         this.renderer.clearRect(0, 0, this.screen.width, this.screen.height);
+        //Draws pendulums
         Vector p1 = this.getViewCoordinates(this.world.pendulums[0].startingLocation);
         Vector p2 = this.getViewCoordinates(this.world.pendulums[0].location);
         Vector p3 = this.getViewCoordinates(this.world.pendulums[1].location);
@@ -129,6 +131,8 @@ class Screen {
         this.renderer.arc(p2.x.toInt(), p2.y.toInt(), this.world.pendulums[0].radius * drawWidth / this.world.width, 0.0, 2 * PI);
         this.renderer.arc(p3.x.toInt(), p3.y.toInt(), this.world.pendulums[1].radius * drawWidth / this.world.width, 0.0, 2 * PI);
         this.renderer.fill();
+        //Updates screen icon
+        (document.getElementById("icon") as LinkElement).href = this.screen.toDataUrl();
     }
 
 }
