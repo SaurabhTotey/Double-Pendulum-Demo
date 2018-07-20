@@ -3512,13 +3512,13 @@
       }
     },
     initHooks_closure0: {
-      "^": "Closure:6;getUnknownTag",
+      "^": "Closure:7;getUnknownTag",
       call$2: function(o, tag) {
         return this.getUnknownTag(o, tag);
       }
     },
     initHooks_closure1: {
-      "^": "Closure:7;prototypeForTag",
+      "^": "Closure:8;prototypeForTag",
       call$1: function(tag) {
         return this.prototypeForTag(tag);
       }
@@ -3817,14 +3817,14 @@
     _AsyncRun__scheduleImmediateJsOverride: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.scheduleImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateJsOverride_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 4],
     _AsyncRun__scheduleImmediateWithSetImmediate: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.setImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 4],
     _AsyncRun__scheduleImmediateWithTimer: [function(callback) {
       P.Timer__createTimer(C.Duration_0, callback);
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 3],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 4],
     _registerErrorHandler: function(errorHandler, zone) {
       if (H.functionTypeTest(errorHandler, {func: 1, args: [P.Null, P.Null]})) {
         zone.toString;
@@ -3998,7 +3998,7 @@
       }
     },
     _AsyncRun__initializeScheduleImmediate_closure: {
-      "^": "Closure:8;_box_0,div,span",
+      "^": "Closure:9;_box_0,div,span",
       call$1: function(callback) {
         var t1, t2;
         ++init.globalState.topEventLoop._activeJsAsyncCount;
@@ -4177,7 +4177,7 @@
         P._Future__propagateToListeners(this, listeners);
       }, function(error) {
         return this._completeError$2(error, null);
-      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 9, 0],
+      }, "_completeError$1", "call$2", "call$1", "get$_completeError", 2, 2, 10, 0],
       _Future$value$1: function(value, $T) {
         this._state = 4;
         this._resultOrListeners = value;
@@ -4331,7 +4331,7 @@
       }
     },
     _Future__chainForeignFuture_closure0: {
-      "^": "Closure:10;target",
+      "^": "Closure:11;target",
       call$2: function(error, stackTrace) {
         this.target._completeError$2(error, stackTrace);
       },
@@ -4864,7 +4864,7 @@
       }],
       _handleError$2: [function(error, stackTrace) {
         this._stream._handleError$3(error, stackTrace, this);
-      }, "call$2", "get$_handleError", 4, 0, 11],
+      }, "call$2", "get$_handleError", 4, 0, 12],
       _handleDone$0: [function() {
         this._async$_close$0();
       }, "call$0", "get$_handleDone", 0, 0, 1],
@@ -5455,7 +5455,7 @@
       $asEfficientLengthIterable: null
     },
     Maps_mapToString_closure: {
-      "^": "Closure:12;_box_0,result",
+      "^": "Closure:13;_box_0,result",
       call$2: function(k, v) {
         var t1, t2;
         t1 = this._box_0;
@@ -5682,7 +5682,7 @@
       }
     },
     Duration_toString_sixDigits: {
-      "^": "Closure:4;",
+      "^": "Closure:5;",
       call$1: function(n) {
         if (n >= 100000)
           return "" + n;
@@ -5698,7 +5698,7 @@
       }
     },
     Duration_toString_twoDigits: {
-      "^": "Closure:4;",
+      "^": "Closure:5;",
       call$1: function(n) {
         if (n >= 10)
           return "" + n;
@@ -6656,7 +6656,7 @@
       }
     },
     Gui_resizeProc: {
-      "^": "Closure:13;$this",
+      "^": "Closure:14;$this",
       call$1: function(ignored) {
         var t1, t2, t3, t4;
         t1 = this.$this;
@@ -6795,6 +6795,20 @@
         viewCoords.y = t1 - t2;
         return viewCoords;
       },
+      getLogicalCoordinates$1: function(viewCoordinates) {
+        var t1, t2, vc;
+        t1 = viewCoordinates.x;
+        t2 = viewCoordinates.y;
+        vc = new V.Vector(t1, t2);
+        t1 = J.get$height$x(this.screen);
+        if (typeof t1 !== "number")
+          return t1.$sub();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        vc.y = t1 - t2;
+        t2 = this.world;
+        return vc.$sub(0, new V.Vector(this.startX, this.startY)).$mul(0, new V.Vector(t2.width, t2.height)).$div(0, new V.Vector(this.drawWidth, this.drawHeight));
+      },
       draw$0: function() {
         var t1, p1, p2, p3, t2, t3, t4, t5, t6, t7;
         J.clearRect$4$x(this.renderer, 0, 0, J.get$width$x(this.screen), J.get$height$x(this.screen));
@@ -6839,7 +6853,7 @@
         t1 = J.get$onMouseDown$x(this.screen);
         W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
         t1 = J.get$onMouseMove$x(this.screen);
-        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure0(_box_0), false, H.getTypeArgumentByIndex(t1, 0));
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure0(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
         W._EventStreamSubscription$(window, "mouseup", new D.Screen_closure1(_box_0, this), false, W.MouseEvent);
       },
       static: {
@@ -6851,82 +6865,108 @@
       }
     },
     Screen_closure: {
-      "^": "Closure:5;_box_0,$this",
+      "^": "Closure:6;_box_0,$this",
       call$1: function($event) {
-        var t1, t2, t3, vc, t4, logicalMouseLocation, t5, t6;
+        var t1, t2, clickLocation, logicalMouseLocation, t3, t4, t5;
         t1 = J.getInterceptor$x($event);
         t2 = t1.get$client($event);
         t2 = t2.get$x(t2);
         t1 = t1.get$client($event);
-        t1 = t1.get$y(t1);
-        t3 = this.$this;
-        vc = new V.Vector(t2, t1);
-        t4 = J.get$height$x(t3.screen);
+        clickLocation = new V.Vector(t2, t1.get$y(t1));
+        t1 = this.$this;
+        logicalMouseLocation = t1.getLogicalCoordinates$1(clickLocation);
+        t2 = logicalMouseLocation.x;
+        t3 = t1.world;
+        t4 = t3.attachedPendulum.location.x;
+        if (typeof t2 !== "number")
+          return t2.$sub();
         if (typeof t4 !== "number")
-          return t4.$sub();
-        if (typeof t1 !== "number")
-          return H.iae(t1);
-        vc.y = t4 - t1;
-        t4 = t3.world;
-        logicalMouseLocation = vc.$sub(0, new V.Vector(t3.startX, t3.startY)).$mul(0, new V.Vector(t4.width, t4.height)).$div(0, new V.Vector(t3.drawWidth, t3.drawHeight));
-        t3 = logicalMouseLocation.x;
-        t5 = t4.attachedPendulum.location.x;
-        if (typeof t3 !== "number")
-          return t3.$sub();
+          return H.iae(t4);
+        t4 = Math.pow(t2 - t4, 2);
+        t2 = logicalMouseLocation.y;
+        t5 = t3.attachedPendulum.location.y;
+        if (typeof t2 !== "number")
+          return t2.$sub();
         if (typeof t5 !== "number")
           return H.iae(t5);
-        t5 = Math.pow(t3 - t5, 2);
-        t3 = logicalMouseLocation.y;
-        t6 = t4.attachedPendulum.location.y;
-        if (typeof t3 !== "number")
-          return t3.$sub();
-        if (typeof t6 !== "number")
-          return H.iae(t6);
-        if (t5 + Math.pow(t3 - t6, 2) <= Math.pow(t4.attachedPendulum.radius, 2))
-          this._box_0.isDragging = true;
-        else {
-          t3 = logicalMouseLocation.x;
-          t5 = t4.initialPendulum.location.x;
-          if (typeof t3 !== "number")
-            return t3.$sub();
+        if (t4 + Math.pow(t2 - t5, 2) <= Math.pow(t3.attachedPendulum.radius, 2)) {
+          t1 = this._box_0;
+          t1.isDragging = true;
+          t1.handleDrag = new D.Screen__closure();
+        } else {
+          t2 = logicalMouseLocation.x;
+          t4 = t3.initialPendulum.location.x;
+          if (typeof t2 !== "number")
+            return t2.$sub();
+          if (typeof t4 !== "number")
+            return H.iae(t4);
+          t4 = Math.pow(t2 - t4, 2);
+          t2 = logicalMouseLocation.y;
+          t5 = t3.initialPendulum.location.y;
+          if (typeof t2 !== "number")
+            return t2.$sub();
           if (typeof t5 !== "number")
             return H.iae(t5);
-          t5 = Math.pow(t3 - t5, 2);
-          t3 = logicalMouseLocation.y;
-          t6 = t4.initialPendulum.location.y;
-          if (typeof t3 !== "number")
-            return t3.$sub();
-          if (typeof t6 !== "number")
-            return H.iae(t6);
-          if (t5 + Math.pow(t3 - t6, 2) <= Math.pow(t4.initialPendulum.radius, 2))
-            this._box_0.isDragging = true;
-          else {
-            t3 = logicalMouseLocation.x;
-            t5 = t4.initialPendulum.startingLocation.x;
-            if (typeof t3 !== "number")
-              return t3.$sub();
+          if (t4 + Math.pow(t2 - t5, 2) <= Math.pow(t3.initialPendulum.radius, 2)) {
+            t1 = this._box_0;
+            t1.isDragging = true;
+            t1.handleDrag = new D.Screen__closure0();
+          } else {
+            t2 = logicalMouseLocation.x;
+            t4 = t3.initialPendulum.startingLocation.x;
+            if (typeof t2 !== "number")
+              return t2.$sub();
+            if (typeof t4 !== "number")
+              return H.iae(t4);
+            t4 = Math.pow(t2 - t4, 2);
+            t2 = logicalMouseLocation.y;
+            t5 = t3.initialPendulum.startingLocation.y;
+            if (typeof t2 !== "number")
+              return t2.$sub();
             if (typeof t5 !== "number")
               return H.iae(t5);
-            t5 = Math.pow(t3 - t5, 2);
-            t3 = logicalMouseLocation.y;
-            t6 = t4.initialPendulum.startingLocation.y;
-            if (typeof t3 !== "number")
-              return t3.$sub();
-            if (typeof t6 !== "number")
-              return H.iae(t6);
-            if (t5 + Math.pow(t3 - t6, 2) <= 1)
-              this._box_0.isDragging = true;
+            if (t4 + Math.pow(t2 - t5, 2) <= 1) {
+              t2 = this._box_0;
+              t2.isDragging = true;
+              t2.handleDrag = new D.Screen__closure1(t1);
+            }
           }
         }
-        t3 = this._box_0;
-        t5 = t3.isDragging;
-        t4.isPaused = t5;
-        if (t5)
-          t3.dragStart = new V.Vector(t2, t1);
+        t1 = this._box_0;
+        t2 = t1.isDragging;
+        t3.isPaused = t2;
+        if (t2)
+          t1.dragStart = clickLocation;
+      }
+    },
+    Screen__closure: {
+      "^": "Closure:3;",
+      call$1: function(v) {
+      }
+    },
+    Screen__closure0: {
+      "^": "Closure:3;",
+      call$1: function(v) {
+      }
+    },
+    Screen__closure1: {
+      "^": "Closure:3;$this",
+      call$1: function(v) {
+        var t1, change, t2;
+        t1 = this.$this.world;
+        change = v.$sub(0, t1.initialPendulum.startingLocation);
+        t2 = t1.initialPendulum;
+        t2.startingLocation = t2.startingLocation.$add(0, change);
+        t2 = t1.initialPendulum;
+        t2.location = t2.location.$add(0, change);
+        t2 = t1.attachedPendulum;
+        t2.startingLocation = t2.startingLocation.$add(0, change);
+        t1 = t1.attachedPendulum;
+        t1.location = t1.location.$add(0, change);
       }
     },
     Screen_closure0: {
-      "^": "Closure:5;_box_0",
+      "^": "Closure:6;_box_0,$this",
       call$1: function($event) {
         var t1, t2, t3;
         t1 = this._box_0;
@@ -6937,11 +6977,11 @@
         t3 = t2.get$client($event);
         t3 = t3.get$x(t3);
         t2 = t2.get$client($event);
-        t1.call$1(new V.Vector(t3, t2.get$y(t2)));
+        t1.call$1(this.$this.getLogicalCoordinates$1(new V.Vector(t3, t2.get$y(t2))));
       }
     },
     Screen_closure1: {
-      "^": "Closure:14;_box_0,$this",
+      "^": "Closure:15;_box_0,$this",
       call$1: function(ignored) {
         var t1 = this._box_0;
         t1.isDragging = false;
@@ -7606,7 +7646,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

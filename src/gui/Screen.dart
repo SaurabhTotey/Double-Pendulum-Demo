@@ -21,24 +21,38 @@ class Screen {
     double drawHeight = 0.0;
 
     /**
-     * Makes a screen and sets Screen attributes
+     * Makes a screen and sets Screen attributes such as the drag procedures
      */
     Screen(this.world) {
         this.screen = document.getElementById('screen');
         this.renderer = this.screen.getContext('2d');
         resizeProc();
         bool isDragging = false;
+        //Drag procedures
         Vector dragStart = null;
         Function(Vector) handleDrag;
         this.screen.onMouseDown.listen((MouseEvent event) {
             Vector clickLocation = new Vector(event.client.x, event.client.y);
-            Vector logicalMouseLocation = getLogicalCoordinates(clickLocation);
+            Vector logicalMouseLocation = this.getLogicalCoordinates(clickLocation);
             if (pow(logicalMouseLocation.x - this.world.attachedPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.attachedPendulum.location.y, 2) <= pow(this.world.attachedPendulum.radius, 2)) {
                 isDragging = true;
+                handleDrag = (Vector v) {
+
+                };
             } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.location.y, 2) <= pow(this.world.initialPendulum.radius, 2)) {
                 isDragging = true;
+                handleDrag = (Vector v) {
+
+                };
             } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.startingLocation.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.startingLocation.y, 2) <= 1) {
                 isDragging = true;
+                handleDrag = (Vector v) {
+                    Vector change = v - this.world.initialPendulum.startingLocation;
+                    this.world.initialPendulum.startingLocation += change;
+                    this.world.initialPendulum.location += change;
+                    this.world.attachedPendulum.startingLocation += change;
+                    this.world.attachedPendulum.location += change;
+                };
             }
             this.world.isPaused = isDragging;
             if (isDragging) {
@@ -49,7 +63,7 @@ class Screen {
             if (!isDragging) {
                 return;
             }
-            handleDrag(new Vector(event.client.x, event.client.y));
+            handleDrag(this.getLogicalCoordinates(new Vector(event.client.x, event.client.y)));
         });
         window.onMouseUp.listen(([MouseEvent ignored]) {
             isDragging = false;
@@ -99,9 +113,9 @@ class Screen {
      */
     draw() {
         this.renderer.clearRect(0, 0, this.screen.width, this.screen.height);
-        Vector p1 = getViewCoordinates(this.world.pendulums[0].startingLocation);
-        Vector p2 = getViewCoordinates(this.world.pendulums[0].location);
-        Vector p3 = getViewCoordinates(this.world.pendulums[1].location);
+        Vector p1 = this.getViewCoordinates(this.world.pendulums[0].startingLocation);
+        Vector p2 = this.getViewCoordinates(this.world.pendulums[0].location);
+        Vector p3 = this.getViewCoordinates(this.world.pendulums[1].location);
         this.renderer.beginPath();
         this.renderer.moveTo(p1.x.toInt(), p1.y.toInt());
         this.renderer.lineTo(p2.x.toInt(), p2.y.toInt());
