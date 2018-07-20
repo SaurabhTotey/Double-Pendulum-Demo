@@ -27,20 +27,35 @@ class Screen {
         this.screen = document.getElementById('screen');
         this.renderer = this.screen.getContext('2d');
         resizeProc();
-        bool isMouseDown = false;
-        this.screen.onMouseDown.listen(([MouseEvent ignored]) {
-            isMouseDown = true;
-            this.world.isPaused = true;
+        bool isDragging = false;
+        Vector dragStart = null;
+        Function(Vector) handleDrag;
+        this.screen.onMouseDown.listen((MouseEvent event) {
+            Vector clickLocation = new Vector(event.client.x, event.client.y);
+            Vector logicalMouseLocation = getLogicalCoordinates(clickLocation);
+            if (pow(logicalMouseLocation.x - this.world.attachedPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.attachedPendulum.location.y, 2) <= pow(this.world.attachedPendulum.radius, 2)) {
+                isDragging = true;
+            } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.location.y, 2) <= pow(this.world.initialPendulum.radius, 2)) {
+                isDragging = true;
+            } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.startingLocation.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.startingLocation.y, 2) <= 1) {
+                isDragging = true;
+            }
+            this.world.isPaused = isDragging;
+            if (isDragging) {
+                dragStart = clickLocation;
+            }
         });
-        this.screen.onMouseMove.listen(([MouseEvent ignored]) {
-            if (!isMouseDown) {
+        this.screen.onMouseMove.listen((MouseEvent event) {
+            if (!isDragging) {
                 return;
             }
-            //TODO: do stuff if mouse has clicked pendulum
+            handleDrag(new Vector(event.client.x, event.client.y));
         });
-        this.screen.onMouseUp.listen(([MouseEvent ignored]) {
-            isMouseDown = false;
+        window.onMouseUp.listen(([MouseEvent ignored]) {
+            isDragging = false;
             this.world.isPaused = false;
+            dragStart = null;
+            handleDrag = null;
         });
     }
 
@@ -48,6 +63,8 @@ class Screen {
      * The procedure for what happens on window resize
      */
     void resizeProc([Event ignored = null]) {
+        this.startX = 0.0;
+        this.startY = 0.0;
         if (this.screen.height / this.world.height < this.screen.width / this.world.width) {
             this.drawHeight = this.screen.height.toDouble();
             this.drawWidth = this.screen.height / this.world.height * this.world.width;
@@ -72,7 +89,9 @@ class Screen {
      * Converts the given screen coordinates into logical or world coordinates
      */
     Vector getLogicalCoordinates(Vector viewCoordinates) {
-        return new Vector.empty(); //TODO: make
+        Vector vc = new Vector(viewCoordinates.x, viewCoordinates.y);
+        vc.y = this.screen.height - vc.y;
+        return (vc - new Vector(this.startX, this.startY)) * new Vector(this.world.width, this.world.height) / new Vector(this.drawWidth, this.drawHeight);
     }
 
     /**

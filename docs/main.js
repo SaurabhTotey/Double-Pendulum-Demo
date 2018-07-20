@@ -3817,14 +3817,14 @@
     _AsyncRun__scheduleImmediateJsOverride: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.scheduleImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateJsOverride_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 4],
+    }, "call$1", "async__AsyncRun__scheduleImmediateJsOverride$closure", 2, 0, 3],
     _AsyncRun__scheduleImmediateWithSetImmediate: [function(callback) {
       ++init.globalState.topEventLoop._activeJsAsyncCount;
       self.setImmediate(H.convertDartClosureToJS(new P._AsyncRun__scheduleImmediateWithSetImmediate_internalCallback(callback), 0));
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 4],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithSetImmediate$closure", 2, 0, 3],
     _AsyncRun__scheduleImmediateWithTimer: [function(callback) {
       P.Timer__createTimer(C.Duration_0, callback);
-    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 4],
+    }, "call$1", "async__AsyncRun__scheduleImmediateWithTimer$closure", 2, 0, 3],
     _registerErrorHandler: function(errorHandler, zone) {
       if (H.functionTypeTest(errorHandler, {func: 1, args: [P.Null, P.Null]})) {
         zone.toString;
@@ -5682,7 +5682,7 @@
       }
     },
     Duration_toString_sixDigits: {
-      "^": "Closure:5;",
+      "^": "Closure:4;",
       call$1: function(n) {
         if (n >= 100000)
           return "" + n;
@@ -5698,7 +5698,7 @@
       }
     },
     Duration_toString_twoDigits: {
-      "^": "Closure:5;",
+      "^": "Closure:4;",
       call$1: function(n) {
         if (n >= 10)
           return "" + n;
@@ -6097,6 +6097,22 @@
     },
     Element: {
       "^": "Node;",
+      get$client: function(receiver) {
+        var t1, t2, t3, t4;
+        t1 = receiver.clientLeft;
+        t2 = receiver.clientTop;
+        t3 = receiver.clientWidth;
+        t4 = receiver.clientHeight;
+        if (typeof t3 !== "number")
+          return t3.$lt();
+        if (t3 < 0)
+          t3 = -t3 * 0;
+        if (typeof t4 !== "number")
+          return t4.$lt();
+        if (t4 < 0)
+          t4 = -t4 * 0;
+        return new P.Rectangle(t1, t2, t3, t4, [null]);
+      },
       toString$0: function(receiver) {
         return receiver.localName;
       },
@@ -6105,9 +6121,6 @@
       },
       get$onMouseMove: function(receiver) {
         return new W._ElementEventStreamImpl(receiver, "mousemove", false, [W.MouseEvent]);
-      },
-      get$onMouseUp: function(receiver) {
-        return new W._ElementEventStreamImpl(receiver, "mouseup", false, [W.MouseEvent]);
       },
       $isInterceptor: 1,
       "%": ";Element"
@@ -6166,6 +6179,9 @@
     },
     MouseEvent: {
       "^": "UIEvent;",
+      get$client: function(receiver) {
+        return new P.Point(receiver.clientX, receiver.clientY, [null]);
+      },
       $isMouseEvent: 1,
       $isEvent: 1,
       $isObject: 1,
@@ -6293,6 +6309,114 @@
     }
   }], ["dart.dom.indexed_db", "dart:indexed_db",, P, {
     "^": ""
+  }], ["dart.math", "dart:math",, P, {
+    "^": "",
+    _JenkinsSmiHash_combine: function(hash, value) {
+      hash = 536870911 & hash + value;
+      hash = 536870911 & hash + ((524287 & hash) << 10);
+      return hash ^ hash >>> 6;
+    },
+    _JenkinsSmiHash_finish: function(hash) {
+      hash = 536870911 & hash + ((67108863 & hash) << 3);
+      hash ^= hash >>> 11;
+      return 536870911 & hash + ((16383 & hash) << 15);
+    },
+    Point: {
+      "^": "Object;x>,y>,$ti",
+      toString$0: function(_) {
+        return "Point(" + H.S(this.x) + ", " + H.S(this.y) + ")";
+      },
+      $eq: function(_, other) {
+        var t1, t2;
+        if (other == null)
+          return false;
+        if (!(other instanceof P.Point))
+          return false;
+        t1 = this.x;
+        t2 = other.x;
+        if (t1 == null ? t2 == null : t1 === t2) {
+          t1 = this.y;
+          t2 = other.y;
+          t2 = t1 == null ? t2 == null : t1 === t2;
+          t1 = t2;
+        } else
+          t1 = false;
+        return t1;
+      },
+      get$hashCode: function(_) {
+        var t1, t2;
+        t1 = J.get$hashCode$(this.x);
+        t2 = J.get$hashCode$(this.y);
+        return P._JenkinsSmiHash_finish(P._JenkinsSmiHash_combine(P._JenkinsSmiHash_combine(0, t1), t2));
+      },
+      $add: function(_, other) {
+        var t1, t2, t3;
+        t1 = this.x;
+        t2 = J.getInterceptor$x(other);
+        t3 = t2.get$x(other);
+        if (typeof t1 !== "number")
+          return t1.$add();
+        t3 = C.JSInt_methods.$add(t1, t3);
+        t1 = this.y;
+        t2 = t2.get$y(other);
+        if (typeof t1 !== "number")
+          return t1.$add();
+        return new P.Point(t3, C.JSInt_methods.$add(t1, t2), this.$ti);
+      }
+    },
+    _RectangleBase: {
+      "^": "Object;",
+      toString$0: function(_) {
+        return "Rectangle (" + H.S(this.left) + ", " + H.S(this.top) + ") " + this.width + " x " + this.height;
+      },
+      $eq: function(_, other) {
+        var t1, t2, t3, t4, t5;
+        if (other == null)
+          return false;
+        if (!(other instanceof P.Rectangle))
+          return false;
+        t1 = this.left;
+        t2 = other.left;
+        if (t1 == null ? t2 == null : t1 === t2) {
+          t3 = this.top;
+          t4 = other.top;
+          if (t3 == null ? t4 == null : t3 === t4) {
+            if (typeof t1 !== "number")
+              return t1.$add();
+            t5 = other.width;
+            if (typeof t2 !== "number")
+              return t2.$add();
+            if (t1 + this.width === t2 + t5) {
+              if (typeof t3 !== "number")
+                return t3.$add();
+              t1 = other.height;
+              if (typeof t4 !== "number")
+                return t4.$add();
+              t1 = t3 + this.height === t4 + t1;
+            } else
+              t1 = false;
+          } else
+            t1 = false;
+        } else
+          t1 = false;
+        return t1;
+      },
+      get$hashCode: function(_) {
+        var t1, t2, t3, t4;
+        t1 = this.left;
+        t2 = J.get$hashCode$(t1);
+        t3 = this.top;
+        t4 = J.get$hashCode$(t3);
+        if (typeof t1 !== "number")
+          return t1.$add();
+        if (typeof t3 !== "number")
+          return t3.$add();
+        return P._JenkinsSmiHash_finish(P._JenkinsSmiHash_combine(P._JenkinsSmiHash_combine(P._JenkinsSmiHash_combine(P._JenkinsSmiHash_combine(0, t2), t4), t1 + this.width & 0x1FFFFFFF), t3 + this.height & 0x1FFFFFFF));
+      }
+    },
+    Rectangle: {
+      "^": "_RectangleBase;left,top,width,height,$ti"
+    }
   }], ["dart.dom.svg", "dart:svg",, P, {
     "^": "",
     AElement: {
@@ -6439,9 +6563,6 @@
       },
       get$onMouseMove: function(receiver) {
         return new W._ElementEventStreamImpl(receiver, "mousemove", false, [W.MouseEvent]);
-      },
-      get$onMouseUp: function(receiver) {
-        return new W._ElementEventStreamImpl(receiver, "mouseup", false, [W.MouseEvent]);
       },
       $isInterceptor: 1,
       "%": "SVGComponentTransferFunctionElement|SVGDescElement|SVGDiscardElement|SVGFEDistantLightElement|SVGFEFuncAElement|SVGFEFuncBElement|SVGFEFuncGElement|SVGFEFuncRElement|SVGFEMergeNodeElement|SVGFEPointLightElement|SVGFESpotLightElement|SVGMetadataElement|SVGStopElement|SVGStyleElement|SVGTitleElement;SVGElement"
@@ -6606,6 +6727,8 @@
       "^": "Object;screen,renderer,world,startX,startY,drawWidth,drawHeight",
       resizeProc$1: function(ignored) {
         var t1, t2, t3, t4, t5, t6;
+        this.startX = 0;
+        this.startY = 0;
         t1 = J.get$height$x(this.screen);
         t2 = this.world;
         t3 = t2.height;
@@ -6660,29 +6783,16 @@
         return this.resizeProc$1(null);
       },
       getViewCoordinates$1: function(logicalCoordinates) {
-        var t1, t2, t3, t4, viewCoords;
-        t1 = logicalCoordinates.$mul(0, new V.Vector(this.drawWidth, this.drawHeight));
-        t2 = this.world;
-        t3 = t2.width;
-        t2 = t2.height;
-        t4 = t1.x;
-        if (typeof t4 !== "number")
-          return t4.$div();
-        if (typeof t3 !== "number")
-          return H.iae(t3);
-        t1 = t1.y;
+        var t1, viewCoords, t2;
+        t1 = this.world;
+        viewCoords = logicalCoordinates.$mul(0, new V.Vector(this.drawWidth, this.drawHeight)).$div(0, new V.Vector(t1.width, t1.height)).$add(0, new V.Vector(this.startX, this.startY));
+        t1 = J.get$height$x(this.screen);
+        t2 = viewCoords.y;
         if (typeof t1 !== "number")
-          return t1.$div();
+          return t1.$sub();
         if (typeof t2 !== "number")
           return H.iae(t2);
-        viewCoords = new V.Vector(t4 / t3, t1 / t2).$add(0, new V.Vector(this.startX, this.startY));
-        t2 = J.get$height$x(this.screen);
-        t1 = viewCoords.y;
-        if (typeof t2 !== "number")
-          return t2.$sub();
-        if (typeof t1 !== "number")
-          return H.iae(t1);
-        viewCoords.y = t2 - t1;
+        viewCoords.y = t1 - t2;
         return viewCoords;
       },
       draw$0: function() {
@@ -6723,13 +6833,14 @@
         this.screen = t1;
         this.renderer = J.getContext$1$x(t1, "2d");
         this.resizeProc$0();
-        _box_0.isMouseDown = false;
+        _box_0.isDragging = false;
+        _box_0.dragStart = null;
+        _box_0.handleDrag = null;
         t1 = J.get$onMouseDown$x(this.screen);
         W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
         t1 = J.get$onMouseMove$x(this.screen);
         W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure0(_box_0), false, H.getTypeArgumentByIndex(t1, 0));
-        t1 = J.get$onMouseUp$x(this.screen);
-        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure1(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
+        W._EventStreamSubscription$(window, "mouseup", new D.Screen_closure1(_box_0, this), false, W.MouseEvent);
       },
       static: {
         Screen$: function(world) {
@@ -6740,30 +6851,103 @@
       }
     },
     Screen_closure: {
-      "^": "Closure:3;_box_0,$this",
-      call$1: function(ignored) {
-        this._box_0.isMouseDown = true;
-        this.$this.world.isPaused = true;
-      },
-      call$0: function() {
-        return this.call$1(null);
+      "^": "Closure:5;_box_0,$this",
+      call$1: function($event) {
+        var t1, t2, t3, vc, t4, logicalMouseLocation, t5, t6;
+        t1 = J.getInterceptor$x($event);
+        t2 = t1.get$client($event);
+        t2 = t2.get$x(t2);
+        t1 = t1.get$client($event);
+        t1 = t1.get$y(t1);
+        t3 = this.$this;
+        vc = new V.Vector(t2, t1);
+        t4 = J.get$height$x(t3.screen);
+        if (typeof t4 !== "number")
+          return t4.$sub();
+        if (typeof t1 !== "number")
+          return H.iae(t1);
+        vc.y = t4 - t1;
+        t4 = t3.world;
+        logicalMouseLocation = vc.$sub(0, new V.Vector(t3.startX, t3.startY)).$mul(0, new V.Vector(t4.width, t4.height)).$div(0, new V.Vector(t3.drawWidth, t3.drawHeight));
+        t3 = logicalMouseLocation.x;
+        t5 = t4.attachedPendulum.location.x;
+        if (typeof t3 !== "number")
+          return t3.$sub();
+        if (typeof t5 !== "number")
+          return H.iae(t5);
+        t5 = Math.pow(t3 - t5, 2);
+        t3 = logicalMouseLocation.y;
+        t6 = t4.attachedPendulum.location.y;
+        if (typeof t3 !== "number")
+          return t3.$sub();
+        if (typeof t6 !== "number")
+          return H.iae(t6);
+        if (t5 + Math.pow(t3 - t6, 2) <= Math.pow(t4.attachedPendulum.radius, 2))
+          this._box_0.isDragging = true;
+        else {
+          t3 = logicalMouseLocation.x;
+          t5 = t4.initialPendulum.location.x;
+          if (typeof t3 !== "number")
+            return t3.$sub();
+          if (typeof t5 !== "number")
+            return H.iae(t5);
+          t5 = Math.pow(t3 - t5, 2);
+          t3 = logicalMouseLocation.y;
+          t6 = t4.initialPendulum.location.y;
+          if (typeof t3 !== "number")
+            return t3.$sub();
+          if (typeof t6 !== "number")
+            return H.iae(t6);
+          if (t5 + Math.pow(t3 - t6, 2) <= Math.pow(t4.initialPendulum.radius, 2))
+            this._box_0.isDragging = true;
+          else {
+            t3 = logicalMouseLocation.x;
+            t5 = t4.initialPendulum.startingLocation.x;
+            if (typeof t3 !== "number")
+              return t3.$sub();
+            if (typeof t5 !== "number")
+              return H.iae(t5);
+            t5 = Math.pow(t3 - t5, 2);
+            t3 = logicalMouseLocation.y;
+            t6 = t4.initialPendulum.startingLocation.y;
+            if (typeof t3 !== "number")
+              return t3.$sub();
+            if (typeof t6 !== "number")
+              return H.iae(t6);
+            if (t5 + Math.pow(t3 - t6, 2) <= 1)
+              this._box_0.isDragging = true;
+          }
+        }
+        t3 = this._box_0;
+        t5 = t3.isDragging;
+        t4.isPaused = t5;
+        if (t5)
+          t3.dragStart = new V.Vector(t2, t1);
       }
     },
     Screen_closure0: {
-      "^": "Closure:3;_box_0",
-      call$1: function(ignored) {
-        if (!this._box_0.isMouseDown)
+      "^": "Closure:5;_box_0",
+      call$1: function($event) {
+        var t1, t2, t3;
+        t1 = this._box_0;
+        if (!t1.isDragging)
           return;
-      },
-      call$0: function() {
-        return this.call$1(null);
+        t1 = t1.handleDrag;
+        t2 = J.getInterceptor$x($event);
+        t3 = t2.get$client($event);
+        t3 = t3.get$x(t3);
+        t2 = t2.get$client($event);
+        t1.call$1(new V.Vector(t3, t2.get$y(t2)));
       }
     },
     Screen_closure1: {
-      "^": "Closure:3;_box_0,$this",
+      "^": "Closure:14;_box_0,$this",
       call$1: function(ignored) {
-        this._box_0.isMouseDown = false;
+        var t1 = this._box_0;
+        t1.isDragging = false;
         this.$this.world.isPaused = false;
+        t1.dragStart = null;
+        t1.handleDrag = null;
       },
       call$0: function() {
         return this.call$1(null);
@@ -6815,29 +6999,14 @@
         t11.angle = t11.angle + t4 * dt;
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure());
         t4 = this.attachedPendulum;
-        t11 = t4.location;
-        t10 = t4.startingLocation;
-        t9 = this.initialPendulum.location;
-        t3 = t10.x;
-        t6 = t9.x;
-        if (typeof t3 !== "number")
-          return t3.$sub();
-        if (typeof t6 !== "number")
-          return H.iae(t6);
-        t10 = t10.y;
-        t9 = t9.y;
-        if (typeof t10 !== "number")
-          return t10.$sub();
-        if (typeof t9 !== "number")
-          return H.iae(t9);
-        t4.location = t11.$add(0, new V.Vector(t3 - t6, t10 - t9));
+        t4.location = t4.location.$add(0, t4.startingLocation.$sub(0, this.initialPendulum.location));
         this.attachedPendulum.startingLocation = this.initialPendulum.location;
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure0());
-        t9 = this.attachedPendulum;
-        t9.velocity = t9.velocity.$add(0, this.initialPendulum.velocity);
+        t4 = this.attachedPendulum;
+        t4.velocity = t4.velocity.$add(0, this.initialPendulum.velocity);
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure1());
-        t9 = this.attachedPendulum;
-        t9.acceleration = t9.acceleration.$add(0, this.initialPendulum.acceleration);
+        t4 = this.attachedPendulum;
+        t4.acceleration = t4.acceleration.$add(0, this.initialPendulum.acceleration);
       }
     },
     Stage_step_closure: {
@@ -6900,6 +7069,22 @@
           return H.iae(t4);
         return new V.Vector(t1 + t2, t3 + t4);
       },
+      $sub: function(_, other) {
+        var t1, t2, t3, t4;
+        t1 = this.x;
+        t2 = other.x;
+        if (typeof t1 !== "number")
+          return t1.$sub();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        t3 = this.y;
+        t4 = other.y;
+        if (typeof t3 !== "number")
+          return t3.$sub();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        return new V.Vector(t1 - t2, t3 - t4);
+      },
       $mul: function(_, other) {
         var t1, t2, t3, t4;
         t1 = this.x;
@@ -6916,6 +7101,22 @@
           return H.iae(t4);
         return new V.Vector(t1 * t2, t3 * t4);
       },
+      $div: function(_, other) {
+        var t1, t2, t3, t4;
+        t1 = this.x;
+        t2 = other.x;
+        if (typeof t1 !== "number")
+          return t1.$div();
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        t3 = this.y;
+        t4 = other.y;
+        if (typeof t3 !== "number")
+          return t3.$div();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        return new V.Vector(t1 / t2, t3 / t4);
+      },
       get$length: function(_) {
         var t1, t2;
         t1 = this.x;
@@ -6924,6 +7125,9 @@
         t2 = this.y;
         H.checkNum(t2);
         return Math.sqrt(t1 + Math.pow(t2, 2));
+      },
+      toString$0: function(_) {
+        return "<" + H.S(this.x) + ", " + H.S(this.y) + ">";
       }
     }
   }], ["", "../src/main.dart",, F, {
@@ -7067,9 +7271,6 @@
   };
   J.get$onMouseMove$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$onMouseMove(receiver);
-  };
-  J.get$onMouseUp$x = function(receiver) {
-    return J.getInterceptor$x(receiver).get$onMouseUp(receiver);
   };
   J.get$width$x = function(receiver) {
     return J.getInterceptor$x(receiver).get$width(receiver);
@@ -7405,7 +7606,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, opt: [W.MouseEvent]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}];
+  init.types = [{func: 1}, {func: 1, v: true}, {func: 1, args: [,]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }

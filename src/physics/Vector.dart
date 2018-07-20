@@ -56,6 +56,13 @@ class Vector {
         this.y = cos(a) * l;
     }
 
+    /**
+     * Returns a string representation of this vector
+     */
+    String toString() {
+        return "<${this.x}, ${this.y}>";
+    }
+
 }
 
 /**
