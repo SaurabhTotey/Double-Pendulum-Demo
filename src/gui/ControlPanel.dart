@@ -20,7 +20,7 @@ class ControlPanel {
     /**
      * Adds a field to the control panel that will take user input and then pass input to the given input handler
      */
-    void addInputField(String title, String name, Function(String) inputHandler, {String initialValue = "", String units = ""}) {
+    void addInputField(String title, String name, Function(String) inputHandler, {String initialValue = "", String units = "", String inputType = "number", double min, double max, double step}) {
         ParagraphElement containerElement = new ParagraphElement();
         SpanElement titleElement = new SpanElement();
         titleElement.setAttribute("class", "title");
@@ -32,7 +32,12 @@ class ControlPanel {
         containerElement.append(labelElement);
         SpanElement inputContainer = new SpanElement();
         inputContainer.setAttribute("class", "input");
-        InputElement inputElement = new InputElement(type: "text");
+        InputElement inputElement = new InputElement(type: inputType);
+        if (inputType == "number") {
+            inputElement.setAttribute("min", "$min");
+            inputElement.setAttribute("max", "$max");
+            inputElement.setAttribute("step", "$step");
+        }
         inputElement.value = initialValue;
         inputElement.onInput.listen((Event e) {
             inputHandler(inputElement.value);
@@ -44,6 +49,7 @@ class ControlPanel {
         inputContainer.append(unitsElement);
         containerElement.append(inputContainer);
         this.controlPanel.append(containerElement);
+        this.controlPanel.append(new BRElement());
     }
 
     /**

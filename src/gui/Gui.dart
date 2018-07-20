@@ -31,12 +31,36 @@ class Gui {
         resizeProc();
         window.onResize.listen(resizeProc);
         this.screen.draw();
+        //Adds input fields to the control panel
         this.controlPanel.addInputField(
             "World",
             "Gravity",
-            (newGravity) { try { this.world.gravity = double.parse(newGravity); } catch (e) {} },
+            (newGravity) => this.world.gravity = double.parse(newGravity),
             initialValue: "${this.world.gravity}",
-            units: "m/s/s"
+            units: "m/s/s",
+            min: 0.0,
+            max: 100.0,
+            step: 0.1
+        );
+        this.controlPanel.addInputField(
+            "Pendulum 1", 
+            "Length", 
+            (newLength) => this.world.initialPendulum.stringLength = double.parse(newLength),
+            initialValue: "${this.world.initialPendulum.stringLength}",
+            units: "m",
+            min: 0.1,
+            max: 25.0,
+            step: 0.1
+        );
+        this.controlPanel.addInputField(
+            "Pendulum 2",
+            "Length",
+            (newLength) => this.world.attachedPendulum.stringLength = double.parse(newLength),
+            initialValue: "${this.world.attachedPendulum.stringLength}",
+            units: "m",
+            min: 0.1,
+            max: 25.0,
+            step: 0.1
         );
     }
 
