@@ -17,3 +17,11 @@ canvas {
 div {
     background-color: lightgray;
 }
+
+p {
+    margin: 3%;
+}
+
+input {
+    float: right;
+}

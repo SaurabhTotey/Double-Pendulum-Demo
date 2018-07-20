@@ -8,11 +8,11 @@ import 'physics/Stage.dart';
 void main() {
     final world = new Stage();
     final gui = new Gui(world);
-    int ms = 5;
-    new Timer.periodic(new Duration(milliseconds: ms), (timer) {
-        world.step(ms / 1000.0);
+    int step = 5;
+    new Timer.periodic(new Duration(milliseconds: step), (timer) {
+        world.step(step / 1000.0);
     });
-    new Timer.periodic(new Duration(milliseconds: ms), (timer) {
-        gui.screen.draw();
+    new Timer.periodic(new Duration(milliseconds: step), (timer) {
+        gui.update();
     });
 }

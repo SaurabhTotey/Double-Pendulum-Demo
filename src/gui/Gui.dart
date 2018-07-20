@@ -31,6 +31,15 @@ class Gui {
         resizeProc();
         window.onResize.listen(resizeProc);
         this.screen.draw();
+        this.controlPanel.addInputField("World Gravity", (newGravity) { try { this.world.gravity = double.parse(newGravity); } catch (e) {} }, "${this.world.gravity}");
+    }
+
+    /**
+     * Updates the gui by updating the screen and control panel
+     */
+    void update() {
+        this.screen.draw();
+        this.controlPanel.update();
     }
 
 }
