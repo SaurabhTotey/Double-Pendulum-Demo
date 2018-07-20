@@ -8109,6 +8109,8 @@
         this.controlPanel.addNumericInput$8("World", "Gravity", t1.gravity, "m/s/s", 0, 100, 0.1, new X.Gui_closure(this));
         this.controlPanel.addNumericInput$8("Pendulum 1", "Rod Length", t1.initialPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure0(this));
         this.controlPanel.addNumericInput$8("Pendulum 2", "Rod Length", t1.attachedPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure1(this));
+        this.controlPanel.addNumericInput$8("Pendulum 1", "Mass", t1.initialPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure2(this));
+        this.controlPanel.addNumericInput$8("Pendulum 2", "Mass", t1.attachedPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure3(this));
       },
       static: {
         Gui$: function(world) {
@@ -8166,6 +8168,20 @@
       call$1: function(newRodLength) {
         this.$this.world.attachedPendulum.stringLength = newRodLength;
         return newRodLength;
+      }
+    },
+    Gui_closure2: {
+      "^": "Closure:0;$this",
+      call$1: function(newMass) {
+        this.$this.world.initialPendulum.mass = newMass;
+        return newMass;
+      }
+    },
+    Gui_closure3: {
+      "^": "Closure:0;$this",
+      call$1: function(newMass) {
+        this.$this.world.attachedPendulum.mass = newMass;
+        return newMass;
       }
     }
   }], ["", "../src/physics/Pendulum.dart",, S, {
@@ -8460,30 +8476,24 @@
   }], ["", "../src/physics/Stage.dart",, L, {
     "^": "",
     Stage: {
-      "^": "Object;initialPendulum,attachedPendulum,pendulums,gravity,dampenFactor,width,height,isPaused",
+      "^": "Object;initialPendulum,attachedPendulum,pendulums,gravity,width,height,isPaused",
       step$1: function(_, dt) {
-        var t1, t2, t3, t4, combinedMass, angleDifference, denominatorFactor, t5, t6, t7, t8, t9, t10;
+        var combinedMass, t1, angleDifference, t2, denominatorFactor, t3, t4, t5, t6, t7, t8, t9, t10;
         if (this.isPaused)
           return;
+        combinedMass = J.$add$ns(this.initialPendulum.mass, this.attachedPendulum.mass);
         t1 = this.initialPendulum;
-        t2 = t1.mass;
-        t3 = this.attachedPendulum;
-        t4 = t3.mass;
-        combinedMass = t2 + t4;
-        angleDifference = t1.angle - t3.angle;
-        denominatorFactor = combinedMass + t2 - t4 * Math.cos(2 * angleDifference);
-        t4 = this.initialPendulum;
-        t2 = J.$mul$ns(J.$mul$ns(J.$negate$n(this.gravity), combinedMass + this.initialPendulum.mass), Math.sin(this.initialPendulum.angle));
-        t3 = this.attachedPendulum;
-        t1 = t3.mass;
-        t5 = this.gravity;
+        angleDifference = t1.angle - this.attachedPendulum.angle;
+        t2 = J.getInterceptor$ns(combinedMass);
+        denominatorFactor = J.$sub$n(t2.$add(combinedMass, t1.mass), J.$mul$ns(this.attachedPendulum.mass, Math.cos(2 * angleDifference)));
+        t1 = this.initialPendulum;
+        t2 = J.$sub$n(J.$mul$ns(J.$mul$ns(J.$negate$n(this.gravity), t2.$add(combinedMass, this.initialPendulum.mass)), Math.sin(this.initialPendulum.angle)), J.$mul$ns(J.$mul$ns(this.attachedPendulum.mass, this.gravity), Math.sin(angleDifference - this.attachedPendulum.angle)));
+        t3 = Math.sin(angleDifference);
+        t4 = this.attachedPendulum;
+        t5 = t4.mass;
         if (typeof t5 !== "number")
           return H.iae(t5);
-        t3 = J.$sub$n(t2, t1 * t5 * Math.sin(angleDifference - t3.angle));
-        t5 = Math.sin(angleDifference);
-        t1 = this.attachedPendulum;
-        t2 = t1.mass;
-        t1 = Math.pow(t1.angularVelocity, 2);
+        t4 = Math.pow(t4.angularVelocity, 2);
         t6 = this.attachedPendulum.stringLength;
         if (typeof t6 !== "number")
           return H.iae(t6);
@@ -8491,47 +8501,51 @@
         t8 = this.initialPendulum.stringLength;
         if (typeof t8 !== "number")
           return H.iae(t8);
-        t8 = J.$sub$n(t3, 2 * t5 * t2 * (t1 * t6 + t7 * t8 * Math.cos(angleDifference)));
+        t8 = J.$sub$n(t2, 2 * t3 * t5 * (t4 * t6 + t7 * t8 * Math.cos(angleDifference)));
         t7 = J.$mul$ns(this.initialPendulum.stringLength, denominatorFactor);
         if (typeof t8 !== "number")
           return t8.$div();
         if (typeof t7 !== "number")
           return H.iae(t7);
-        t4.angularAcceleration = t8 / t7;
+        t1.angularAcceleration = t8 / t7;
         t7 = this.attachedPendulum;
         t8 = Math.sin(angleDifference);
-        t4 = Math.pow(this.initialPendulum.angularVelocity, 2);
+        t1 = Math.pow(this.initialPendulum.angularVelocity, 2);
         t6 = this.initialPendulum.stringLength;
         if (typeof t6 !== "number")
           return H.iae(t6);
-        t1 = J.$mul$ns(J.$mul$ns(this.gravity, combinedMass), Math.cos(this.initialPendulum.angle));
-        if (typeof t1 !== "number")
-          return H.iae(t1);
-        t2 = Math.pow(this.attachedPendulum.angularVelocity, 2);
-        t5 = this.attachedPendulum;
-        t3 = t5.stringLength;
+        if (typeof combinedMass !== "number")
+          return H.iae(combinedMass);
+        t4 = J.$mul$ns(J.$mul$ns(this.gravity, combinedMass), Math.cos(this.initialPendulum.angle));
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        t5 = Math.pow(this.attachedPendulum.angularVelocity, 2);
+        t3 = this.attachedPendulum;
+        t2 = t3.stringLength;
+        if (typeof t2 !== "number")
+          return H.iae(t2);
+        t3 = t3.mass;
         if (typeof t3 !== "number")
           return H.iae(t3);
-        t5 = t5.mass;
         t9 = Math.cos(angleDifference);
         t10 = J.$mul$ns(this.attachedPendulum.stringLength, denominatorFactor);
         if (typeof t10 !== "number")
           return H.iae(t10);
-        t7.angularAcceleration = 2 * t8 * (t4 * t6 * combinedMass + t1 + t2 * t3 * t5 * t9) / t10;
+        t7.angularAcceleration = 2 * t8 * (t1 * t6 * combinedMass + t4 + t5 * t2 * t3 * t9) / t10;
         t10 = this.initialPendulum;
         t10.angularVelocity = t10.angularVelocity + t10.angularAcceleration * dt;
         t9 = this.attachedPendulum;
-        t5 = t9.angularVelocity + t9.angularAcceleration * dt;
-        t9.angularVelocity = t5;
+        t3 = t9.angularVelocity + t9.angularAcceleration * dt;
+        t9.angularVelocity = t3;
         t10.angle = t10.angle + t10.angularVelocity * dt;
-        t9.angle = t9.angle + t5 * dt;
+        t9.angle = t9.angle + t3 * dt;
         this.updatePendulumPositions$0();
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure());
-        t5 = this.attachedPendulum;
-        t5.velocity = t5.velocity.$add(0, this.initialPendulum.velocity);
+        t3 = this.attachedPendulum;
+        t3.velocity = t3.velocity.$add(0, this.initialPendulum.velocity);
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure0());
-        t5 = this.attachedPendulum;
-        t5.acceleration = t5.acceleration.$add(0, this.initialPendulum.acceleration);
+        t3 = this.attachedPendulum;
+        t3.acceleration = t3.acceleration.$add(0, this.initialPendulum.acceleration);
       },
       updatePendulumPositions$0: function() {
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_updatePendulumPositions_closure());
@@ -8617,7 +8631,7 @@
     "^": "",
     main: [function() {
       var world, t1, t2, gui;
-      world = new L.Stage(null, null, null, 9.8, 1, 20, 15, false);
+      world = new L.Stage(null, null, null, 9.8, 20, 15, false);
       t1 = S.Pendulum$(new V.Vector(10, 8.5), 1.5, 0.5, new V.Vector(10, 13.5), 5);
       world.initialPendulum = t1;
       t2 = t1.location;

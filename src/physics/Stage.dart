@@ -16,8 +16,6 @@ class Stage {
     List<Pendulum> pendulums;
     //The gravity in the world in m/s/s
     double gravity;
-    //The dampening effect on the pendulum swinging; works multiplicatively
-    double dampenFactor;
     //The stage width in meters
     double width;
     //The stage height in meters
@@ -30,7 +28,6 @@ class Stage {
      */
     Stage({
         this.gravity = 9.8,
-        this.dampenFactor = 1.0,
         this.width = 20.0,
         this.height = 15.0,
         this.initialPendulum = null,

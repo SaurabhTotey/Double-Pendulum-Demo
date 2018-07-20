@@ -61,6 +61,26 @@ class Gui {
             0.1,
             (newRodLength) => this.world.attachedPendulum.stringLength = newRodLength
         );
+        this.controlPanel.addNumericInput(
+            "Pendulum 1",
+            "Mass",
+            this.world.initialPendulum.mass,
+            "kg",
+            0.1,
+            100.0,
+            0.1,
+            (newMass) => this.world.initialPendulum.mass = newMass
+        );
+        this.controlPanel.addNumericInput(
+            "Pendulum 2",
+            "Mass",
+            this.world.attachedPendulum.mass,
+            "kg",
+            0.1,
+            100.0,
+            0.1,
+            (newMass) => this.world.attachedPendulum.mass = newMass
+        );
     }
 
     /**
