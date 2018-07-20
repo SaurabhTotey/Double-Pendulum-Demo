@@ -14,6 +14,8 @@ class Stage {
     Pendulum attachedPendulum;
     //The pendulums as a list for making doing something to both pendulums easy
     List<Pendulum> pendulums;
+    //A multiplier on how fast time moves in this world
+    double timeWarp = 1.0;
     //The gravity in the world in m/s/s
     double gravity;
     //The stage width in meters
@@ -52,10 +54,11 @@ class Stage {
      * Moves the world forward by the specified amount of time
      * All math used is stolen from https://myphysicslab.com/pendulum/double-pendulum-en.html
      */
-    void step(double dt) {
+    void step(double delta) {
         if (this.isPaused) {
             return;
         }
+        double dt = delta * this.timeWarp;
         //Calculates the angular acceleration for both pendulums
         double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
         double angleDifference = this.initialPendulum.angle - this.attachedPendulum.angle;

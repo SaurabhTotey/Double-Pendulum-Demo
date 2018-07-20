@@ -42,6 +42,16 @@ class Gui {
             (newGravity) => this.world.gravity = newGravity
         );
         this.controlPanel.addNumericInput(
+            "World",
+            "Time Warp",
+            this.world.timeWarp,
+            "",
+            0.0,
+            10.0,
+            0.01,
+            (newTimeWarp) => this.world.timeWarp = newTimeWarp
+        );
+        this.controlPanel.addNumericInput(
             "Pendulum 1",
             "Rod Length",
             this.world.initialPendulum.stringLength,

@@ -8107,10 +8107,11 @@
         W._EventStreamSubscription$(window, "resize", t2, false, W.Event);
         this.screen.draw$0();
         this.controlPanel.addNumericInput$8("World", "Gravity", t1.gravity, "m/s/s", 0, 100, 0.1, new X.Gui_closure(this));
-        this.controlPanel.addNumericInput$8("Pendulum 1", "Rod Length", t1.initialPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure0(this));
-        this.controlPanel.addNumericInput$8("Pendulum 2", "Rod Length", t1.attachedPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure1(this));
-        this.controlPanel.addNumericInput$8("Pendulum 1", "Mass", t1.initialPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure2(this));
-        this.controlPanel.addNumericInput$8("Pendulum 2", "Mass", t1.attachedPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure3(this));
+        this.controlPanel.addNumericInput$8("World", "Time Warp", t1.timeWarp, "", 0, 10, 0.01, new X.Gui_closure0(this));
+        this.controlPanel.addNumericInput$8("Pendulum 1", "Rod Length", t1.initialPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure1(this));
+        this.controlPanel.addNumericInput$8("Pendulum 2", "Rod Length", t1.attachedPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure2(this));
+        this.controlPanel.addNumericInput$8("Pendulum 1", "Mass", t1.initialPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure3(this));
+        this.controlPanel.addNumericInput$8("Pendulum 2", "Mass", t1.attachedPendulum.mass, "kg", 0.1, 100, 0.1, new X.Gui_closure4(this));
       },
       static: {
         Gui$: function(world) {
@@ -8158,26 +8159,33 @@
     },
     Gui_closure0: {
       "^": "Closure:0;$this",
+      call$1: function(newTimeWarp) {
+        this.$this.world.timeWarp = newTimeWarp;
+        return newTimeWarp;
+      }
+    },
+    Gui_closure1: {
+      "^": "Closure:0;$this",
       call$1: function(newRodLength) {
         this.$this.world.initialPendulum.stringLength = newRodLength;
         return newRodLength;
       }
     },
-    Gui_closure1: {
+    Gui_closure2: {
       "^": "Closure:0;$this",
       call$1: function(newRodLength) {
         this.$this.world.attachedPendulum.stringLength = newRodLength;
         return newRodLength;
       }
     },
-    Gui_closure2: {
+    Gui_closure3: {
       "^": "Closure:0;$this",
       call$1: function(newMass) {
         this.$this.world.initialPendulum.mass = newMass;
         return newMass;
       }
     },
-    Gui_closure3: {
+    Gui_closure4: {
       "^": "Closure:0;$this",
       call$1: function(newMass) {
         this.$this.world.attachedPendulum.mass = newMass;
@@ -8476,11 +8484,15 @@
   }], ["", "../src/physics/Stage.dart",, L, {
     "^": "",
     Stage: {
-      "^": "Object;initialPendulum,attachedPendulum,pendulums,gravity,width,height,isPaused",
-      step$1: function(_, dt) {
-        var combinedMass, t1, angleDifference, t2, denominatorFactor, t3, t4, t5, t6, t7, t8, t9, t10;
+      "^": "Object;initialPendulum,attachedPendulum,pendulums,timeWarp,gravity,width,height,isPaused",
+      step$1: function(_, delta) {
+        var t1, dt, combinedMass, angleDifference, t2, denominatorFactor, t3, t4, t5, t6, t7, t8, t9, t10;
         if (this.isPaused)
           return;
+        t1 = this.timeWarp;
+        if (typeof t1 !== "number")
+          return H.iae(t1);
+        dt = delta * t1;
         combinedMass = J.$add$ns(this.initialPendulum.mass, this.attachedPendulum.mass);
         t1 = this.initialPendulum;
         angleDifference = t1.angle - this.attachedPendulum.angle;
@@ -8631,7 +8643,7 @@
     "^": "",
     main: [function() {
       var world, t1, t2, gui;
-      world = new L.Stage(null, null, null, 9.8, 20, 15, false);
+      world = new L.Stage(null, null, null, 1, 9.8, 20, 15, false);
       t1 = S.Pendulum$(new V.Vector(10, 8.5), 1.5, 0.5, new V.Vector(10, 13.5), 5);
       world.initialPendulum = t1;
       t2 = t1.location;
