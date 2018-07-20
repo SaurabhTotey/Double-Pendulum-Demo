@@ -23,25 +23,15 @@ div {
     background-color: lightgray;
 }
 
-p {
-    margin: 3%;
-    vertical-align: middle;
-    text-align: center;
-}
-
 input {
     text-align: center;
     font-size: var(--font-size);
 }
 
-.input {
-    float: right;
+table {
+    padding: 3%;
 }
 
-.title {
-    font-weight: bold;
-}
-
-.units {
-    text-decoration: underline;
+td {
+    text-align: center;
 }

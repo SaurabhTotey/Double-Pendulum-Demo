@@ -7,6 +7,8 @@ class ControlPanel {
 
     //The HTML element where the control panel is housed
     DivElement controlPanel;
+    //The HTML that houses all of the widgets the user can mess with to alter the simulation
+    TableElement uiContainer;
     //A list of the functions that will update all of the output fields; called periodically in update
     List<Function()> outputUpdaters = [];
 
@@ -15,47 +17,66 @@ class ControlPanel {
      */
     ControlPanel() {
         this.controlPanel = document.getElementById('control-panel');
+        this.uiContainer = new TableElement();
+        this.uiContainer.style.width = "100%";
+        this.controlPanel.append(this.uiContainer);
+        TableRowElement titleRow = new TableRowElement();
+        HtmlElement sectionTitle = document.createElement("th");
+        sectionTitle.innerHtml = "Section";
+        HtmlElement attributeTitle = document.createElement("th");
+        attributeTitle.innerHtml = "Attribute";
+        HtmlElement valueTitle = document.createElement("th");
+        valueTitle.innerHtml = "Value";
+        HtmlElement unitsTitle = document.createElement("th");
+        unitsTitle.innerHtml = "Units";
+        titleRow.append(sectionTitle);
+        titleRow.append(attributeTitle);
+        titleRow.append(valueTitle);
+        titleRow.append(unitsTitle);
+        this.uiContainer.append(titleRow);
+        this.uiContainer.append(new BRElement());
     }
 
     /**
-     * Adds a field to the control panel that will take user input and then pass input to the given input handler
+     * Adds a numeric input field to the uiContainer
      */
-    void addInputField(String title, String name, Function(String) inputHandler, {String initialValue = "", String units = "", String inputType = "number", double min, double max, double step}) {
-        ParagraphElement containerElement = new ParagraphElement();
-        SpanElement titleElement = new SpanElement();
-        titleElement.setAttribute("class", "title");
-        titleElement.innerHtml = title;
-        containerElement.append(titleElement);
-        SpanElement labelElement = new SpanElement();
-        labelElement.setAttribute("class", "label");
-        labelElement.innerHtml = " $name";
-        containerElement.append(labelElement);
-        SpanElement inputContainer = new SpanElement();
-        inputContainer.setAttribute("class", "input");
-        InputElement inputElement = new InputElement(type: inputType);
-        if (inputType == "number") {
-            inputElement.setAttribute("min", "$min");
-            inputElement.setAttribute("max", "$max");
-            inputElement.setAttribute("step", "$step");
-        }
-        inputElement.value = initialValue;
-        inputElement.onInput.listen((Event e) {
-            inputHandler(inputElement.value);
-        });
-        inputContainer.append(inputElement);
-        SpanElement unitsElement = new SpanElement();
-        unitsElement.setAttribute("class", "units");
-        unitsElement.innerHtml = units;
-        inputContainer.append(unitsElement);
-        containerElement.append(inputContainer);
-        this.controlPanel.append(containerElement);
-        this.controlPanel.append(new BRElement());
+    void addNumericInput(String section, String attribute, double value, String units, double min, double max, double step, Function(double) inputHandler) {
+        TableRowElement rowElement = new TableRowElement();
+        TableCellElement sectionCell = new TableCellElement();
+        sectionCell.innerHtml = section;
+        TableCellElement attributeCell = new TableCellElement();
+        attributeCell.innerHtml = attribute;
+        TableCellElement unitsCell = new TableCellElement();
+        unitsCell.innerHtml = units;
+
+        TableCellElement inputCell = new TableCellElement();
+        InputElement numericInputElement = new InputElement(type: "number");
+        numericInputElement.setAttribute("min", "$min");
+        numericInputElement.setAttribute("max", "$max");
+        numericInputElement.setAttribute("step", "$step");
+        numericInputElement.value = "$value";
+        numericInputElement.onInput.listen( (ignored) => inputHandler(double.parse(numericInputElement.value)) );
+        inputCell.append(numericInputElement);
+
+        rowElement.append(sectionCell);
+        rowElement.append(attributeCell);
+        rowElement.append(inputCell);
+        rowElement.append(unitsCell);
+        this.uiContainer.append(rowElement);
     }
 
     /**
-     * Adds a field to the control panel that will display whatever the outputRetriever returns
+     * Adds a text input field to the uiContainer
      */
-    void addOutputField(String name, String Function() outputRetriever) {
+    void addTextInput(String section, String attribute, String value, String units, Function(String) inputHandler) {
+
+    }
+
+    /**
+     * Adds an output field to the uiContainer; whether it is numeric or not doesn't matter because it isn't editable
+     * Output should only be used to show what is going on, not to take user input
+     */
+    void addOutputField(String section, String attribute, String value, String units, String Function() outputHandler) {
 
     }
 

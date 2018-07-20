@@ -31,36 +31,35 @@ class Gui {
         resizeProc();
         window.onResize.listen(resizeProc);
         this.screen.draw();
-        //Adds input fields to the control panel
-        this.controlPanel.addInputField(
+        this.controlPanel.addNumericInput(
             "World",
             "Gravity",
-            (newGravity) => this.world.gravity = double.parse(newGravity),
-            initialValue: "${this.world.gravity}",
-            units: "m/s/s",
-            min: 0.0,
-            max: 100.0,
-            step: 0.1
+            this.world.gravity,
+            "m/s/s",
+            0.0,
+            100.0,
+            0.1,
+            (newGravity) => this.world.gravity = newGravity
         );
-        this.controlPanel.addInputField(
-            "Pendulum 1", 
-            "Length", 
-            (newLength) => this.world.initialPendulum.stringLength = double.parse(newLength),
-            initialValue: "${this.world.initialPendulum.stringLength}",
-            units: "m",
-            min: 0.1,
-            max: 25.0,
-            step: 0.1
+        this.controlPanel.addNumericInput(
+            "Pendulum 1",
+            "Rod Length",
+            this.world.initialPendulum.stringLength,
+            "m",
+            0.1,
+            20.0,
+            0.1,
+            (newRodLength) => this.world.initialPendulum.stringLength = newRodLength
         );
-        this.controlPanel.addInputField(
+        this.controlPanel.addNumericInput(
             "Pendulum 2",
-            "Length",
-            (newLength) => this.world.attachedPendulum.stringLength = double.parse(newLength),
-            initialValue: "${this.world.attachedPendulum.stringLength}",
-            units: "m",
-            min: 0.1,
-            max: 25.0,
-            step: 0.1
+            "Rod Length",
+            this.world.attachedPendulum.stringLength,
+            "m",
+            0.1,
+            20.0,
+            0.1,
+            (newRodLength) => this.world.attachedPendulum.stringLength = newRodLength
         );
     }
 

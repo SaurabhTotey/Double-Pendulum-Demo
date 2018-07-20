@@ -6339,7 +6339,7 @@
     },
     HtmlElement: {
       "^": "Element;",
-      "%": "HTMLBRElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLTableCaptionElement|HTMLTableCellElement|HTMLTableColElement|HTMLTableDataCellElement|HTMLTableHeaderCellElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
+      "%": "HTMLBRElement|HTMLContentElement|HTMLDListElement|HTMLDataListElement|HTMLDetailsElement|HTMLDialogElement|HTMLDirectoryElement|HTMLDivElement|HTMLFontElement|HTMLFrameElement|HTMLHRElement|HTMLHeadElement|HTMLHeadingElement|HTMLHtmlElement|HTMLLabelElement|HTMLLegendElement|HTMLMarqueeElement|HTMLModElement|HTMLOptGroupElement|HTMLParagraphElement|HTMLPictureElement|HTMLPreElement|HTMLQuoteElement|HTMLShadowElement|HTMLSpanElement|HTMLTableCaptionElement|HTMLTableColElement|HTMLTitleElement|HTMLTrackElement|HTMLUListElement|HTMLUnknownElement;HTMLElement"
     },
     AnchorElement: {
       "^": "HtmlElement;type},href}",
@@ -6574,6 +6574,9 @@
       }, function($receiver, html, treeSanitizer) {
         return this.createFragment$3$treeSanitizer$validator($receiver, html, treeSanitizer, null);
       }, "createFragment$2$treeSanitizer", null, null, "get$createFragment", 2, 5, null, 0, 0],
+      set$innerHtml: function(receiver, html) {
+        this.setInnerHtml$1(receiver, html);
+      },
       setInnerHtml$3$treeSanitizer$validator: function(receiver, html, treeSanitizer, validator) {
         receiver.textContent = null;
         receiver.appendChild(this.createFragment$3$treeSanitizer$validator(receiver, html, treeSanitizer, validator));
@@ -6888,10 +6891,6 @@
       "^": "HtmlElement;type}",
       "%": "HTMLSourceElement"
     },
-    SpanElement: {
-      "^": "HtmlElement;",
-      "%": "HTMLSpanElement"
-    },
     SpeechRecognitionError: {
       "^": "Event;error=",
       "%": "SpeechRecognitionError"
@@ -6899,6 +6898,10 @@
     StyleElement: {
       "^": "HtmlElement;type}",
       "%": "HTMLStyleElement"
+    },
+    TableCellElement: {
+      "^": "HtmlElement;",
+      "%": "HTMLTableCellElement|HTMLTableDataCellElement|HTMLTableHeaderCellElement"
     },
     TableElement: {
       "^": "HtmlElement;",
@@ -6957,6 +6960,15 @@
     },
     TemplateElement: {
       "^": "HtmlElement;",
+      setInnerHtml$3$treeSanitizer$validator: function(receiver, html, treeSanitizer, validator) {
+        var fragment;
+        receiver.textContent = null;
+        fragment = this.createFragment$3$treeSanitizer$validator(receiver, html, treeSanitizer, validator);
+        receiver.content.appendChild(fragment);
+      },
+      setInnerHtml$1: function($receiver, html) {
+        return this.setInnerHtml$3$treeSanitizer$validator($receiver, html, null, null);
+      },
       $isTemplateElement: 1,
       "%": "HTMLTemplateElement"
     },
@@ -7915,6 +7927,9 @@
     },
     SvgElement: {
       "^": "Element;",
+      set$innerHtml: function(receiver, value) {
+        this.setInnerHtml$1(receiver, value);
+      },
       createFragment$3$treeSanitizer$validator: function(receiver, svg, treeSanitizer, validator) {
         var t1, html, t2, fragment, svgFragment, root;
         t1 = H.setRuntimeTypeInfo([], [W.NodeValidator]);
@@ -8011,51 +8026,41 @@
   }], ["", "../src/gui/ControlPanel.dart",, O, {
     "^": "",
     ControlPanel: {
-      "^": "Object;controlPanel,outputUpdaters",
-      addInputField$9$initialValue$inputType$max$min$step$units: function(title, $name, inputHandler, initialValue, inputType, max, min, step, units) {
-        var t1, containerElement, titleElement, labelElement, inputContainer, inputElement, t2, unitsElement;
+      "^": "Object;controlPanel,uiContainer,outputUpdaters",
+      addNumericInput$8: function(section, attribute, value, units, min, max, step, inputHandler) {
+        var t1, rowElement, sectionCell, attributeCell, unitsCell, inputCell, numericInputElement;
         t1 = document;
-        containerElement = t1.createElement("p");
-        titleElement = t1.createElement("span");
-        titleElement.setAttribute("class", "title");
-        C.SpanElement_methods.setInnerHtml$1(titleElement, title);
-        containerElement.appendChild(titleElement);
-        labelElement = t1.createElement("span");
-        labelElement.setAttribute("class", "label");
-        C.SpanElement_methods.setInnerHtml$1(labelElement, " " + $name);
-        containerElement.appendChild(labelElement);
-        inputContainer = t1.createElement("span");
-        inputContainer.setAttribute("class", "input");
-        inputElement = W.InputElement_InputElement(inputType);
-        if (inputType === "number") {
-          inputElement.setAttribute("min", H.S(min));
-          inputElement.setAttribute("max", "" + max);
-          inputElement.setAttribute("step", H.S(step));
-        }
-        t2 = J.getInterceptor$x(inputElement);
-        t2.set$value(inputElement, initialValue);
-        t2 = t2.get$onInput(inputElement);
-        W._EventStreamSubscription$(t2._html$_target, t2._eventType, new O.ControlPanel_addInputField_closure(inputHandler, inputElement), false, H.getTypeArgumentByIndex(t2, 0));
-        inputContainer.appendChild(inputElement);
-        unitsElement = t1.createElement("span");
-        unitsElement.setAttribute("class", "units");
-        C.SpanElement_methods.setInnerHtml$1(unitsElement, units);
-        inputContainer.appendChild(unitsElement);
-        containerElement.appendChild(inputContainer);
-        this.controlPanel.appendChild(containerElement);
-        this.controlPanel.appendChild(t1.createElement("br"));
-      },
-      addInputField$8$initialValue$max$min$step$units: function(title, $name, inputHandler, initialValue, max, min, step, units) {
-        return this.addInputField$9$initialValue$inputType$max$min$step$units(title, $name, inputHandler, initialValue, "number", max, min, step, units);
+        rowElement = t1.createElement("tr");
+        sectionCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(sectionCell, section);
+        attributeCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(attributeCell, attribute);
+        unitsCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(unitsCell, units);
+        inputCell = t1.createElement("td");
+        numericInputElement = W.InputElement_InputElement("number");
+        numericInputElement.setAttribute("min", H.S(min));
+        numericInputElement.setAttribute("max", "" + max);
+        numericInputElement.setAttribute("step", H.S(step));
+        t1 = J.getInterceptor$x(numericInputElement);
+        t1.set$value(numericInputElement, H.S(value));
+        t1 = t1.get$onInput(numericInputElement);
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new O.ControlPanel_addNumericInput_closure(inputHandler, numericInputElement), false, H.getTypeArgumentByIndex(t1, 0));
+        inputCell.appendChild(numericInputElement);
+        rowElement.appendChild(sectionCell);
+        rowElement.appendChild(attributeCell);
+        rowElement.appendChild(inputCell);
+        rowElement.appendChild(unitsCell);
+        this.uiContainer.appendChild(rowElement);
       },
       update$0: function() {
         C.JSArray_methods.forEach$1(this.outputUpdaters, new O.ControlPanel_update_closure());
       }
     },
-    ControlPanel_addInputField_closure: {
-      "^": "Closure:16;inputHandler,inputElement",
-      call$1: function(e) {
-        this.inputHandler.call$1(J.get$value$x(this.inputElement));
+    ControlPanel_addNumericInput_closure: {
+      "^": "Closure:0;inputHandler,numericInputElement",
+      call$1: function(ignored) {
+        return this.inputHandler.call$1(H.Primitives_parseDouble(J.get$value$x(this.numericInputElement), null));
       }
     },
     ControlPanel_update_closure: {
@@ -8069,19 +8074,41 @@
     Gui: {
       "^": "Object;screen,controlPanel,world",
       Gui$1: function(world) {
-        var t1, t2;
+        var t1, t2, t3, t4, t5, t6, titleRow, sectionTitle, attributeTitle, valueTitle, unitsTitle;
         t1 = this.world;
         this.screen = D.Screen$(t1);
-        t2 = new O.ControlPanel(null, []);
-        t2.controlPanel = document.getElementById("control-panel");
+        t2 = new O.ControlPanel(null, null, []);
+        t3 = document;
+        t4 = t3.getElementById("control-panel");
+        t2.controlPanel = t4;
+        t5 = t3.createElement("table");
+        t2.uiContainer = t5;
+        t6 = t5.style;
+        t6.width = "100%";
+        t4.appendChild(t5);
+        titleRow = t3.createElement("tr");
+        sectionTitle = t3.createElement("th");
+        J.set$innerHtml$x(sectionTitle, "Section");
+        attributeTitle = t3.createElement("th");
+        J.set$innerHtml$x(attributeTitle, "Attribute");
+        valueTitle = t3.createElement("th");
+        J.set$innerHtml$x(valueTitle, "Value");
+        unitsTitle = t3.createElement("th");
+        J.set$innerHtml$x(unitsTitle, "Units");
+        titleRow.appendChild(sectionTitle);
+        titleRow.appendChild(attributeTitle);
+        titleRow.appendChild(valueTitle);
+        titleRow.appendChild(unitsTitle);
+        t5.appendChild(titleRow);
+        t5.appendChild(t3.createElement("br"));
         this.controlPanel = t2;
         t2 = new X.Gui_resizeProc(this);
         t2.call$0();
         W._EventStreamSubscription$(window, "resize", t2, false, W.Event);
         this.screen.draw$0();
-        this.controlPanel.addInputField$8$initialValue$max$min$step$units("World", "Gravity", new X.Gui_closure(this), H.S(t1.gravity), 100, 0, 0.1, "m/s/s");
-        this.controlPanel.addInputField$8$initialValue$max$min$step$units("Pendulum 1", "Length", new X.Gui_closure0(this), H.S(t1.initialPendulum.stringLength), 25, 0.1, 0.1, "m");
-        this.controlPanel.addInputField$8$initialValue$max$min$step$units("Pendulum 2", "Length", new X.Gui_closure1(this), H.S(t1.attachedPendulum.stringLength), 25, 0.1, 0.1, "m");
+        this.controlPanel.addNumericInput$8("World", "Gravity", t1.gravity, "m/s/s", 0, 100, 0.1, new X.Gui_closure(this));
+        this.controlPanel.addNumericInput$8("Pendulum 1", "Rod Length", t1.initialPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure0(this));
+        this.controlPanel.addNumericInput$8("Pendulum 2", "Rod Length", t1.attachedPendulum.stringLength, "m", 0.1, 20, 0.1, new X.Gui_closure1(this));
       },
       static: {
         Gui$: function(world) {
@@ -8092,7 +8119,7 @@
       }
     },
     Gui_resizeProc: {
-      "^": "Closure:17;$this",
+      "^": "Closure:16;$this",
       call$1: function(ignored) {
         var t1, t2, t3, t4;
         t1 = this.$this;
@@ -8123,29 +8150,22 @@
     Gui_closure: {
       "^": "Closure:0;$this",
       call$1: function(newGravity) {
-        var t1 = H.Primitives_parseDouble(newGravity, null);
-        this.$this.world.gravity = t1;
-        return t1;
+        this.$this.world.gravity = newGravity;
+        return newGravity;
       }
     },
     Gui_closure0: {
       "^": "Closure:0;$this",
-      call$1: function(newLength) {
-        var t1, t2;
-        t1 = this.$this.world.initialPendulum;
-        t2 = H.Primitives_parseDouble(newLength, null);
-        t1.stringLength = t2;
-        return t2;
+      call$1: function(newRodLength) {
+        this.$this.world.initialPendulum.stringLength = newRodLength;
+        return newRodLength;
       }
     },
     Gui_closure1: {
       "^": "Closure:0;$this",
-      call$1: function(newLength) {
-        var t1, t2;
-        t1 = this.$this.world.attachedPendulum;
-        t2 = H.Primitives_parseDouble(newLength, null);
-        t1.stringLength = t2;
-        return t2;
+      call$1: function(newRodLength) {
+        this.$this.world.attachedPendulum.stringLength = newRodLength;
+        return newRodLength;
       }
     }
   }], ["", "../src/physics/Pendulum.dart",, S, {
@@ -8425,7 +8445,7 @@
       }
     },
     Screen_closure1: {
-      "^": "Closure:18;_box_0,$this",
+      "^": "Closure:17;_box_0,$this",
       call$1: function(ignored) {
         var t1 = this._box_0;
         t1.isDragging = false;
@@ -8725,6 +8745,9 @@
   J.set$href$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$href(receiver, value);
   };
+  J.set$innerHtml$x = function(receiver, value) {
+    return J.getInterceptor$x(receiver).set$innerHtml(receiver, value);
+  };
   J.set$type$x = function(receiver, value) {
     return J.getInterceptor$x(receiver).set$type(receiver, value);
   };
@@ -8888,7 +8911,7 @@
   C.JSString_methods = J.JSString.prototype;
   C.JavaScriptFunction_methods = J.JavaScriptFunction.prototype;
   C.PlainJavaScriptObject_methods = J.PlainJavaScriptObject.prototype;
-  C.SpanElement_methods = W.SpanElement.prototype;
+  C.TableCellElement_methods = W.TableCellElement.prototype;
   C.TableElement_methods = W.TableElement.prototype;
   C.UnknownJavaScriptObject_methods = J.UnknownJavaScriptObject.prototype;
   C.C_OutOfMemoryError = new P.OutOfMemoryError();
@@ -9151,7 +9174,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1, args: [,]}, {func: 1}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, args: [W.Event]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
+  init.types = [{func: 1, args: [,]}, {func: 1}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
