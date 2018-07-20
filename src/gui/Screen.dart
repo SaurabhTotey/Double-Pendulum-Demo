@@ -37,12 +37,16 @@ class Screen {
             if (pow(logicalMouseLocation.x - this.world.attachedPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.attachedPendulum.location.y, 2) <= pow(this.world.attachedPendulum.radius, 2)) {
                 isDragging = true;
                 handleDrag = (Vector v) {
-
+                    Vector sl = this.world.attachedPendulum.startingLocation;
+                    this.world.attachedPendulum.angle = -atan2(sl.x - v.x, sl.y - v.y);
+                    this.world.updatePendulumPositions();
                 };
             } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.location.y, 2) <= pow(this.world.initialPendulum.radius, 2)) {
                 isDragging = true;
                 handleDrag = (Vector v) {
-
+                    Vector sl = this.world.initialPendulum.startingLocation;
+                    this.world.initialPendulum.angle = -atan2(sl.x - v.x, sl.y - v.y);
+                    this.world.updatePendulumPositions();
                 };
             } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.startingLocation.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.startingLocation.y, 2) <= 1) {
                 isDragging = true;

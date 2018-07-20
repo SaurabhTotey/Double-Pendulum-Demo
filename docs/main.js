@@ -6890,9 +6890,9 @@
         if (typeof t5 !== "number")
           return H.iae(t5);
         if (t4 + Math.pow(t2 - t5, 2) <= Math.pow(t3.attachedPendulum.radius, 2)) {
-          t1 = this._box_0;
-          t1.isDragging = true;
-          t1.handleDrag = new D.Screen__closure();
+          t2 = this._box_0;
+          t2.isDragging = true;
+          t2.handleDrag = new D.Screen__closure(t1);
         } else {
           t2 = logicalMouseLocation.x;
           t4 = t3.initialPendulum.location.x;
@@ -6908,9 +6908,9 @@
           if (typeof t5 !== "number")
             return H.iae(t5);
           if (t4 + Math.pow(t2 - t5, 2) <= Math.pow(t3.initialPendulum.radius, 2)) {
-            t1 = this._box_0;
-            t1.isDragging = true;
-            t1.handleDrag = new D.Screen__closure0();
+            t2 = this._box_0;
+            t2.isDragging = true;
+            t2.handleDrag = new D.Screen__closure0(t1);
           } else {
             t2 = logicalMouseLocation.x;
             t4 = t3.initialPendulum.startingLocation.x;
@@ -6940,13 +6940,49 @@
       }
     },
     Screen__closure: {
-      "^": "Closure:3;",
+      "^": "Closure:3;$this",
       call$1: function(v) {
+        var t1, t2, sl, t3, t4, t5, t6;
+        t1 = this.$this.world;
+        t2 = t1.attachedPendulum;
+        sl = t2.startingLocation;
+        t3 = sl.x;
+        t4 = v.x;
+        if (typeof t3 !== "number")
+          return t3.$sub();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        t5 = sl.y;
+        t6 = v.y;
+        if (typeof t5 !== "number")
+          return t5.$sub();
+        if (typeof t6 !== "number")
+          return H.iae(t6);
+        t2.angle = -Math.atan2(t3 - t4, t5 - t6);
+        t1.updatePendulumPositions$0();
       }
     },
     Screen__closure0: {
-      "^": "Closure:3;",
+      "^": "Closure:3;$this",
       call$1: function(v) {
+        var t1, t2, sl, t3, t4, t5, t6;
+        t1 = this.$this.world;
+        t2 = t1.initialPendulum;
+        sl = t2.startingLocation;
+        t3 = sl.x;
+        t4 = v.x;
+        if (typeof t3 !== "number")
+          return t3.$sub();
+        if (typeof t4 !== "number")
+          return H.iae(t4);
+        t5 = sl.y;
+        t6 = v.y;
+        if (typeof t5 !== "number")
+          return t5.$sub();
+        if (typeof t6 !== "number")
+          return H.iae(t6);
+        t2.angle = -Math.atan2(t3 - t4, t5 - t6);
+        t1.updatePendulumPositions$0();
       }
     },
     Screen__closure1: {
@@ -7037,33 +7073,22 @@
         t11.angularVelocity = t4;
         t10.angle = t10.angle + t10.angularVelocity * dt;
         t11.angle = t11.angle + t4 * dt;
+        this.updatePendulumPositions$0();
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure());
         t4 = this.attachedPendulum;
-        t4.location = t4.location.$add(0, t4.startingLocation.$sub(0, this.initialPendulum.location));
-        this.attachedPendulum.startingLocation = this.initialPendulum.location;
+        t4.velocity = t4.velocity.$add(0, this.initialPendulum.velocity);
         C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure0());
         t4 = this.attachedPendulum;
-        t4.velocity = t4.velocity.$add(0, this.initialPendulum.velocity);
-        C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_step_closure1());
-        t4 = this.attachedPendulum;
         t4.acceleration = t4.acceleration.$add(0, this.initialPendulum.acceleration);
+      },
+      updatePendulumPositions$0: function() {
+        C.JSArray_methods.forEach$1(this.pendulums, new L.Stage_updatePendulumPositions_closure());
+        var t1 = this.attachedPendulum;
+        t1.location = t1.location.$add(0, t1.startingLocation.$sub(0, this.initialPendulum.location));
+        this.attachedPendulum.startingLocation = this.initialPendulum.location;
       }
     },
     Stage_step_closure: {
-      "^": "Closure:2;",
-      call$1: function(pendulum) {
-        var t1, t2, t3;
-        t1 = pendulum.get$startingLocation();
-        t2 = pendulum.stringLength;
-        t3 = new V.Vector(null, null);
-        t3.x = t2;
-        t3.y = t2;
-        t3 = t1.$add(0, t3.$mul(0, new V.Vector(Math.sin(pendulum.angle), -Math.cos(pendulum.angle))));
-        pendulum.location = t3;
-        return t3;
-      }
-    },
-    Stage_step_closure0: {
       "^": "Closure:2;",
       call$1: function(pendulum) {
         var t1, t2;
@@ -7076,7 +7101,7 @@
         return t2;
       }
     },
-    Stage_step_closure1: {
+    Stage_step_closure0: {
       "^": "Closure:2;",
       call$1: function(pendulum) {
         var t1, t2;
@@ -7087,6 +7112,20 @@
         t2 = t2.$mul(0, new V.Vector(-Math.pow(pendulum.angularVelocity, 2) * Math.sin(pendulum.angle) + pendulum.angularAcceleration * Math.cos(pendulum.angle), Math.pow(pendulum.angularVelocity, 2) * Math.cos(pendulum.angle) + pendulum.angularAcceleration * Math.sin(pendulum.angle)));
         pendulum.acceleration = t2;
         return t2;
+      }
+    },
+    Stage_updatePendulumPositions_closure: {
+      "^": "Closure:2;",
+      call$1: function(pendulum) {
+        var t1, t2, t3;
+        t1 = pendulum.get$startingLocation();
+        t2 = pendulum.stringLength;
+        t3 = new V.Vector(null, null);
+        t3.x = t2;
+        t3.y = t2;
+        t3 = t1.$add(0, t3.$mul(0, new V.Vector(Math.sin(pendulum.angle), -Math.cos(pendulum.angle))));
+        pendulum.location = t3;
+        return t3;
       }
     }
   }], ["", "../src/physics/Vector.dart",, V, {

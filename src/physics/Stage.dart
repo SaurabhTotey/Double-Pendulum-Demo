@@ -72,11 +72,7 @@ class Stage {
         this.initialPendulum.angle += this.initialPendulum.angularVelocity * dt;
         this.attachedPendulum.angle += this.attachedPendulum.angularVelocity * dt;
         //Updates the pendulums' positions using their angles
-        this.pendulums.forEach( (pendulum) =>
-            pendulum.location = pendulum.startingLocation + new Vector.isosceles(pendulum.stringLength) * new Vector(sin(pendulum.angle), -cos(pendulum.angle))
-        );
-        this.attachedPendulum.location += this.attachedPendulum.startingLocation - this.initialPendulum.location;
-        this.attachedPendulum.startingLocation = this.initialPendulum.location;
+        this.updatePendulumPositions();
         //Updates the pendulums' velocities using their angles and angular velocity
         this.pendulums.forEach( (pendulum) =>
             pendulum.velocity = new Vector.isosceles(pendulum.stringLength * pendulum.angularVelocity) * new Vector(cos(pendulum.angle), sin(pendulum.angle))
@@ -87,6 +83,18 @@ class Stage {
             pendulum.acceleration = new Vector.isosceles(pendulum.stringLength) * new Vector(-pow(pendulum.angularVelocity, 2) * sin(pendulum.angle) + pendulum.angularAcceleration * cos(pendulum.angle), pow(pendulum.angularVelocity, 2) * cos(pendulum.angle) + pendulum.angularAcceleration * sin(pendulum.angle))
         );
         this.attachedPendulum.acceleration += this.initialPendulum.acceleration;
+    }
+
+    /**
+     * A function that sets the positions of each pendulum using its angle
+     * Is separated out into a function because it is called outside of stage when the angle of the pendulums are changed by outside factors (eg. Screen)
+     */
+    void updatePendulumPositions() {
+        this.pendulums.forEach( (pendulum) =>
+            pendulum.location = pendulum.startingLocation + new Vector.isosceles(pendulum.stringLength) * new Vector(sin(pendulum.angle), -cos(pendulum.angle))
+        );
+        this.attachedPendulum.location += this.attachedPendulum.startingLocation - this.initialPendulum.location;
+        this.attachedPendulum.startingLocation = this.initialPendulum.location;
     }
 
 }
