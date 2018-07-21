@@ -76,6 +76,8 @@ class Screen {
         });
         this.initialPendulumTracer = new Tracer( () => this.world.initialPendulum.location );
         this.attachedPendulumTracer = new Tracer( () => this.world.attachedPendulum.location );
+        this.initialPendulumTracer.color = "rgba(255,0,0,200)";
+        this.attachedPendulumTracer.color = "rgba(0,255,0,200)";
     }
 
     /**

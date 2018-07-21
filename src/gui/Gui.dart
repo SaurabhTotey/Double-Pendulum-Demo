@@ -177,6 +177,57 @@ class Gui {
             "m/s/s",
             () => "${this.world.attachedPendulum.acceleration}"    
         );
+        this.controlPanel.addBreak();
+        this.controlPanel.addTextInput(
+            "Tracer 1",
+            "Color",
+            "${this.screen.initialPendulumTracer.color}",
+            "CSS Color String",
+            (newColor) => this.screen.initialPendulumTracer.color = newColor
+        );
+        this.controlPanel.addTextInput(
+            "Tracer 2",
+            "Color",
+            "${this.screen.attachedPendulumTracer.color}",
+            "CSS Color String",
+            (newColor) => this.screen.attachedPendulumTracer.color = newColor
+        );
+        this.controlPanel.addActionButton(
+            "Tracer 1",
+            "Clear",
+            "Clear Trace",
+            "",
+            () => this.screen.initialPendulumTracer.points.clear()
+        );
+        this.controlPanel.addActionButton(
+            "Tracer 2",
+            "Clear",
+            "Clear Trace",
+            "",
+            () => this.screen.attachedPendulumTracer.points.clear()
+        );
+        // this.controlPanel.addBreak();
+        // this.controlPanel.addActionButton(
+        //     "World",
+        //     "Reset",
+        //     "Reset all",
+        //     "",
+        //     () {
+        //         double oldTimeWarp = this.world.timeWarp;
+        //         this.world.timeWarp = 0.0;
+        //         this.world.initialPendulum = new Pendulum(
+        //             startingLocation: new Vector(this.world.width / 2, this.world.height * 0.9),
+        //             location: new Vector(this.world.width / 2, this.world.height * 0.9 - 5.0)
+        //         );
+        //         this.world.attachedPendulum = new Pendulum(
+        //             startingLocation: this.world.initialPendulum.location,
+        //             location: new Vector(this.world.initialPendulum.location.x + this.world.attachedPendulum.stringLength, this.world.initialPendulum.location.y)
+        //         );
+        //         this.screen.initialPendulumTracer.points.clear();
+        //         this.screen.attachedPendulumTracer.points.clear();
+        //         this.world.timeWarp = oldTimeWarp;
+        //     }
+        // );
     }
 
     /**

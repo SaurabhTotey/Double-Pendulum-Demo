@@ -75,7 +75,25 @@ class ControlPanel {
      * Adds a text input field to the uiContainer
      */
     void addTextInput(String section, String attribute, String value, String units, Function(String) inputHandler) {
+        TableRowElement rowElement = new TableRowElement();
+        TableCellElement sectionCell = new TableCellElement();
+        sectionCell.innerHtml = section;
+        TableCellElement attributeCell = new TableCellElement();
+        attributeCell.innerHtml = attribute;
+        TableCellElement unitsCell = new TableCellElement();
+        unitsCell.innerHtml = units;
 
+        TableCellElement inputCell = new TableCellElement();
+        InputElement inputElement = new InputElement(type: "text");
+        inputElement.value = value;
+        inputElement.onInput.listen( (ignored) => inputHandler(inputElement.value) );
+        inputCell.append(inputElement);
+
+        rowElement.append(sectionCell);
+        rowElement.append(attributeCell);
+        rowElement.append(inputCell);
+        rowElement.append(unitsCell);
+        this.uiContainer.append(rowElement);
     }
 
     /**
@@ -104,6 +122,31 @@ class ControlPanel {
         rowElement.append(sectionCell);
         rowElement.append(attributeCell);
         rowElement.append(outputCell);
+        rowElement.append(unitsCell);
+        this.uiContainer.append(rowElement);
+    }
+
+    /**
+     * Adds an action button to the ui container
+     */
+    void addActionButton(String section, String attribute, String actionName, String units, Function() action) {
+        TableRowElement rowElement = new TableRowElement();
+        TableCellElement sectionCell = new TableCellElement();
+        sectionCell.innerHtml = section;
+        TableCellElement attributeCell = new TableCellElement();
+        attributeCell.innerHtml = attribute;
+        TableCellElement unitsCell = new TableCellElement();
+        unitsCell.innerHtml = units;
+
+        TableCellElement actionCell = new TableCellElement();
+        ButtonElement buttonElement = new ButtonElement();
+        buttonElement.innerHtml = actionName;
+        buttonElement.onClick.listen(([Event ignored]) => action());
+        actionCell.append(buttonElement);
+
+        rowElement.append(sectionCell);
+        rowElement.append(attributeCell);
+        rowElement.append(actionCell);
         rowElement.append(unitsCell);
         this.uiContainer.append(rowElement);
     }

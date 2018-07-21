@@ -29,6 +29,10 @@ input {
     font-size: var(--font-size);
 }
 
+button {
+    font-size: var(--font-size);
+}
+
 table {
     padding: 3%;
 }

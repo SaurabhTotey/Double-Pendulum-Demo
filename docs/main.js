@@ -8087,6 +8087,29 @@
         rowElement.appendChild(unitsCell);
         this.uiContainer.appendChild(rowElement);
       },
+      addTextInput$5: function(section, attribute, value, units, inputHandler) {
+        var t1, rowElement, sectionCell, attributeCell, unitsCell, inputCell, inputElement;
+        t1 = document;
+        rowElement = t1.createElement("tr");
+        sectionCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(sectionCell, section);
+        attributeCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(attributeCell, attribute);
+        unitsCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(unitsCell, units);
+        inputCell = t1.createElement("td");
+        inputElement = W.InputElement_InputElement("text");
+        t1 = J.getInterceptor$x(inputElement);
+        t1.set$value(inputElement, value);
+        t1 = t1.get$onInput(inputElement);
+        W._EventStreamSubscription$(t1._html$_target, t1._eventType, new O.ControlPanel_addTextInput_closure(inputHandler, inputElement), false, H.getTypeArgumentByIndex(t1, 0));
+        inputCell.appendChild(inputElement);
+        rowElement.appendChild(sectionCell);
+        rowElement.appendChild(attributeCell);
+        rowElement.appendChild(inputCell);
+        rowElement.appendChild(unitsCell);
+        this.uiContainer.appendChild(rowElement);
+      },
       addOutputField$5: function(section, attribute, value, units, outputHandler) {
         var t1, rowElement, sectionCell, attributeCell, unitsCell, outputCell, outputElement, t2;
         t1 = document;
@@ -8112,6 +8135,27 @@
         rowElement.appendChild(unitsCell);
         this.uiContainer.appendChild(rowElement);
       },
+      addActionButton$5: function(section, attribute, actionName, units, action) {
+        var t1, rowElement, sectionCell, attributeCell, unitsCell, actionCell, buttonElement;
+        t1 = document;
+        rowElement = t1.createElement("tr");
+        sectionCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(sectionCell, section);
+        attributeCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(attributeCell, attribute);
+        unitsCell = t1.createElement("td");
+        C.TableCellElement_methods.setInnerHtml$1(unitsCell, units);
+        actionCell = t1.createElement("td");
+        buttonElement = t1.createElement("button");
+        C.ButtonElement_methods.setInnerHtml$1(buttonElement, actionName);
+        W._EventStreamSubscription$(buttonElement, "click", new O.ControlPanel_addActionButton_closure(action), false, W.MouseEvent);
+        actionCell.appendChild(buttonElement);
+        rowElement.appendChild(sectionCell);
+        rowElement.appendChild(attributeCell);
+        rowElement.appendChild(actionCell);
+        rowElement.appendChild(unitsCell);
+        this.uiContainer.appendChild(rowElement);
+      },
       update$0: function() {
         C.JSArray_methods.forEach$1(this.outputUpdaters, new O.ControlPanel_update_closure());
       }
@@ -8122,10 +8166,25 @@
         return this.inputHandler.call$1(H.Primitives_parseDouble(J.get$value$x(this.numericInputElement), null));
       }
     },
+    ControlPanel_addTextInput_closure: {
+      "^": "Closure:1;inputHandler,inputElement",
+      call$1: function(ignored) {
+        return this.inputHandler.call$1(J.get$value$x(this.inputElement));
+      }
+    },
     ControlPanel_addOutputField_closure: {
       "^": "Closure:0;outputHandler,outputElement",
       call$0: function() {
         J.set$value$x(this.outputElement, this.outputHandler.call$0());
+      }
+    },
+    ControlPanel_addActionButton_closure: {
+      "^": "Closure:16;action",
+      call$1: function(ignored) {
+        return this.action.call$0();
+      },
+      call$0: function() {
+        return this.call$1(null);
       }
     },
     ControlPanel_update_closure: {
@@ -8189,6 +8248,11 @@
         this.controlPanel.addOutputField$5("Pendulum 2", "Location", t1.attachedPendulum.location.toString$0(0), "m", new X.Gui_closure14(this));
         this.controlPanel.addOutputField$5("Pendulum 2", "Velocity", t1.attachedPendulum.velocity.toString$0(0), "m/s", new X.Gui_closure15(this));
         this.controlPanel.addOutputField$5("Pendulum 2", "Acceleration", t1.attachedPendulum.acceleration.toString$0(0), "m/s/s", new X.Gui_closure16(this));
+        this.controlPanel.uiContainer.appendChild(t3.createElement("br"));
+        this.controlPanel.addTextInput$5("Tracer 1", "Color", H.S(this.screen.initialPendulumTracer.color), "CSS Color String", new X.Gui_closure17(this));
+        this.controlPanel.addTextInput$5("Tracer 2", "Color", H.S(this.screen.attachedPendulumTracer.color), "CSS Color String", new X.Gui_closure18(this));
+        this.controlPanel.addActionButton$5("Tracer 1", "Clear", "Clear Trace", "", new X.Gui_closure19(this));
+        this.controlPanel.addActionButton$5("Tracer 2", "Clear", "Clear Trace", "", new X.Gui_closure20(this));
       },
       static: {
         Gui$: function(world) {
@@ -8199,7 +8263,7 @@
       }
     },
     Gui_resizeProc: {
-      "^": "Closure:16;$this",
+      "^": "Closure:17;$this",
       call$1: function(ignored) {
         var t1, t2, t3, t4;
         t1 = this.$this;
@@ -8339,6 +8403,34 @@
       "^": "Closure:0;$this",
       call$0: function() {
         return this.$this.world.attachedPendulum.acceleration.toString$0(0);
+      }
+    },
+    Gui_closure17: {
+      "^": "Closure:1;$this",
+      call$1: function(newColor) {
+        this.$this.screen.initialPendulumTracer.color = newColor;
+        return newColor;
+      }
+    },
+    Gui_closure18: {
+      "^": "Closure:1;$this",
+      call$1: function(newColor) {
+        this.$this.screen.attachedPendulumTracer.color = newColor;
+        return newColor;
+      }
+    },
+    Gui_closure19: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        C.JSArray_methods.set$length(this.$this.screen.initialPendulumTracer.points, 0);
+        return;
+      }
+    },
+    Gui_closure20: {
+      "^": "Closure:0;$this",
+      call$0: function() {
+        C.JSArray_methods.set$length(this.$this.screen.attachedPendulumTracer.points, 0);
+        return;
       }
     }
   }], ["", "../src/physics/Pendulum.dart",, S, {
@@ -8507,7 +8599,8 @@
         J.fill$0$x(this.renderer);
       },
       Screen$1: function(world, _box_0) {
-        var t1 = document.getElementById("screen");
+        var t1, t2;
+        t1 = document.getElementById("screen");
         this.screen = t1;
         this.renderer = J.getContext$1$x(t1, "2d");
         this.resizeProc$0();
@@ -8518,8 +8611,12 @@
         t1 = J.get$onMouseMove$x(this.screen);
         W._EventStreamSubscription$(t1._html$_target, t1._eventType, new D.Screen_closure0(_box_0, this), false, H.getTypeArgumentByIndex(t1, 0));
         W._EventStreamSubscription$(window, "mouseup", new D.Screen_closure1(_box_0, this), false, W.MouseEvent);
-        this.initialPendulumTracer = new D.Tracer([], "rgba(255,0,0,150)", new D.Screen_closure2(this));
-        this.attachedPendulumTracer = new D.Tracer([], "rgba(255,0,0,150)", new D.Screen_closure3(this));
+        t1 = new D.Tracer([], "rgba(255,0,0,150)", new D.Screen_closure2(this));
+        this.initialPendulumTracer = t1;
+        t2 = new D.Tracer([], "rgba(255,0,0,150)", new D.Screen_closure3(this));
+        this.attachedPendulumTracer = t2;
+        t1.color = "rgba(255,0,0,200)";
+        t2.color = "rgba(0,255,0,200)";
       },
       static: {
         Screen$: function(world) {
@@ -8633,7 +8730,7 @@
       }
     },
     Screen_closure1: {
-      "^": "Closure:17;_box_0,$this",
+      "^": "Closure:18;_box_0,$this",
       call$1: function(ignored) {
         var t1 = this._box_0;
         t1.isDragging = false;
@@ -9139,6 +9236,7 @@
   };
   var $ = Isolate.$isolateProperties;
   C.BodyElement_methods = W.BodyElement.prototype;
+  C.ButtonElement_methods = W.ButtonElement.prototype;
   C.Interceptor_methods = J.Interceptor.prototype;
   C.JSArray_methods = J.JSArray.prototype;
   C.JSInt_methods = J.JSInt.prototype;
@@ -9409,7 +9507,7 @@
   Isolate = Isolate.$finishIsolateConstructor(Isolate);
   $ = new Isolate();
   init.metadata = [null];
-  init.types = [{func: 1}, {func: 1, args: [,]}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
+  init.types = [{func: 1}, {func: 1, args: [,]}, {func: 1, v: true}, {func: 1, args: [V.Vector]}, {func: 1, v: true, args: [{func: 1, v: true}]}, {func: 1, ret: P.String, args: [P.int]}, {func: 1, args: [W.MouseEvent]}, {func: 1, ret: P.bool, args: [W.Element, P.String, P.String, W._Html5NodeValidator]}, {func: 1, args: [, P.String]}, {func: 1, args: [P.String]}, {func: 1, args: [{func: 1, v: true}]}, {func: 1, v: true, args: [P.Object], opt: [P.StackTrace]}, {func: 1, args: [,], opt: [,]}, {func: 1, v: true, args: [, P.StackTrace]}, {func: 1, args: [,,]}, {func: 1, v: true, args: [W.Node, W.Node]}, {func: 1, opt: [W.Event]}, {func: 1, v: true, opt: [W.Event]}, {func: 1, opt: [W.MouseEvent]}];
   function convertToFastObject(properties) {
     function MyClass() {
     }
