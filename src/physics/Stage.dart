@@ -24,6 +24,8 @@ class Stage {
     double height;
     //Whether the stage should be running or not
     bool isPaused = false;
+    //How long the world has existed
+    double totalTime = 0.0;
 
     /**
      * Creating a stage initializes the pendulums to be at a stable rest position by default
@@ -59,6 +61,7 @@ class Stage {
             return;
         }
         double dt = delta * this.timeWarp;
+        this.totalTime += dt;
         //Calculates the angular acceleration for both pendulums
         double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
         double angleDifference = this.initialPendulum.angle - this.attachedPendulum.angle;

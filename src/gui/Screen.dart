@@ -1,5 +1,6 @@
 import 'dart:html';
 import 'dart:math';
+import 'Tracer.dart';
 import '../physics/Stage.dart';
 import '../physics/Vector.dart';
 
@@ -19,6 +20,9 @@ class Screen {
     double startY = 0.0;
     double drawWidth = 0.0;
     double drawHeight = 0.0;
+    //The tracers that trace the pendulums
+    Tracer initialPendulumTracer;
+    Tracer attachedPendulumTracer;
 
     /**
      * Makes a screen and sets Screen attributes such as the drag procedures
@@ -29,7 +33,6 @@ class Screen {
         resizeProc();
         bool isDragging = false;
         //Drag procedures
-        Vector dragStart = null;
         Function(Vector) handleDrag;
         this.screen.onMouseDown.listen((MouseEvent event) {
             Vector clickLocation = new Vector(event.client.x, event.client.y);
@@ -59,9 +62,6 @@ class Screen {
                 };
             }
             this.world.isPaused = isDragging;
-            if (isDragging) {
-                dragStart = clickLocation;
-            }
         });
         this.screen.onMouseMove.listen((MouseEvent event) {
             if (!isDragging) {
@@ -72,9 +72,10 @@ class Screen {
         window.onMouseUp.listen(([MouseEvent ignored]) {
             isDragging = false;
             this.world.isPaused = false;
-            dragStart = null;
             handleDrag = null;
         });
+        this.initialPendulumTracer = new Tracer( () => this.world.initialPendulum.location );
+        this.attachedPendulumTracer = new Tracer( () => this.world.attachedPendulum.location );
     }
 
     /**
@@ -118,7 +119,25 @@ class Screen {
     draw() {
         //Clears screen
         this.renderer.clearRect(0, 0, this.screen.width, this.screen.height);
+        //Updates the tracers
+        for (Tracer tracer in [this.initialPendulumTracer, this.attachedPendulumTracer]) {
+            tracer.update();
+            this.renderer.strokeStyle = tracer.color;
+            this.renderer.beginPath();
+            Vector vc = this.getViewCoordinates(tracer.points[0]);
+            this.renderer.moveTo(vc.x, vc.y);
+            if (tracer.points.length == 1) {
+                continue;
+            }
+            tracer.points.sublist(1).forEach((point) {
+                vc = this.getViewCoordinates(point);
+                this.renderer.lineTo(vc.x, vc.y);
+            });
+            this.renderer.stroke();
+        }
         //Draws pendulums
+        renderer.strokeStyle = "black";
+        renderer.fillStyle = "black";
         Vector p1 = this.getViewCoordinates(this.world.pendulums[0].startingLocation);
         Vector p2 = this.getViewCoordinates(this.world.pendulums[0].location);
         Vector p3 = this.getViewCoordinates(this.world.pendulums[1].location);
@@ -131,8 +150,6 @@ class Screen {
         this.renderer.arc(p2.x.toInt(), p2.y.toInt(), this.world.pendulums[0].radius * drawWidth / this.world.width, 0.0, 2 * PI);
         this.renderer.arc(p3.x.toInt(), p3.y.toInt(), this.world.pendulums[1].radius * drawWidth / this.world.width, 0.0, 2 * PI);
         this.renderer.fill();
-        //Updates screen icon
-        (document.getElementById("icon") as LinkElement).href = this.screen.toDataUrl();
     }
 
 }
