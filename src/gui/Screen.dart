@@ -1,5 +1,5 @@
 import 'dart:html';
-import 'dart:math';
+import 'dart:math' as math;
 import 'Tracer.dart';
 import '../physics/Stage.dart';
 import '../physics/Vector.dart';
@@ -37,21 +37,21 @@ class Screen {
         this.screen.onMouseDown.listen((MouseEvent event) {
             Vector clickLocation = new Vector(event.client.x, event.client.y);
             Vector logicalMouseLocation = this.getLogicalCoordinates(clickLocation);
-            if (pow(logicalMouseLocation.x - this.world.attachedPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.attachedPendulum.location.y, 2) <= pow(this.world.attachedPendulum.radius, 2)) {
+            if (math.pow(logicalMouseLocation.x - this.world.attachedPendulum.location.x, 2) + math.pow(logicalMouseLocation.y - this.world.attachedPendulum.location.y, 2) <= math.pow(this.world.attachedPendulum.radius, 2)) {
                 isDragging = true;
                 handleDrag = (Vector v) {
                     Vector sl = this.world.attachedPendulum.startingLocation;
-                    this.world.attachedPendulum.angle = -atan2(sl.x - v.x, sl.y - v.y);
+                    this.world.attachedPendulum.angle = -math.atan2(sl.x - v.x, sl.y - v.y);
                     this.world.updatePendulumPositions();
                 };
-            } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.location.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.location.y, 2) <= pow(this.world.initialPendulum.radius, 2)) {
+            } else if (math.pow(logicalMouseLocation.x - this.world.initialPendulum.location.x, 2) + math.pow(logicalMouseLocation.y - this.world.initialPendulum.location.y, 2) <= math.pow(this.world.initialPendulum.radius, 2)) {
                 isDragging = true;
                 handleDrag = (Vector v) {
                     Vector sl = this.world.initialPendulum.startingLocation;
-                    this.world.initialPendulum.angle = -atan2(sl.x - v.x, sl.y - v.y);
+                    this.world.initialPendulum.angle = -math.atan2(sl.x - v.x, sl.y - v.y);
                     this.world.updatePendulumPositions();
                 };
-            } else if (pow(logicalMouseLocation.x - this.world.initialPendulum.startingLocation.x, 2) + pow(logicalMouseLocation.y - this.world.initialPendulum.startingLocation.y, 2) <= 1) {
+            } else if (math.pow(logicalMouseLocation.x - this.world.initialPendulum.startingLocation.x, 2) + math.pow(logicalMouseLocation.y - this.world.initialPendulum.startingLocation.y, 2) <= 1) {
                 isDragging = true;
                 handleDrag = (Vector v) {
                     Vector change = v - this.world.initialPendulum.startingLocation;
@@ -149,8 +149,8 @@ class Screen {
         this.renderer.lineTo(p3.x.toInt(), p3.y.toInt());
         this.renderer.stroke();
         this.renderer.beginPath();
-        this.renderer.arc(p2.x.toInt(), p2.y.toInt(), this.world.pendulums[0].radius * drawWidth / this.world.width, 0.0, 2 * PI);
-        this.renderer.arc(p3.x.toInt(), p3.y.toInt(), this.world.pendulums[1].radius * drawWidth / this.world.width, 0.0, 2 * PI);
+        this.renderer.arc(p2.x.toInt(), p2.y.toInt(), this.world.pendulums[0].radius * drawWidth / this.world.width, 0.0, 2 * math.pi);
+        this.renderer.arc(p3.x.toInt(), p3.y.toInt(), this.world.pendulums[1].radius * drawWidth / this.world.width, 0.0, 2 * math.pi);
         this.renderer.fill();
     }
 
