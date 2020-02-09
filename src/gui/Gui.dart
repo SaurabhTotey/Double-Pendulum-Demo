@@ -140,42 +140,42 @@ class Gui {
             "Location",
             "${this.world.initialPendulum.location}",
             "m",
-            () => "${this.world.initialPendulum.location}"    
+            () => "${this.world.initialPendulum.location}"
         );
         this.controlPanel.addOutputField(
             "Pendulum 1",
             "Velocity",
             "${this.world.initialPendulum.velocity}",
             "m/s",
-            () => "${this.world.initialPendulum.velocity}"    
+            () => "${this.world.initialPendulum.velocity}"
         );
         this.controlPanel.addOutputField(
             "Pendulum 1",
             "Acceleration",
             "${this.world.initialPendulum.acceleration}",
             "m/s/s",
-            () => "${this.world.initialPendulum.acceleration}"    
+            () => "${this.world.initialPendulum.acceleration}"
         );
         this.controlPanel.addOutputField(
             "Pendulum 2",
             "Location",
             "${this.world.attachedPendulum.location}",
             "m",
-            () => "${this.world.attachedPendulum.location}"    
+            () => "${this.world.attachedPendulum.location}"
         );
         this.controlPanel.addOutputField(
             "Pendulum 2",
             "Velocity",
             "${this.world.attachedPendulum.velocity}",
             "m/s",
-            () => "${this.world.attachedPendulum.velocity}"    
+            () => "${this.world.attachedPendulum.velocity}"
         );
         this.controlPanel.addOutputField(
             "Pendulum 2",
             "Acceleration",
             "${this.world.attachedPendulum.acceleration}",
             "m/s/s",
-            () => "${this.world.attachedPendulum.acceleration}"    
+            () => "${this.world.attachedPendulum.acceleration}"
         );
         this.controlPanel.addBreak();
         this.controlPanel.addTextInput(
