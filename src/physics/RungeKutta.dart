@@ -30,8 +30,9 @@ class PositionAndSpeed {
  * Evaluates a position and speed state a time dt after the state given by initialState
  * Needs to be given a function to calculate acceleration at any arbitrary time dt away from any arbitrary state
  * Uses the Runge-Kutta 4 method to do so
+ * All math used is stolen from https://gafferongames.com/post/integration_basics/
  */
-PositionAndSpeed rungeKutta(PositionAndSpeed initialState, double dt, Function(PositionAndSpeed, Double) computeAccelerationFunction) {
+PositionAndSpeed rungeKutta(PositionAndSpeed initialState, double dt, Function(PositionAndSpeed, double) computeAccelerationFunction) {
 
     PositionAndSpeed evaluateFunction(PositionAndSpeed state, double dt, PositionAndSpeed previousResults) {
         PositionAndSpeed eulerStep = state + previousResults * dt;
@@ -43,6 +44,6 @@ PositionAndSpeed rungeKutta(PositionAndSpeed initialState, double dt, Function(P
     PositionAndSpeed c = evaluateFunction(initialState, dt / 2, b);
     PositionAndSpeed d = evaluateFunction(initialState, dt, c);
 
-    return (a + 2.0 * (b + c) + d) / 6.0;
+    return (a + (b + c) * 2.0 + d) / 6.0;
 
 }
