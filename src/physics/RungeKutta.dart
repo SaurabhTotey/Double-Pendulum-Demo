@@ -1,10 +1,20 @@
+
+/**
+ * A class that holds both a position and a speed, and contains some utility operator overloads
+ */
 class PositionAndSpeed {
 
     double position;
     double speed;
 
+    /**
+     * Constructs a position and speed that takes in both fields
+     */
     PositionAndSpeed(this.position, this.speed);
 
+    /**
+     * Constructs a PositionAndSpeed where both position and speed are 0
+     */
     PositionAndSpeed.empty() {
         this.position = 0.0;
         this.speed = 0.0;
@@ -16,6 +26,11 @@ class PositionAndSpeed {
 
 }
 
+/**
+ * Evaluates a position and speed state a time dt after the state given by initialState
+ * Needs to be given a function to calculate acceleration at any arbitrary time dt away from any arbitrary state
+ * Uses the Runge-Kutta 4 method to do so
+ */
 PositionAndSpeed rungeKutta(PositionAndSpeed initialState, double dt, Function(PositionAndSpeed, Double) computeAccelerationFunction) {
 
     PositionAndSpeed evaluateFunction(PositionAndSpeed state, double dt, PositionAndSpeed previousResults) {

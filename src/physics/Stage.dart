@@ -62,7 +62,7 @@ class Stage {
         }
         double dt = delta * this.timeWarp;
         this.totalTime += dt;
-        //Calculates the angular acceleration for both pendulums
+        //Calculates the angular acceleration for both pendulums TODO: use RungeKutta
         double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
         double angleDifference = this.initialPendulum.angle - this.attachedPendulum.angle;
         double denominatorFactor = combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * angleDifference);
