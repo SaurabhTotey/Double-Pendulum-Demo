@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'Pendulum.dart';
+import 'RungeKutta.dart';
 import 'Vector.dart';
 
 /**
@@ -62,17 +63,25 @@ class Stage {
         }
         double dt = delta * this.timeWarp;
         this.totalTime += dt;
-        //Calculates the angular acceleration for both pendulums TODO: use RungeKutta
+        //Calculates the angular acceleration for both pendulums
         double combinedMass = this.initialPendulum.mass + this.attachedPendulum.mass;
-        this.initialPendulum.angularAcceleration = (-this.gravity * (combinedMass + this.initialPendulum.mass) * sin(this.initialPendulum.angle) - this.attachedPendulum.mass * this.gravity * sin(this.initialPendulum.angle - 2 * this.attachedPendulum.angle) - 2 * sin(this.initialPendulum.angle - this.attachedPendulum.angle) * this.attachedPendulum.mass * (pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength + pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * cos(this.initialPendulum.angle - this.attachedPendulum.angle))) / (this.initialPendulum.stringLength * (combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * (this.initialPendulum.angle - this.attachedPendulum.angle))));
-        this.attachedPendulum.angularAcceleration = 2 * sin(this.initialPendulum.angle - this.attachedPendulum.angle) * (pow(this.initialPendulum.angularVelocity, 2) * this.initialPendulum.stringLength * combinedMass + this.gravity * combinedMass * cos(this.initialPendulum.angle) + pow(this.attachedPendulum.angularVelocity, 2) * this.attachedPendulum.stringLength * this.attachedPendulum.mass * cos(this.initialPendulum.angle - this.attachedPendulum.angle)) / (this.attachedPendulum.stringLength * (combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * (this.initialPendulum.angle - this.attachedPendulum.angle))));
-        //Calculates the angular velocity for both pendulums
-        this.initialPendulum.angularVelocity += this.initialPendulum.angularAcceleration * dt;
-        this.attachedPendulum.angularVelocity += this.attachedPendulum.angularAcceleration * dt;
-        //Calculates the angles for both pendulums
-        this.initialPendulum.angle += this.initialPendulum.angularVelocity * dt;
-        this.attachedPendulum.angle += this.attachedPendulum.angularVelocity * dt;
+        double initialPendulumAngle = this.initialPendulum.angle;
+        double attachedPendulumAngle = this.attachedPendulum.angle;
+        double initialPendulumAngularVelocity = this.initialPendulum.angularVelocity;
+        double attachedPendulumAngularVelocity = this.attachedPendulum.angularVelocity;
+        double initialPendulumAngularAccelerationFunction(PositionAndSpeed state) => (-this.gravity * (combinedMass + this.initialPendulum.mass) * sin(state.position) - this.attachedPendulum.mass * this.gravity * sin(state.position - 2 * attachedPendulumAngle) - 2 * sin(state.position - attachedPendulumAngle) * this.attachedPendulum.mass * (pow(attachedPendulumAngularVelocity, 2) * this.attachedPendulum.stringLength + pow(state.speed, 2) * this.initialPendulum.stringLength * cos(state.position - attachedPendulumAngle))) / (this.initialPendulum.stringLength * (combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * (state.position - attachedPendulumAngle))));
+        double attachedPendulumAngularAccelerationFunction(PositionAndSpeed state) => 2 * sin(initialPendulumAngle - state.position) * (pow(initialPendulumAngularVelocity, 2) * this.initialPendulum.stringLength * combinedMass + this.gravity * combinedMass * cos(initialPendulumAngle) + pow(state.speed, 2) * this.attachedPendulum.stringLength * this.attachedPendulum.mass * cos(initialPendulumAngle - state.position)) / (this.attachedPendulum.stringLength * (combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * (initialPendulumAngle - state.position))));
+        PositionAndSpeed initialPendulumState = new PositionAndSpeed(initialPendulumAngle, initialPendulumAngularVelocity);
+        PositionAndSpeed attachedPendulumState = new PositionAndSpeed(attachedPendulumAngle, attachedPendulumAngularVelocity);
+        PositionAndSpeed newInitialPendulumState = semiImplicitEuler(initialPendulumState, dt, initialPendulumAngularAccelerationFunction);
+        PositionAndSpeed newAttachedPendulumState = semiImplicitEuler(attachedPendulumState, dt, attachedPendulumAngularAccelerationFunction);
         //Updates the pendulums' positions using their angles
+        this.initialPendulum.angularAcceleration = initialPendulumAngularAccelerationFunction(initialPendulumState);
+        this.attachedPendulum.angularAcceleration = attachedPendulumAngularAccelerationFunction(attachedPendulumState);
+        this.initialPendulum.angularVelocity = newInitialPendulumState.speed;
+        this.attachedPendulum.angularVelocity = newAttachedPendulumState.speed;
+        this.initialPendulum.angle = newInitialPendulumState.position;
+        this.attachedPendulum.angle = newAttachedPendulumState.position;
         this.updatePendulumPositions();
         //Updates the pendulums' velocities using their angles and angular velocity
         this.pendulums.forEach( (pendulum) =>
