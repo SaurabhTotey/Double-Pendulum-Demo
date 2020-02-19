@@ -20,7 +20,7 @@ class PositionAndSpeed {
         this.speed = 0.0;
     }
 
-    operator +(PositionAndSpeed other) => new PositionAndSpeed(this.position + other.position, this.speed + other.position);
+    operator +(PositionAndSpeed other) => new PositionAndSpeed(this.position + other.position, this.speed + other.speed);
     operator *(double scalar) => new PositionAndSpeed(this.position * scalar, this.speed * scalar);
     operator /(double scalar) => new PositionAndSpeed(this.position / scalar, this.speed / scalar);
 
@@ -34,17 +34,17 @@ class PositionAndSpeed {
  */
 PositionAndSpeed rungeKutta(PositionAndSpeed initialState, double dt, Function(PositionAndSpeed) computeAccelerationFunction) {
 
-    PositionAndSpeed evaluateFunction(PositionAndSpeed state, double dt, PositionAndSpeed previousResults) {
-        PositionAndSpeed eulerStep = state + previousResults * dt;
+    PositionAndSpeed numericalDerivative(PositionAndSpeed state, double dt, PositionAndSpeed previousNumericalDerviative) {
+        PositionAndSpeed eulerStep = state + previousNumericalDerviative * dt;
         return new PositionAndSpeed(eulerStep.speed, computeAccelerationFunction(eulerStep));
     }
 
-    PositionAndSpeed a = evaluateFunction(initialState, 0.0, PositionAndSpeed.empty());
-    PositionAndSpeed b = evaluateFunction(initialState, dt / 2, a);
-    PositionAndSpeed c = evaluateFunction(initialState, dt / 2, b);
-    PositionAndSpeed d = evaluateFunction(initialState, dt, c);
+    PositionAndSpeed a = numericalDerivative(initialState, 0.0, PositionAndSpeed.empty());
+    PositionAndSpeed b = numericalDerivative(initialState, dt / 2.0, a);
+    PositionAndSpeed c = numericalDerivative(initialState, dt / 2.0, b);
+    PositionAndSpeed d = numericalDerivative(initialState, dt, c);
 
-    return initialState + (a + (b + c) * 2.0 + d) / 6.0;
+    return initialState + (a + (b + c) * 2.0 + d) / 6.0 * dt;
 
 }
 

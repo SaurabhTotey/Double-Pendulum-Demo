@@ -1,6 +1,6 @@
 import 'dart:math';
+import 'DifferentialEquationSolver.dart';
 import 'Pendulum.dart';
-import 'RungeKutta.dart';
 import 'Vector.dart';
 
 /**
@@ -73,8 +73,8 @@ class Stage {
         double attachedPendulumAngularAccelerationFunction(PositionAndSpeed state) => 2 * sin(initialPendulumAngle - state.position) * (pow(initialPendulumAngularVelocity, 2) * this.initialPendulum.stringLength * combinedMass + this.gravity * combinedMass * cos(initialPendulumAngle) + pow(state.speed, 2) * this.attachedPendulum.stringLength * this.attachedPendulum.mass * cos(initialPendulumAngle - state.position)) / (this.attachedPendulum.stringLength * (combinedMass + this.initialPendulum.mass - this.attachedPendulum.mass * cos(2 * (initialPendulumAngle - state.position))));
         PositionAndSpeed initialPendulumState = new PositionAndSpeed(initialPendulumAngle, initialPendulumAngularVelocity);
         PositionAndSpeed attachedPendulumState = new PositionAndSpeed(attachedPendulumAngle, attachedPendulumAngularVelocity);
-        PositionAndSpeed newInitialPendulumState = semiImplicitEuler(initialPendulumState, dt, initialPendulumAngularAccelerationFunction);
-        PositionAndSpeed newAttachedPendulumState = semiImplicitEuler(attachedPendulumState, dt, attachedPendulumAngularAccelerationFunction);
+        PositionAndSpeed newInitialPendulumState = rungeKutta(initialPendulumState, dt, initialPendulumAngularAccelerationFunction);
+        PositionAndSpeed newAttachedPendulumState = rungeKutta(attachedPendulumState, dt, attachedPendulumAngularAccelerationFunction);
         //Updates the pendulums' positions using their angles
         this.initialPendulum.angularAcceleration = initialPendulumAngularAccelerationFunction(initialPendulumState);
         this.attachedPendulum.angularAcceleration = attachedPendulumAngularAccelerationFunction(attachedPendulumState);
